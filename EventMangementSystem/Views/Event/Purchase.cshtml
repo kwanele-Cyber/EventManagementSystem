@@ -1,0 +1,137 @@
+﻿@model EventMangementSystem.Models.Ticket
+@{
+    ViewBag.Title = "Purchase Tickets";
+}
+
+<h2 class="text-center mb-4">Purchase Tickets for @Model.Event.Name</h2>
+
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h4>Event Details</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Event.Name</dd>
+
+            <dt class="col-sm-3">Date</dt>
+            <dd class="col-sm-9">@Model.Event.Date.ToString("MM/dd/yyyy")</dd>
+
+            <dt class="col-sm-3">Location</dt>
+            <dd class="col-sm-9">@Model.Event.Location</dd>
+
+            <dt class="col-sm-3">Venue</dt>
+            <dd class="col-sm-9">@Model.Event.Venue.Name</dd>
+
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">@Model.Event.Description</dd>
+
+            <dt class="col-sm-3">Ticket Price</dt>
+            <dd class="col-sm-9">@Model.Event.TicketPrice.ToString("R0.00")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="card mb-4" style="display:none">
+    <div class="card-header bg-secondary text-white">
+        <h4>Event Inventory</h4>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            @foreach (var item in Model.Event.EventInventories)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    @item.Inventory.ItemName
+                    <span class="badge badge-primary badge-pill">@item.QuantityRequired</span>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@using (Html.BeginForm("Purchase", "Event", FormMethod.Post, new { @class = "card" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card-header bg-info text-white">
+        <h4>Purchase Form</h4>
+    </div>
+    <div class="card-body">
+        @Html.HiddenFor(model => model.EventId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttendeeName, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AttendeeName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AttendeeName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttendeeEmail, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AttendeeEmail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.AttendeeEmail, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @id = "Quantity" } })
+            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label>Total Price</label>
+            <input type="text" id="TotalPrice" class="form-control" readonly />
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <button type="submit" class="btn btn-primary">Purchase</button>
+    </div>
+}
+
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var quantityInput = document.getElementById('Quantity');
+            var totalPriceInput = document.getElementById('TotalPrice');
+            var price = parseFloat('@Model.Event.TicketPrice');
+
+            function updateTotalPrice() {
+                var quantity = parseInt(quantityInput.value) || 0;
+                var totalPrice = quantity * price;
+                totalPriceInput.value = totalPrice.toFixed(2);
+            }
+
+            quantityInput.addEventListener('input', updateTotalPrice);
+            updateTotalPrice(); // Initial calculation
+        });
+    </script>
+}
+
+<style>
+    .card {
+        margin: 20px auto;
+        max-width: 800px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .badge-primary {
+        background-color: #007bff;
+    }
+
+    .form-group .control-label {
+        font-weight: bold;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+</style>

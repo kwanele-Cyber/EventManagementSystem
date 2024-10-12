@@ -1,0 +1,99 @@
+﻿@model IEnumerable<EventMangementSystem.Models.ServiceRequest>
+@using EventMangementSystem.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = "Confirmed Service Requests";
+}
+
+<style>
+    /* General container styling */
+    .container2 {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    /* Custom heading styles */
+    .custom-heading {
+        color: #333;
+        font-weight: bold;
+        font-size: 2rem; /* Larger heading size */
+        margin-bottom: 20px;
+    }
+
+    /* Table styling */
+    .table {
+        border: 1px solid #ddd;
+        border-radius: 8px; /* Rounded corners */
+        width: 100%;
+    }
+
+    /* Table header styling */
+    .custom-table-header {
+        background-color: #007bff; /* Green background for header */
+        color: black; /* White text for header */
+        font-size: 2.2rem; /* Larger font size for header */
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Alternating row background */
+    .custom-table-row:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Table cell padding and border */
+    .table th, .table td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        font-size: 1rem; /* Set the font size for table cells */
+    }
+
+    /* Footer styling */
+    .footer {
+        background-color: #007bff;
+        padding: 20px;
+        text-align: center;
+        color: white;
+        font-size: 1.1rem;
+    }
+</style>
+
+
+
+<div class="container2 mt-5">
+    <h2 class="text-center custom-heading">Confirmed Service Requests</h2>
+
+    @if (!Model.Any())
+    {
+        <p class="text-center">There are no confirmed requests at this time.</p>
+    }
+    else
+    {
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr class="custom-table-header">
+                    <th style="color:black">Event</th>
+                    <th style="color:black">Service Category</th>
+                    <th style="color:black">Assigned Provider</th>
+                    <th style="color:black">Priority</th>
+                    <th style="color:black">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var request in Model)
+                {
+                    <tr class="custom-table-row" style="font-size:16px">
+                        @{ var svCat = db.ServiceCategories.Find(int.Parse(request.ServiceCategory)); }
+                        <td style="color:black">@request.Event.Name</td>
+                        <td style="color:black">@svCat.Name</td>
+                        <td style="color:black">@request.ServiceProvider.Name</td>
+                        <td style="color:black">@request.Priority</td>
+                        <td style="color:black"> Confirmed</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

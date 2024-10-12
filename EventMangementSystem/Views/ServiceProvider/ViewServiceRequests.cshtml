@@ -1,0 +1,35 @@
+﻿@model IEnumerable<EventMangementSystem.Models.ServiceRequest>
+@using EventMangementSystem.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = "Available Service Requests for Bidding";
+}
+
+<h2>Available Service Requests</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Service Category</th>
+            <th>Priority</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.Event.Name</td>
+                @{var serviceCat = db.ServiceCategories.Find(int.Parse(request.ServiceCategory)); }
+                <td>@serviceCat.Name</td>
+                <td>@request.Priority</td>
+                <td>
+                    <a href="@Url.Action("SubmitBid", "ServiceProvider", new { requestId = request.Id })" class="btn btn-primary">
+                        Submit Bid
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+﻿@model EventMangementSystem.Models.Employee
+
+@{
+    ViewBag.Title = "Delete Employee";
+}
+
+<h2>Delete Employee</h2>
+
+<h3>Are you sure you want to delete this employee?</h3>
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateHired)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateHired)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <!-- Hidden field for EmployeeId -->
+        <input type="hidden" name="EmployeeId" value="@Model.EmployeeId" />
+
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+    }
+</div>

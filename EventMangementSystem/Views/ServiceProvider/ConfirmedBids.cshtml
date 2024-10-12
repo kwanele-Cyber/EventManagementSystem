@@ -1,0 +1,134 @@
+﻿@model IEnumerable<EventMangementSystem.Models.Quotation>
+@using EventMangementSystem.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = "My Confirmed Bids";
+}
+
+<style>
+    /* General container styling */
+    .container2 {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for card effect */
+        margin-top: 20px;
+    }
+
+    /* Heading styling */
+    h2 {
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Table styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-family: 'Arial', sans-serif;
+    }
+
+        .table thead th {
+            background-color: #007bff;
+            color: white;
+            text-align: left;
+            padding: 10px;
+        }
+
+        .table tbody td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Add hover effect for table rows */
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    /* Confirm button styling */
+    .confirm-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Button hover effect */
+        .confirm-btn:hover {
+            background-color: #218838;
+        }
+
+    /* Styling for completed service text */
+    .completed-text {
+        color: #28a745;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    /* Card styling for table container */
+    .table-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+    }
+</style>
+
+<div class="container2">
+    <h2>My Confirmed Bids</h2>
+
+    @if (!Model.Any())
+    {
+        <p class="text-center">You have no confirmed bids at this time.</p>
+    }
+    else
+    {
+        <div class="table-card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Service Category</th>
+                        <th>Bid Amount</th>
+                        <th>Priority</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var bid in Model)
+                    {
+                        <tr>
+                            @{ var ServReq = db.ServiceCategories.Find(int.Parse(bid.ServiceRequest.ServiceCategory)); }
+                            <td>@bid.ServiceRequest.Event.Name</td>
+                            <td>@ServReq.Name</td>
+                            <td>@bid.Price.ToString("R.00")</td>
+                            <td>@bid.ServiceRequest.Priority</td>
+                            @if (bid.ServiceRequest.IsCompleted)
+                            {
+                                <td class="completed-text">Service Delivered</td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <!-- Confirm Service Button -->
+                                    <a href="@Url.Action("ConfirmService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn">Confirm Service</a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

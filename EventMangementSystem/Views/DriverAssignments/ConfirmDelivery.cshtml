@@ -1,0 +1,178 @@
+﻿@model EventMangementSystem.Models.DispatchInventoryViewModel
+@using EventMangementSystem.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = "Confirm Delivery";
+}
+
+<head>
+    <link href="~/Content/review.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.5.3/signature_pad.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        .confirm-delivery-section {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .confirm-delivery-title {
+            color: #28a745;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .title h4 {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .signature-section {
+            margin-top: 40px;
+        }
+
+            .signature-section h5 {
+                font-size: 1.625em;
+                margin-bottom: 20px;
+                color: #28a745;
+                text-transform: uppercase;
+            }
+
+        .signature-pad {
+            border: 2px dashed #28a745;
+            border-radius: 10px;
+            width: 100%;
+            height: 200px;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        #saveBtn {
+            background-color: #28a745;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+            #saveBtn:hover {
+                background-color: #218838;
+                transform: scale(1.05);
+            }
+    </style>
+</head>
+
+<section class="w3l-index-about py-5" id="about2">
+    <div class="container py-md-5 py-2 confirm-delivery-section">
+        <h2 class="confirm-delivery-title">Confirm Delivery</h2>
+
+        <div class="card">
+            <div class="row">
+                <div class="col-md-12 cart">
+                    <div class="title">
+                        <div class="row">
+                            <div class="col">
+                                <h4><b>Delivery Confirmation for Inventory ID: @Model.EventInventory.EventInventoryId</b></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Details -->
+                    @if (Model.EventInventory.InventoryId != 0)
+                    {
+                        var inventory = db.Inventories.FirstOrDefault(x => x.InventoryId == Model.EventInventory.InventoryId);
+
+                        <div class="inventory-details">
+                            <h5>Inventory Details</h5>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6 text-center mb-3">
+                                    <div class="inventory-item">
+                                        <h6 style="font-size:20px">Inventory: @inventory.ItemName</h6>
+                                        <img src="~/assets/images/@inventory.picture" alt="@inventory.ItemName" class="inventory-image" />
+                                        <p style="font-size:20px">Quantity: @Model.EventInventory.QuantityRequired</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Signature Section -->
+                    <div class="signature-section">
+                        <form action="@Url.Action("ConfirmDelivery", "DriverAssignments", new { id = Model.EventInventory.EventInventoryId })" method="post">
+                            @Html.AntiForgeryToken()
+                            <h5>Signatures</h5>
+                            <div class="form-group">
+                                <label for="driverSignature">Driver's Signature</label>
+                                <div id="driverSignatureContainer" style="position: relative;">
+                                    <canvas id="driverSignaturePad" class="signature-pad" width="500" height="200"></canvas>
+                                </div>
+                                <input type="hidden" id="driverSignatureData" name="driverSignature" value="" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="managerSignature">Event Manager's Signature</label>
+                                <div id="managerSignatureContainer" style="position: relative;">
+                                    <canvas id="managerSignaturePad" class="signature-pad" width="500" height="200"></canvas>
+                                </div>
+                                <input type="hidden" id="managerSignatureData" name="managerSignature" value="" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="saveBtn">Confirm Delivery</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        var driverCanvas = document.getElementById('driverSignaturePad');
+        var managerCanvas = document.getElementById('managerSignaturePad');
+
+        var driverSignaturePad = new SignaturePad(driverCanvas);
+        var managerSignaturePad = new SignaturePad(managerCanvas);
+
+        function resizeCanvas(canvas, signaturePad) {
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+            signaturePad.clear();
+        }
+
+        resizeCanvas(driverCanvas, driverSignaturePad);
+        resizeCanvas(managerCanvas, managerSignaturePad);
+
+        window.addEventListener('resize', function () {
+            resizeCanvas(driverCanvas, driverSignaturePad);
+            resizeCanvas(managerCanvas, managerSignaturePad);
+        });
+
+        $('#saveBtn').click(function (e) {
+            var driverSignatureData = driverSignaturePad.toDataURL();
+            var managerSignatureData = managerSignaturePad.toDataURL();
+            $('#driverSignatureData').val(driverSignatureData);
+            $('#managerSignatureData').val(managerSignatureData);
+
+            if (driverSignaturePad.isEmpty() || managerSignaturePad.isEmpty()) {
+                alert('Please provide both signatures.');
+                e.preventDefault();
+            }
+        });
+    });
+</script>

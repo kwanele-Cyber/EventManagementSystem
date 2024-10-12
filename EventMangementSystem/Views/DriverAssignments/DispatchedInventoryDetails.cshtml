@@ -1,0 +1,219 @@
+﻿@model EventMangementSystem.Models.EventInventory
+@using EventMangementSystem.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = "Dispatched Inventory Details";
+}
+
+<style>
+   
+
+    /* Card Styles */
+    .card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+    .title h4 {
+        font-size: 1.75rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .title .text-muted {
+        font-size: 1.25rem;
+        font-weight: normal;
+        color: #6c757d;
+    }
+
+    /* Signature Container */
+    .signature-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        border-top: 1px solid #e9ecef;
+        padding-top: 20px;
+    }
+
+        .signature-container div {
+            flex: 1;
+            text-align: center;
+        }
+
+        .signature-container img {
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: #fff;
+        }
+
+        .signature-container p {
+            font-size: 1rem;
+            color: #495057;
+            font-weight: bold;
+        }
+
+    /* Modal Styles */
+    .modal-header {
+        background-color: #007bff;
+        color: #fff;
+        border-bottom: none;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .modal-content {
+        border-radius: 15px;
+    }
+
+    .modal-body img {
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Ordered Products */
+    .row .col-md-4 h6 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+
+    .row .col-md-4 p {
+        font-size: 1rem;
+        color: #495057;
+    }
+
+    /* Button Styles */
+    .btn {
+        border-radius: 50px;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+    .btn-outline-dark {
+        border: 2px solid #343a40;
+        color: #343a40;
+    }
+
+        .btn-outline-dark:hover {
+            background-color: #343a40;
+            color: #fff;
+        }
+</style>
+
+<section class="w3l-index-about py-5" id="about2">
+    <div class="container py-md-5 py-2">
+        <h2>Dispatched Inventory Details</h2>
+
+        <div class="card mb-4">
+            <div class="row">
+                <div class="col-md-12 cart">
+                    <div class="title">
+                        <div class="row">
+                            <div class="col">
+                                <h4><b>Inventory ID: @Model.EventInventoryId</b></h4>
+                            </div>
+                            <div class="col align-self-center text-right text-muted">Manager: @Model.FirstName</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p><b>Delivery Date:</b> @Model.DeliveryDate.ToString("MM/dd/yyyy")</p>
+                        <div class="signature-container">
+                            <div>
+                                <p><b>Driver's Signature:</b></p>
+                                @if (!string.IsNullOrEmpty(Model.DriverSignature))
+                                {
+                                    <img src="data:image/png;base64,@Model.DriverSignature" alt="Driver's Signature" class="img-fluid" style="width: 300px;" />
+                                }
+                                else
+                                {
+                                    <p>Not signed</p>
+                                }
+                            </div>
+                            <div>
+                                <p><b>Admin's Signature:</b></p>
+                                @if (!string.IsNullOrEmpty(Model.AdminSignature))
+                                {
+                                    <img src="data:image/png;base64,@Model.AdminSignature" alt="Admin's Signature" class="img-fluid" style="width: 300px;" />
+                                }
+                                else
+                                {
+                                    <p>Not signed</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5>Inventories</h5>
+                        <div class="row">
+                            @{ var inventories = db.Inventories.Where(x => x.InventoryId == Model.InventoryId).ToList(); }
+                            @foreach (var item in inventories)
+                            {
+                                <div class="col-md-4 text-center mb-3">
+                                    <h6>Product: @item.ItemName</h6>
+                                    <div>
+                                        <p>Quantity: @Model.QuantityRequired</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5>Inventory QR Code</h5>
+                        <p>@Model.UniqueCode</p>
+                        <div class="text-center mb-3">
+                            <a href="#" >
+                                <img src="~/images/@Model.QrCodePicture" alt="Order QR Code" class="img-fluid barcode-img" style="width:200px;height:200px" />
+                            </a>
+                        </div>
+
+                        <!-- QR Code Modal -->
+                        <div class="modal fade" id="qrCodeModal" tabindex="-1" role="dialog" aria-labelledby="qrCodeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="qrCodeModalLabel">Order QR Code</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img src="~/images/@Model.QrCodePicture" class="img-fluid" style="width:300px" alt="QR Code">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Download PDF Button -->
+                    <div class="text-center mt-4">
+                        <a href="@Url.Action("DownloadPdf", "DriverAssignments", new { id = Model.EventInventoryId })" class="btn btn-outline-dark">
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

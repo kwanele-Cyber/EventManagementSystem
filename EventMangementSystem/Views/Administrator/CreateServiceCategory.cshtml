@@ -1,0 +1,36 @@
+﻿@model EventMangementSystem.Models.ServiceCategory
+
+@{
+    ViewBag.Title = "Create Service Category";
+}
+
+<div class="container form-container">
+    <h2 class="animated-title">Create a New Service Category</h2>
+
+    @using (Html.BeginForm("CreateServiceCategory", "Administrator", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control custom-input", placeholder = "Enter Category Name" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control custom-input", rows = 4, placeholder = "Enter Description" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create Category" class="btn btn-primary submit-button" />
+            </div>
+        </div>
+    }
+</div>

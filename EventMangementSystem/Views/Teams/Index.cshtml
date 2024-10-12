@@ -1,0 +1,39 @@
+﻿@model IEnumerable<EventMangementSystem.Models.Team>
+
+@{
+    ViewBag.Title = "Team List";
+}
+
+<h2>Team List</h2>
+
+<table class="table">
+    <tr>
+        <th>Team Name</th>
+        <th>Description</th>
+        <th>Members</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TeamName</td>
+            <td>@item.Description</td>
+            <td>
+                @foreach (var member in item.TeamMembers)
+                {
+                    <span>@member.Employee.Name (@member.Employee.Email)</span><br />
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Create New Team", "CreateTeam")
+</p>

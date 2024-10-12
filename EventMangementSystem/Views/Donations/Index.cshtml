@@ -1,0 +1,111 @@
+﻿@model IEnumerable<EventMangementSystem.Models.Donation>
+
+@{
+    ViewBag.Title = "Donations";
+}
+
+
+<head>
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            color: #343a40;
+            position: relative;
+        }
+
+            .page-title:after {
+                content: '';
+                width: 100px;
+                height: 2px;
+                background-color: #e74c3c;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -10px;
+            }
+
+        .table-container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-create {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+            .btn-create:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+
+    <div class="container">
+
+        
+
+        <div class="table-container">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Event.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Surname)</th>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.Description)</th>
+                        <th>@Html.DisplayNameFor(model => model.CreatedDate)</th>
+                        <th>@Html.DisplayNameFor(model => model.Amount)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Event.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                            @*<td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.DonationId }, new { @class = "btn btn-sm btn-outline-primary" }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.DonationId }, new { @class = "btn btn-sm btn-outline-info" }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.DonationId }, new { @class = "btn btn-sm btn-outline-danger" })
+                            </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+

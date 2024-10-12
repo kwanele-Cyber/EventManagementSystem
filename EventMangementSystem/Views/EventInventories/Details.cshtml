@@ -1,0 +1,154 @@
+﻿@model EventMangementSystem.Models.EventInventory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EventInventory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InventoryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InventoryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityRequired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityRequired)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UniqueCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UniqueCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverSignature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverSignature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminSignature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminSignature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QrCodePicture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QrCodePicture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DriverEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DriverEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PreferredTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreferredTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveredBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveredBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveredOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveredOn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeliveryRescheduled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeliveryRescheduled)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EventInventoryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

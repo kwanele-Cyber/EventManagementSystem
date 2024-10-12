@@ -1,0 +1,429 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Event management </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Wedding Proposer Responsive web template, Bootstrap Web Templates, Flat Web Templates" />
+    <!-- CSS Files -->
+    <link href="~/assets/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/snow.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700" rel="stylesheet">
+    <style>
+        #chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #chat-sidebar {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 350px;
+            height: 500px;
+            background-color: #fff;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 999;
+        }
+
+            #chat-sidebar.open {
+                transform: translateX(0);
+            }
+
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            position: relative;
+        }
+
+        #chat-close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .chat-messages {
+            padding: 15px;
+            height: 320px;
+            overflow-y: auto;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            display: none; /* Initially hidden */
+        }
+
+        .chat-input {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #ccc;
+            display: none; /* Initially hidden */
+        }
+
+            .chat-input input {
+                flex: 1;
+                padding: 10px;
+                margin-right: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .chat-input button {
+                padding: 10px 15px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .chat-input button:hover {
+                    background-color: #0056b3;
+                }
+
+        .chat-message {
+            margin-bottom: 10px;
+        }
+
+            .chat-message strong {
+                color: #007bff;
+            }
+
+        .timestamp {
+            font-size: 0.85em;
+            color: #999;
+            margin-left: 10px;
+        }
+
+        #event-list {
+            padding: 15px;
+        }
+
+            #event-list h2 {
+                margin-bottom: 15px;
+            }
+
+            #event-list ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+                #event-list ul li {
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                }
+
+                    #event-list ul li:hover {
+                        background-color: #f0f0f0;
+                    }
+    </style>
+</head>
+<body>
+    <!-- header -->
+    <header>
+        <div class="container">
+            <!-- nav -->
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-content">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="logo">
+                            <h1><a href="index.html"><span>EV</span> <div class="logo-img"><img src="~/assets/images/in-love.png" alt="img09" /></div><p class="sub_title">eventmanagement</p></a></h1>
+                        </div>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-content">
+                        <nav class="cl-effect-13" id="cl-effect-13">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                                            <ul class="dropdown-menu agile_short_dropdown">
+                                                <li><a href="@Url.Action("Index", "Venue")">Venues</a></li>
+                                                <li><a href="@Url.Action("Index", "Inventory")">Inventories</a></li>
+                                                <li><a href="@Url.Action("ServiceCategoriesList", "Administrator")">Service Categories</a></li>
+                                                <li><a href="@Url.Action("Index", "EventInventories")">Event Inventories</a></li>
+                                                <li><a href="@Url.Action("Index", "DriverAssignments")">Deliveries</a></li>
+                                                <li><a href="@Url.Action("Create", "Users")">Team</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else if (User.IsInRole("EventManager"))
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Event Manager <b class="caret"></b></a>
+                                            <ul class="dropdown-menu agile_short_dropdown">
+                                                <li><a href="@Url.Action("Index", "Event")">Events</a></li>
+                                                <li><a href="@Url.Action("RequestService", "EventOrganizer")">Request Service</a></li>
+                                                <li><a href="@Url.Action("ServiceRequests", "EventOrganizer")">Service Requests</a></li>
+                                                <li><a href="@Url.Action("CreatePromotion", "Marketing")">Promotion</a></li>
+                                                <li><a href="@Url.Action("Index", "CheckIn")">Check-In</a></li>
+                                                <li><a href="@Url.Action("Index", "Dashboard")">Dashboard</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else if (User.IsInRole("Driver"))
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Driver <b class="caret"></b></a>
+                                            <ul class="dropdown-menu agile_short_dropdown">
+                                                <li><a href="@Url.Action("MyProfile", "Drivers")">My Profile</a></li>
+                                                <li><a href="@Url.Action("MyAssignments", "DriverAssignments")">Deliveries</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else if (User.IsInRole("ServiceProvider"))
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Provider <b class="caret"></b></a>
+                                            <ul class="dropdown-menu agile_short_dropdown">
+                                                <li><a href="@Url.Action("ViewServiceRequests", "ServiceProvider")">ServiceRequests</a></li>
+                                                <li><a href="@Url.Action("ConfirmedBids", "ServiceProvider")">ConfirmedBids</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+                                            <ul class="dropdown-menu agile_short_dropdown">
+                                                <li><a href="@Url.Action("Index", "Event")">Events</a></li>
+                                                <li><a href="@Url.Action("Tickets", "Ticket")">Tickets</a></li>
+                                                <li><a href="@Url.Action("Index", "Donations")">Donations</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                        @Html.AntiForgeryToken()
+                                    }
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("Register", "Account")">Register</a></li>
+                                    <li><a href="@Url.Action("Login", "Account")">Login</a></li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    @if (ViewBag.Title != "Home Page")
+    {
+        <div class="about_section">
+            <div class="container">
+                @{
+                    var successMessage = TempData["SuccessMessage"] as string;
+                    var errorMessage = TempData["ErrorMessage"] as string;
+                }
+                @if (!string.IsNullOrEmpty(successMessage))
+                {
+                    <div class="alert alert-success" role="alert">
+                        @successMessage
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @errorMessage
+                    </div>
+                }
+                <p class="sub_para">@ViewBag.Title</p>
+                @RenderBody()
+            </div>
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+    <!-- footer -->
+    <div class="agile-footer">
+        <div class="container">
+            <div class="aglie-info-logo">
+                <div class="banner-mid-wthree"> <a href="index.html" class="hvr-buzz"> <img src="~/assets/images/couple.png" alt="wp" /></a> </div>
+            </div>
+            <ul class="aglieits-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html">Wedding Albums</a></li>
+                <li><a href="icons.html">Icons</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="w3_agileits_social_media">
+                <ul>
+                    <li><a href="#" class="wthree_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="wthree_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="wthree_dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="wthree_behance"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <div class="copy-right">
+                <p>© 2017 Wedding Proposer. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Sidebar -->
+    <div id="chat-sidebar">
+        <div class="chat-header">
+            Chat <span id="chat-close">&times;</span>
+        </div>
+        <div id="event-list">
+            <h2>Select an Event</h2>
+            <ul id="event-list-items"></ul>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message" class="form-control" placeholder="Type your message here..." />
+            <button id="send-message" class="btn btn-primary">Send</button>
+        </div>
+    </div>
+    <div id="chat-toggle">
+        <i class="fa fa-comments"></i>
+    </div>
+
+    <!-- Required JS Files -->
+    <script type="text/javascript" src="~/assets/js/jquery-2.1.4.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/responsiveslides.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/2.4.2/jquery.signalR.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script>
+        $(function () {
+            var chatToggle = $('#chat-toggle');
+            var chatSidebar = $('#chat-sidebar');
+            var chatClose = $('#chat-close');
+            var chatMessages = $('#chat-messages');
+            var chatInput = $('.chat-input');
+            var eventList = $('#event-list');
+            var eventListItems = $('#event-list-items');
+
+            chatToggle.click(function () {
+                $.ajax({
+                    url: '@Url.Action("GetEvents", "Chat")',
+                    type: 'GET',
+                    success: function (data) {
+                        eventListItems.empty();
+                        $.each(data, function (index, event) {
+                            var listItem = $('<li></li>').text(event.Name).data('eventId', event.EventId);
+                            listItem.click(function () {
+                                loadChat(event.EventId);
+                            });
+                            eventListItems.append(listItem);
+                        });
+                        chatSidebar.addClass('open');
+                        chatToggle.hide();
+                    },
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            chatClose.click(function () {
+                chatSidebar.removeClass('open');
+                chatToggle.show();
+            });
+
+            function loadChat(eventId) {
+                $.ajax({
+                    url: '@Url.Action("Index", "Chat")',
+                    type: 'GET',
+                    data: { id: eventId },
+                    success: function (data) {
+                        $('#chatSessionId').val(data.ChatSessionId);
+                        $('#userId').val(data.UserId);
+                        $('#eventId').val(eventId);
+                        chatMessages.show();
+                        chatInput.show();
+                        eventList.hide();
+                        loadMessages(eventId);
+                    },
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            }
+
+            function loadMessages(eventId) {
+                $.ajax({
+                    url: '@Url.Action("GetMessagesForEvent", "Chat")',
+                    type: 'GET',
+                    data: { eventId: eventId },
+                    success: function (data) {
+                        chatMessages.empty();
+                        $.each(data, function (index, message) {
+                            var messageElement = $('<div></div>').addClass('chat-message')
+                                .html(`<strong>${message.UserName}:</strong> ${message.Message} <span class="timestamp">${formatTimestamp(message.Timestamp)}</span>`);
+                            chatMessages.append(messageElement);
+                        });
+                        chatMessages.scrollTop(chatMessages[0].scrollHeight);
+                    },
+                    error: function (xhr) {
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            }
+
+            function formatTimestamp(timestamp) {
+                var date = new Date(timestamp);
+                return date.toLocaleString();
+            }
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+using System.ComponentModel;
+
+namespace EventMangementSystem.Models
+{
+   
+
+    public class DriverAssignment
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int AssDrivId { get; set; }
+
+        [ForeignKey("EventInventory")]
+        public int EventInventoryId { get; set; }
+        public int DrivId { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public string Status { get; set; }
+        [DataType(DataType.Date)]
+        public string DeliveryDate { get; set; }
+        [DataType(DataType.Time)]
+        public string DeliveryTime { get; set; }
+        public DateTime Created { get; set; }
+        public bool IsActive { get; set; }
+        [DisplayName("Delivery due by")]
+        public string GenDeliveryDate { get; set; }
+        [DisplayName("Preferred Time")]
+        public string PreferredTime { get; set; }
+        public virtual EventInventory EventInventory { get; set; }
+        [ForeignKey("DrivId")]
+        public virtual Driver Driver { get; set; }
+    }
+}

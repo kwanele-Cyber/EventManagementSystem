@@ -1,0 +1,93 @@
+﻿@model EventMangementSystem.Models.Ticket
+
+@{
+    ViewBag.Title = "Ticket Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Ticket Details for @Model.Event.Name</h2>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6 border-right">
+                    <h4 class="text-secondary">Attendee Details</h4>
+                    <dl class="row">
+                        <dt class="col-sm-4">Name</dt>
+                        <dd class="col-sm-8">@Model.AttendeeName</dd>
+
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.AttendeeEmail</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-secondary">Event Details</h4>
+                    <dl class="row">
+                        <dt class="col-sm-4">Name</dt>
+                        <dd class="col-sm-8">@Model.Event.Name</dd>
+
+                        <dt class="col-sm-4">Date</dt>
+                        <dd class="col-sm-8">@Model.Event.Date.ToString("MM/dd/yyyy")</dd>
+
+                        <dt class="col-sm-4">Location</dt>
+                        <dd class="col-sm-8">@Model.Event.Location</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <h4 class="text-secondary">QR Code</h4>
+                    <div class="d-flex justify-content-center">
+                        <img src="data:image/png;base64,@Model.QRCode" alt="QR Code" class="img-fluid border" style="max-width: 200px; border-radius: 10px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        margin: 20px auto;
+        max-width: 800px;
+        border-radius: 10px;
+    }
+
+    .card-header {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .dl-horizontal dt {
+        font-weight: bold;
+    }
+
+    .img-fluid {
+        max-width: 200px;
+        height: auto;
+        margin-top: 20px;
+        border: 2px solid #dee2e6;
+    }
+
+    .text-secondary {
+        color: #6c757d !important;
+    }
+
+    .border-right {
+        border-right: 1px solid #dee2e6;
+    }
+
+    .btn-secondary {
+        background-color: #0094ff;
+        border-color: #6c757d;
+    }
+</style>

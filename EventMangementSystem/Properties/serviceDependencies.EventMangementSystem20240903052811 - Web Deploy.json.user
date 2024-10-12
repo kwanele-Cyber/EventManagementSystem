@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql3": {
+      "restored": true,
+      "restoreTime": "2024-09-03T03:35:30.2819843Z"
+    }
+  },
+  "parameters": {
+    "mssql3.subscriptionId": {
+      "Name": "mssql3.subscriptionId",
+      "Type": "subscription",
+      "Value": "c8c7dda4-652c-4a1b-a145-d7b3e417b096"
+    },
+    "mssql3.resourceGroupName": {
+      "Name": "mssql3.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "AmmendedEvent"
+    }
+  }
+}

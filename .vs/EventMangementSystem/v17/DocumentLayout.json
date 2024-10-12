@@ -1,0 +1,207 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\models\\identitymodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\models\\identitymodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\viewmodels\\taskviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\views\\teams\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\teams\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\views\\employees\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\employees\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\views\\employees\\delet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\employees\\delet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IdentityModels.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Models\\IdentityModels.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Models\\IdentityModels.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Models\\IdentityModels.cs",
+              "RelativeToolTip": "EventMangementSystem\\Models\\IdentityModels.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAqwDYAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T06:46:49.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Task.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Models\\Task.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Models\\Task.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Models\\Task.cs",
+              "RelativeToolTip": "EventMangementSystem\\Models\\Task.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T06:45:21.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TaskViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\ViewModels\\TaskViewModel.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\ViewModels\\TaskViewModel.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\ViewModels\\TaskViewModel.cs",
+              "RelativeToolTip": "EventMangementSystem\\ViewModels\\TaskViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T06:34:49.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TasksController.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\TasksController.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\TasksController.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\TasksController.cs",
+              "RelativeToolTip": "EventMangementSystem\\Controllers\\TasksController.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAuwIsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T06:32:13.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TeamsController.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\TeamsController.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\TeamsController.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\TeamsController.cs",
+              "RelativeToolTip": "EventMangementSystem\\Controllers\\TeamsController.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAiwMkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T05:40:33.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Teams\\Details.cshtml",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Teams\\Details.cshtml",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Teams\\Details.cshtml",
+              "RelativeToolTip": "EventMangementSystem\\Views\\Teams\\Details.cshtml",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAQwKUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-12T05:14:26.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Employees\\Details.cshtml",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Employees\\Details.cshtml",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Employees\\Details.cshtml",
+              "RelativeToolTip": "EventMangementSystem\\Views\\Employees\\Details.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAowC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-12T05:05:21.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Delet.cshtml",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Employees\\Delet.cshtml",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Employees\\Delet.cshtml",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Employees\\Delet.cshtml",
+              "RelativeToolTip": "EventMangementSystem\\Views\\Employees\\Delet.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-12T05:03:39.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "EventMangementSystem\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAcwEsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T04:46:36.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Models\\Employee.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Models\\Employee.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Models\\Employee.cs",
+              "RelativeToolTip": "EventMangementSystem\\Models\\Employee.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T04:44:06.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmployeesController.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\EmployeesController.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\EmployeesController.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\EmployeesController.cs",
+              "RelativeToolTip": "EventMangementSystem\\Controllers\\EmployeesController.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAIwKoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T04:43:24.339Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

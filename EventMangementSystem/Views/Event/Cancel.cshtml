@@ -1,0 +1,35 @@
+﻿@model EventMangementSystem.Models.Event
+
+<h2>Cancel Event</h2>
+
+<h3>Are you sure you want to cancel this event?</h3>
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Date</dt>
+        <dd>@Html.DisplayFor(model => model.Date)</dd>
+
+        <dt>Location</dt>
+        <dd>@Html.DisplayFor(model => model.Location)</dd>
+
+        <dt>Description</dt>
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
+
+        <dt>Venue</dt>
+        <dd>@Html.DisplayFor(model => model.Venue.Name)</dd>
+
+        <dt>Venue Address</dt>
+        <dd>@Html.DisplayFor(model => model.Venue.Address)</dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm("Cancel", "Event", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.EventId)
+    <button type="submit" class="btn btn-danger">Cancel Event</button>
+    
+
+}
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })

@@ -1,0 +1,100 @@
+﻿@model List<EventMangementSystem.Models.ServiceRequest>
+
+@{
+    ViewBag.Title = "Request Multiple Services";
+
+    // Serialize events and categories for use in JavaScript
+    var eventsJson = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Events);
+    var categoriesJson = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ServiceCategories);
+}
+
+<div class="container form-container">
+    <h2>Request Multiple Services</h2>
+
+    @using (Html.BeginForm("RequestService", "EventOrganizer", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div id="service-requests">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="service-request-item">
+                    <h4>Service Request @(i + 1)</h4>
+
+                    <div class="form-group">
+                        <label>Event</label>
+                        @Html.DropDownListFor(m => m[i].EventId, new SelectList(ViewBag.Events, "Id", "Name"), "Select Event", new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Service Category</label>
+                        @Html.DropDownListFor(m => m[i].ServiceCategory, new SelectList(ViewBag.ServiceCategories, "Id", "Name"), "Select Category", new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <div>
+                            @Html.RadioButtonFor(m => m[i].Priority, "Urgent") Urgent
+                            @Html.RadioButtonFor(m => m[i].Priority, "Standard") Standard
+                            @Html.RadioButtonFor(m => m[i].Priority, "Low") Low
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <button type="button" class="btn btn-secondary" id="add-service-request">Add Another Service</button>
+        <br /><br />
+
+        <input type="submit" value="Submit Requests" class="btn btn-primary" />
+    }
+
+</div>
+
+@section scripts {
+    <script>
+        // JavaScript objects to hold events and categories
+        var events = @Html.Raw(eventsJson);
+        var categories = @Html.Raw(categoriesJson);
+        let requestCount = @Model.Count;
+
+        // Add new service request block dynamically
+        $('#add-service-request').click(function () {
+            let newRequestHtml = `
+                <div class="service-request-item">
+                    <h4>Service Request ${requestCount + 1}</h4>
+                    <div class="form-group">
+                        <label>Event</label>
+                        <select class="form-control" name="requests[${requestCount}].EventId">
+                            ${generateOptions(events)}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Service Category</label>
+                        <select class="form-control" name="requests[${requestCount}].ServiceCategory">
+                            ${generateOptions(categories)}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <div>
+                            <input type="radio" name="requests[${requestCount}].Priority" value="Urgent" /> Urgent
+                            <input type="radio" name="requests[${requestCount}].Priority" value="Standard" /> Standard
+                            <input type="radio" name="requests[${requestCount}].Priority" value="Low" /> Low
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            $('#service-requests').append(newRequestHtml);
+            requestCount++;
+        });
+
+        // Function to generate <option> tags for dropdowns
+        function generateOptions(items) {
+            let optionsHtml = '<option value="">Select</option>'; // Add a default option
+            items.forEach(item => {
+                optionsHtml += `<option value="${item.Id}">${item.Name}</option>`;
+            });
+            return optionsHtml;
+        }
+    </script>
+}

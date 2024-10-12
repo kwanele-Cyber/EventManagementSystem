@@ -1,0 +1,70 @@
+﻿@model YourNamespace.Models.DashboardViewModel
+
+<h2>Event Organizer Dashboard</h2>
+
+<div>
+    <h3>Summary</h3>
+    <p>Total Events: @Model.TotalEvents</p>
+    <p>Total Service Requests: @Model.TotalServiceRequests</p>
+    <p>Total Quotations: @Model.TotalQuotations</p>
+    <p>Average Quotation Amount: @Model.AverageQuotationAmount.ToString("C")</p>
+</div>
+
+<div>
+    <h3>Recent Events</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Service Requests</th>
+        </tr>
+        @foreach (var eventSummary in Model.RecentEvents)
+        {
+            <tr>
+                <td>@eventSummary.Name</td>
+                <td>@eventSummary.Date.ToString("d")</td>
+                <td>@eventSummary.NumberOfServiceRequests</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <h3>Recent Service Requests</h3>
+    <table>
+        <tr>
+            <th>Service Type</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        @foreach (var srSummary in Model.RecentServiceRequests)
+        {
+            <tr>
+                <td>@srSummary.ServiceType</td>
+                <td>@srSummary.Description</td>
+                <td>@srSummary.CreatedAt.ToString("g")</td>
+                <td>@srSummary.Status</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <h3>Recent Quotations</h3>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+        @foreach (var quotationSummary in Model.RecentQuotations)
+        {
+            <tr>
+                <td>@quotationSummary.Amount.ToString("C")</td>
+                <td>@quotationSummary.Status</td>
+                <td>@quotationSummary.CreatedAt.ToString("g")</td>
+            </tr>
+        }
+    </table>
+</div>
