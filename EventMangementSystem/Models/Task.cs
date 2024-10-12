@@ -4,7 +4,7 @@ using System;
 
 namespace EventMangementSystem.Models
 {
-    public class Task
+    public class GroupTask
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -29,14 +29,14 @@ namespace EventMangementSystem.Models
         [ForeignKey("TeamId")]
         public virtual Team Team { get; set; }
 
-        public TaskStatus Status { get; set; }
+        public GroupTaskStatus Status { get; set; }
 
         public string Dependencies { get; set; } // Optional: Dependencies on other tasks
 
         public double Progress { get; set; } // Progress in percentage (0-1 range)
     }
 
-    public enum TaskStatus
+    public enum GroupTaskStatus
     {
         NotStarted,
         InProgress,

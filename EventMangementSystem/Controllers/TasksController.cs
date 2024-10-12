@@ -43,14 +43,14 @@ namespace EventMangementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var task = new Task
+                var task = new GroupTask
                 {
                     TaskName = model.TaskName,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     EmployeeId = model.EmployeeId,
                     TeamId = model.TeamId,
-                    Status = TaskStatus.NotStarted
+                    Status = GroupTaskStatus.NotStarted
                 };
 
                 db.Tasks.Add(task);

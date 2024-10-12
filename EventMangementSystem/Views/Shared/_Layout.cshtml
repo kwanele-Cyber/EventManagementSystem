@@ -12,6 +12,12 @@
     <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Fonts -->
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700" rel="stylesheet">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['gantt'] });
+    </script>
+
     <style>
         #chat-toggle {
             position: fixed;
@@ -335,10 +341,12 @@
 
     <!-- Required JS Files -->
     <script type="text/javascript" src="~/assets/js/jquery-2.1.4.min.js"></script>
-    <script src="~/assets/js/bootstrap.min.js"></script>
-    <script src="~/assets/js/responsiveslides.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/2.4.2/jquery.signalR.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/responsiveslides.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/charts/loader.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/2.4.2/jquery.signalR.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Additional Scripts -->
     <script>
@@ -425,5 +433,5 @@
         });
     </script>
     @RenderSection("scripts", required: false)
-</body>
+    </body>
 </html>

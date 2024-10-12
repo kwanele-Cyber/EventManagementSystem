@@ -1,0 +1,11 @@
+{
+  "name": "charts-google",
+  "version": "2.0.0",
+  "description": "google charts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "raghav",
+  "license": "ISC"
+}

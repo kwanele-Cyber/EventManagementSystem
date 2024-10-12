@@ -21,5 +21,8 @@ namespace EventMangementSystem.Models
         public int? ServiceProviderId { get; set; }
         [ForeignKey(nameof(ServiceProviderId))]
         public virtual ServiceProvider ServiceProvider { get; set; }
+
+        // Add this property
+        public virtual ICollection<GroupTask> GroupTasks { get; set; }
     }
 }

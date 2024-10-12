@@ -258,6 +258,10 @@
     <Compile Include="Migrations\202410111850231_fix_ServProviderFK_conflict.Designer.cs">
       <DependentUpon>202410111850231_fix_ServProviderFK_conflict.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202410120800333_GroupsAndTasks.cs" />
+    <Compile Include="Migrations\202410120800333_GroupsAndTasks.Designer.cs">
+      <DependentUpon>202410120800333_GroupsAndTasks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Announcement.cs" />
@@ -350,8 +354,10 @@
     <Content Include="assets\images\triangle.svg" />
     <Content Include="assets\images\up.png" />
     <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\charts\loader.js" />
     <Content Include="assets\js\easing.js" />
     <Content Include="assets\js\easy-responsive-tabs.js" />
+    <Content Include="assets\js\googleCharts.min.js" />
     <Content Include="assets\js\jquery-2.1.4.min.js" />
     <Content Include="assets\js\lsb.min.js" />
     <Content Include="assets\js\move-top.js" />
@@ -443,6 +449,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\EventMangementSystem20240523060732 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\EventMangementSystem20240903052811 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -619,6 +626,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202410111850231_fix_ServProviderFK_conflict.resx">
       <DependentUpon>202410111850231_fix_ServProviderFK_conflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410120800333_GroupsAndTasks.resx">
+      <DependentUpon>202410120800333_GroupsAndTasks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -59,7 +59,7 @@ namespace EventMangementSystem.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<GroupTask> Tasks { get; set; }
     }
 }
 
