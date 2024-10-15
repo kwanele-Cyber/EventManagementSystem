@@ -10,46 +10,74 @@
         height: 100vh; /* Set the desired height, 100vh makes it full screen height */
     }
 </style>
-<div class="background-container">
-    <div class="snow-container">
-        <div class="snow foreground"></div>
-        <div class="snow foreground layered"></div>
-        <div class="snow middleground"></div>
-        <div class="snow middleground layered"></div>
-        <div class="snow background"></div>
-        <div class="snow background layered"></div>
+
+@if(User.IsInRole("Employee"))
+{
+        <div class="container pt-4">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <a href="@Url.Action("Index","Teams")" class="col-lg-3 btn btn-cst-lg btn-primary">
+                            <i class="fa fa-user fa-5x"></i><br />
+                            My Teams <br>
+                        </a>
+                        <a href="@Url.Action("Index","Tasks")" class="col-lg-3 btn btn-cst-lg btn-success">
+                            <i class="fa fa-user fa-5x"></i><br />
+                            My Tasks <br>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <hr />
+}
+else
+{
+    <!--Hero-->
+    <div class="background-container">
+        <div class="snow-container">
+            <div class="snow foreground"></div>
+            <div class="snow foreground layered"></div>
+            <div class="snow middleground"></div>
+            <div class="snow middleground layered"></div>
+            <div class="snow background"></div>
+            <div class="snow background layered"></div>
+        </div>
+        <div class="callbacks_container">
+            <ul class="rslides" id="slider3">
+                <li>
+
+                    <div class="banner_agile-info">
+                        <h3>We Make Your Dream True</h3>
+                        <p>CREATIVE EVENT PLANNER</p>
+                        <div class="banner-mid-wthree"> <a href="index.html" class="hvr-buzz"> <img src="~/assets/images/couple.png" alt="wp" /></a> </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="banner_agile-info">
+                        <h3>You are Getting Married?</h3>
+                        <p>CREATIVE WEDDING PLANNER</p>
+                        <div class="banner-mid-wthree"> <a href="index.html" class="hvr-buzz"> <img src="~/assets/images/couple.png" alt="wp" /></a> </div>
+                    </div>
+                </li>
+                <li>
+
+                    <div class="banner_agile-info">
+                        <h3>We Make Your Dream True</h3>
+                        <p>CREATIVE WEDDING PLANNER</p>
+                        <div class="banner-mid-wthree"> <a href="index.html" class="hvr-buzz"> <img src="~/assets/images/couple.png" alt="wp" /></a> </div>
+                    </div>
+                </li>
+
+
+            </ul>
+
+            <div class="clearfix"></div>
+        </div>
     </div>
-    <div class="callbacks_container">
-        <ul class="rslides" id="slider3">
-            <li>
 
-                <div class="banner_agile-info">
-                    <h3>We Make Your Dream True</h3>
-                    <p>CREATIVE EVENT PLANNER</p>
-                    <div class="banner-mid-wthree"> <a href="index.html" class="hvr-buzz"> <img src="~/assets/images/couple.png" alt="wp" /></a> </div>
-                </div>
-            </li>
-            <li>
-                <div class="banner_agile-info">
-                    <h3>We are Getting Married</h3>
-                    <p>CREATIVE WEDDING PLANNER</p>
-                    <div class="banner-mid-wthree"> <a href="index.html" class="hvr-buzz"> <img src="~/assets/images/couple.png" alt="wp" /></a> </div>
-                </div>
-            </li>
-            <li>
-
-                <div class="banner_agile-info">
-                    <h3>We Make Your Dream True</h3>
-                    <p>CREATIVE WEDDING PLANNER</p>
-                    <div class="banner-mid-wthree"> <a href="index.html" class="hvr-buzz"> <img src="~/assets/images/couple.png" alt="wp" /></a> </div>
-                </div>
-            </li>
+    <hr />
+}
 
 
-        </ul>
-
-        <div class="clearfix"></div>
-    </div>
-
-
-</div>

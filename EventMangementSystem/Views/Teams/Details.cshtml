@@ -76,8 +76,8 @@
                                 <tr>
                                     <td>@task.TaskName</td>
                                     <td>@task.Status.ToString()</td>
-                                    <td>@task.StartDate.ToShortDateString()</td>
-                                    <td>@task.EndDate.ToShortDateString()</td>
+                                    <td>@task.StartDate.ToString(@"g")</td>
+                                    <td>@task.EndDate.ToString(@"g")</td>
                                 </tr>
                             }
                         </tbody>
@@ -92,6 +92,8 @@
         </div>
     </div>
 
+    @if (User.IsInRole("Employee"))
+    {
     <!-- Assign Task tab -->
     <div role="tabpanel" class="tab-pane" id="assignTask">
         <div class="form-horizontal">
@@ -141,6 +143,7 @@
             }
         </div>
     </div>
+    }
 </div>
 
 <!-- Scripts for enabling tab navigation and Gantt chart -->
@@ -158,21 +161,30 @@
         function drawChart() {
             var jsonData = @Html.Raw(Json.Encode(ViewBag.GanttData));
 
+            if (!jsonData || jsonData.length === 0) {
+                console.warn("No Gantt data available.");
+                return;
+            }
+
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Task ID');
             data.addColumn('string', 'Task Name');
-            data.addColumn('date', 'Start Date');
-            data.addColumn('date', 'End Date');
+            data.addColumn('datetime', 'Start Date');
+            data.addColumn('datetime', 'End Date');
             data.addColumn('number', 'Duration');
             data.addColumn('string', 'Dependencies');
 
             jsonData.forEach(function (task) {
+                var startDate = new Date(task.StartDate);
+                var endDate = new Date(task.EndDate);
+                var duration = parseFloat((endDate - startDate) / (1000 * 60 * 60)); 
+
                 data.addRow([
                     task.TaskId,
                     task.TaskName,
-                    new Date(task.StartDate),
-                    new Date(task.EndDate),
-                    null,
+                    startDate,
+                    endDate,
+                    duration,
                     task.Dependencies
                 ]);
             });
@@ -186,3 +198,4 @@
         }
     </script>
 }
+

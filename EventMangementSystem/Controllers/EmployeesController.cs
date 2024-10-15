@@ -23,6 +23,8 @@ namespace EventMangementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(EmployeeViewModel model)
         {
+            model.Role = "Employee";
+
             if (ModelState.IsValid)
             {
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -34,13 +36,28 @@ namespace EventMangementSystem.Controllers
                     roleManager.Create(new IdentityRole(model.Role));
                 }
 
+                //Get Employeer Info...
+                var employerEmail = User.Identity.GetUserName();
+                int employerId = 0;
+
+                if (User.IsInRole(nameof(RoleEnum.ServiceProvider)))
+                {
+                    employerId = db.ServiceProviders.FirstOrDefault(sp => sp.email == employerEmail)?.Id ?? 0;
+                    
+                }
+                else
+                {
+                    throw new Exception("You don't have enought permision to do this action, Only Service Providers can add Employees");
+                }
+                 
+
                 // Create ApplicationUser (Identity User)
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
                 };
 
                 var userCreationResult = userManager.Create(user, model.Password);
@@ -48,7 +65,7 @@ namespace EventMangementSystem.Controllers
                 if (userCreationResult.Succeeded)
                 {
                     // Add the new user to the specified role
-                    userManager.AddToRole(user.Id, model.Role);
+                    userManager.AddToRole(user.Id, nameof(RoleEnum.Employee));
 
                     // Create Employee record
                     var employee = new Employee
@@ -57,7 +74,7 @@ namespace EventMangementSystem.Controllers
                         Email = model.Email,
                         Position = model.Position,
                         DateHired = model.DateHired,
-                        ServiceProviderId = db.ServiceProviders.FirstOrDefault(sp => sp.email == User.Identity.GetUserName())?.Id ?? 0
+                        ServiceProviderId = employerId
                     };
 
                     db.Employees.Add(employee);

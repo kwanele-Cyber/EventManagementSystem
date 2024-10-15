@@ -1,5 +1,6 @@
 ﻿using EventMangementSystem.Models;
 using EventMangementSystem.ViewModels;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -82,7 +83,15 @@ namespace EventMangementSystem.Controllers
         // GET: Team/Index
         public ActionResult Index()
         {
-            var teams = db.Teams.Include(t => t.TeamMembers.Select(tm => tm.Employee)).ToList();
+            var email = User.Identity.GetUserName();
+            List<Team> teams = new List<Team>();
+
+           
+            teams = db.Teams
+                .Include(t => t.GroupTasks)
+                .Include(t => t.TeamMembers.Select(tm => tm.Employee))
+                .ToList();
+            
             return View(teams);
         }
 
@@ -189,12 +198,28 @@ namespace EventMangementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Include(t => t.TeamMembers.Select(tm => tm.Employee))
-                                .FirstOrDefault(t => t.TeamId == id);
+            Team team = db.Teams
+                .Include(t => t.GroupTasks)
+                .Include(t => t.TeamMembers.Select(tm => tm.Employee))
+                .FirstOrDefault(t => t.TeamId == id);
+
             if (team == null)
             {
                 return HttpNotFound();
             }
+
+
+            // Assuming `GroupTasks` is properly populated
+            var groupTasks = db.Tasks.Where(t => t.TeamId == id).ToList();
+            //Dec 6, 2014 10:30:00 -0800
+            ViewBag.GanttData = groupTasks.Select(t => new
+            {
+                TaskId = t.TaskId.ToString(),
+                TaskName = t.TaskName,
+                StartDate = t.StartDate.ToString(@"g"),
+                EndDate = t.EndDate.ToString(@"g"),
+                Dependencies = t.Dependencies // Assuming Dependencies is a string that indicates task dependencies
+            }).ToList();
 
             ViewBag.IsServiceProviderOrCoordinator = User.IsInRole("ServiceProvider") || User.IsInRole("TeamCoordinator") || User.IsInRole("TeamLeader");
 

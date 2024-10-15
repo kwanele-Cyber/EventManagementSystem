@@ -1,11 +1,9 @@
 ﻿@model EventMangementSystem.ViewModels.TeamEmployeeViewModel
 
 @{
-    ViewBag.Title = "Coordinate Team";
+    ViewBag.Title = "Create Team";
 }
-
-<h2>Coordinate Team</h2>
-
+<hr/>
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item active">
@@ -13,9 +11,6 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#addEmployee" role="tab" data-toggle="tab">Add Employee</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#assignRoles" role="tab" data-toggle="tab">Assign Roles</a>
     </li>
 </ul>
 
@@ -90,9 +85,16 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.Label("Role", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.Label("Password", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <input type="text" name="Position" class="form-control" placeholder="e.g., Technician, Supervisor" />
+                        <input type="text" name="Password" class="form-control" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("GroupRole", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="text" name="Position" class="form-control" placeholder="e.g., Technician, Supervisor"/>
                     </div>
                 </div>
 
@@ -104,51 +106,6 @@
             }
         </div>
     </div>
-
-    <!-- Assign Roles tab -->
-    <div role="tabpanel" class="tab-pane" id="assignRoles">
-        <div class="form-horizontal">
-            @using (Html.BeginForm("AssignRoles", "Teams", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-
-                <h4>Assign Roles to Team Members</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                @* Here, we correct the Razor syntax for the 'for' loop *@
-
-                if (Model.Team.TeamMembers != null)
-                {
-                    List<EventMangementSystem.Models.TeamMember> items = Model.Team.TeamMembers.ToList();
-
-                    for (int i = 0; i < items.Count; i++)
-                    {
-                        <div class="form-group">
-                            @Html.Label(items[i].Employee.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.Team.TeamMembers.ToList()[i].Role, new { @class = "form-control", placeholder = $"Role for {items[i].Employee.Name}" })
-                                @Html.ValidationMessageFor(m => m.Team.TeamMembers.ToList()[i].Role, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    }
-                }
-                else if (Model.Team.TeamMembers == null)
-                {
-                    <div class="form-group">
-                        <h2 class="h2 text-bg-info">No Members Have been Added in this Team</h2>
-                    </div>
-                }
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save Roles" class="btn btn-primary" />
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
 
 <!-- Scripts for enabling tab navigation -->
 @section Scripts {

@@ -2,9 +2,13 @@
 
 @{
     ViewBag.Title = "Team List";
+    var email = User.Identity.Name;
+    var myGroupRole = "";
 }
 
 <h2>Team List</h2>
+
+<p>@email</p>
 
 <table class="table">
     <tr>
@@ -13,27 +17,82 @@
         <th>Members</th>
         <th></th>
     </tr>
-
-    @foreach (var item in Model)
+    @if (User.IsInRole("Employee"))
     {
-        <tr>
-            <td>@item.TeamName</td>
-            <td>@item.Description</td>
-            <td>
-                @foreach (var member in item.TeamMembers)
+        foreach (var item in Model)
+        {
+
+            foreach (var member in item.TeamMembers)
+            {
+                if (member.Employee.Email == email)
                 {
-                    <span>@member.Employee.Name (@member.Employee.Email)</span><br />
+                    <tr>
+                        <td>@item.TeamName</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <span>@member.Employee.Name (@member.Employee.Email)</span><br />
+                        </td>
+                        <td>
+                            @if (myGroupRole == "Leader") {
+                                <span>@Html.ActionLink("Edit", "Edit", new { id = item.TeamId })</span>
+                            }|
+                            @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+                        </td>
+                    </tr>
                 }
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
-            </td>
-        </tr>
+            }
+        }
+    }
+    else if (User.IsInRole("Admin"))
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TeamName</td>
+                <td>@item.Description</td>
+                <td>
+                    @foreach (var member in item.TeamMembers)
+                    {
+                        <span>@member.Employee.Name (@member.Employee.Email)</span><br />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+                </td>
+            </tr>
+        }
+    }
+    else if (User.IsInRole("ServiceProvider"))
+    {
+        foreach (var item in Model)
+        {
+            if (item.ServiceProvider.email == email)
+            {
+                <tr>
+                    <td>@item.TeamName</td>
+                    <td>@item.Description</td>
+                    <td>
+                        @foreach (var member in item.TeamMembers)
+                        {
+                            <span>@member.Employee.Name (@member.Employee.Email)</span><br />
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+                    </td>
+                </tr>
+            }
+        }
     }
 </table>
-
+@if (User.IsInRole("ServiceProvider"))
+{
 <p>
     @Html.ActionLink("Create New Team", "CreateTeam")
 </p>
+}

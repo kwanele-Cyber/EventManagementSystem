@@ -1,12 +1,139 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\views\\teams\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\teams\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\views\\teams\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\teams\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\projects\\applicationdevelopment\\eventmanagementsystem\\eventmangementsystem\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Teams\\Details.cshtml",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Teams\\Details.cshtml",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Teams\\Details.cshtml",
+              "RelativeToolTip": "EventMangementSystem\\Views\\Teams\\Details.cshtml",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAHkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-15T14:19:51.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Teams\\Index.cshtml",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Teams\\Index.cshtml",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Teams\\Index.cshtml",
+              "RelativeToolTip": "EventMangementSystem\\Views\\Teams\\Index.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-15T13:44:40.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TeamsController.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\TeamsController.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\TeamsController.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\TeamsController.cs",
+              "RelativeToolTip": "EventMangementSystem\\Controllers\\TeamsController.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T13:28:50.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "EventMangementSystem\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T13:28:21.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Site.css",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Content\\Site.css",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Content\\Site.css",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Content\\Site.css",
+              "RelativeToolTip": "EventMangementSystem\\Content\\Site.css",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-15T13:20:10.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "EventMangementSystem\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAANIAAAAAAAAAAAAAAOYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-15T13:14:58.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "EventMangementSystem\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-15T13:09:02.101Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
