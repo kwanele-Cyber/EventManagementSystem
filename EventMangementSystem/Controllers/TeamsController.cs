@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -44,8 +45,20 @@ namespace EventMangementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateTeam(TeamEmployeeViewModel viewModel)
         {
+            // Reload the employees list in case of an error
+            var currentUserEmail = User.Identity.GetUserName();
+            var serviceProvider = db.ServiceProviders.FirstOrDefault(sp => sp.email == currentUserEmail);
+
+            //set service provider for service provider if not set.
+            if (viewModel.Team.ServiceProviderId == null)
+            {
+                viewModel.Team.ServiceProviderId = serviceProvider.Id;
+                viewModel.Team.ServiceProvider = serviceProvider;
+            }
+
             if (ModelState.IsValid)
             {
+                
                 db.Teams.Add(viewModel.Team);
                 db.SaveChanges();
 
@@ -69,10 +82,7 @@ namespace EventMangementSystem.Controllers
                 // Redirect to Edit action after creating the team
                 return RedirectToAction("Edit", new { id = viewModel.Team.TeamId });
             }
-
-            // Reload the employees list in case of an error
-            var currentUserEmail = User.Identity.GetUserName();
-            var serviceProvider = db.ServiceProviders.FirstOrDefault(sp => sp.email == currentUserEmail);
+            //reload employees
             viewModel.Employees = db.Employees
                 .Where(e => e.ServiceProviderId == serviceProvider.Id)
                 .ToList();
@@ -84,12 +94,14 @@ namespace EventMangementSystem.Controllers
         public ActionResult Index()
         {
             var email = User.Identity.GetUserName();
+            ViewBag.Email = email;
             List<Team> teams = new List<Team>();
 
            
             teams = db.Teams
                 .Include(t => t.GroupTasks)
                 .Include(t => t.TeamMembers.Select(tm => tm.Employee))
+                .Include(t => t.ServiceProvider)
                 .ToList();
             
             return View(teams);
@@ -191,40 +203,72 @@ namespace EventMangementSystem.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Teams/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            // Include related tasks and team members
             Team team = db.Teams
-                .Include(t => t.GroupTasks)
-                .Include(t => t.TeamMembers.Select(tm => tm.Employee))
+                .Include(t => t.GroupTasks.Select(gt => gt.Employee)) // Ensure tasks include employees
+                .Include(t => t.TeamMembers.Select(tm => tm.Employee)) // Ensure team members include employees
                 .FirstOrDefault(t => t.TeamId == id);
+
 
             if (team == null)
             {
                 return HttpNotFound();
             }
 
-
+            ViewData["GanttData"] = new List<EventMangementSystem.Models.GroupTaskViewModel>();
             // Assuming `GroupTasks` is properly populated
-            var groupTasks = db.Tasks.Where(t => t.TeamId == id).ToList();
-            //Dec 6, 2014 10:30:00 -0800
-            ViewBag.GanttData = groupTasks.Select(t => new
+            ViewData["GanttData"] = db.Tasks.Include(t=>t.Employee).Where(t => t.TeamId == id).Select(t => new GroupTaskViewModel
             {
                 TaskId = t.TaskId.ToString(),
                 TaskName = t.TaskName,
-                StartDate = t.StartDate.ToString(@"g"),
-                EndDate = t.EndDate.ToString(@"g"),
-                Dependencies = t.Dependencies // Assuming Dependencies is a string that indicates task dependencies
+                StartDate = new TaskTime
+                {
+                    Hour = t.StartDate.Hour,
+                    Minute = t.StartDate.Minute,
+                    Second = t.StartDate.Second,
+                    Day = t.StartDate.Day,
+                    Month = t.StartDate.Month - 1, // JavaScript Date months are 0-based
+                    Year = t.StartDate.Year
+                },
+                EndDate = new TaskTime
+                {
+                    Hour = t.EndDate.Hour,
+                    Minute = t.EndDate.Minute,
+                    Second = t.EndDate.Second,
+                    Day = t.EndDate.Day,
+                    Month = t.EndDate.Month - 1, // JavaScript Date months are 0-based
+                    Year = t.EndDate.Year
+                },
+                Dependencies = t.Dependencies, // Assuming Dependencies is a string that indicates task dependencies
+                Progress = t.Progress,
+                AssignedTo  = t.Employee
             }).ToList();
+            //Dec 6, 2014 10:30:00 -0800
+            
 
-            ViewBag.IsServiceProviderOrCoordinator = User.IsInRole("ServiceProvider") || User.IsInRole("TeamCoordinator") || User.IsInRole("TeamLeader");
+            // Check user roles for service provider, team coordinator, or leader
+            var role = User.IsInRole("ServiceProvider")? "ServiceProvider" :
+                       User.IsInRole("Driver") ? "Driver" :
+                       User.IsInRole("User") ? "User" :
+                       User.IsInRole("Employee")? "Employee" : 
+                       User.IsInRole("EventOrganiser") ? "EventOrganiser" :
+                       User.IsInRole("Admin") ? "Admin" : null;
+
+            ViewBag.Role = role;
+
+            ViewBag.IsLeader = (role == "TeamLeader")?true:false;
 
             return View(team);
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

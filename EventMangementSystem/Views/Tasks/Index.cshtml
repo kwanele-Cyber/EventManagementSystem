@@ -1,0 +1,110 @@
+﻿@model IEnumerable<EventMangementSystem.Models.GroupTask>
+
+@{
+    ViewBag.Title = "Team Tasks";
+    string returnUrl = ViewBag.ReturnUrl ?? Url.Action("Index", "Teams");  // Fallback if returnUrl is not provided
+}
+
+<h2>Team Tasks for Team ID: @ViewBag.TeamId</h2>
+
+<!-- Add a return link at the top -->
+<a href="@returnUrl" class="btn btn-secondary">Back to Previous Page</a>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item active">
+        <a class="nav-link active" href="#employeeTasks" role="tab" data-toggle="tab">Employee Tasks</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#allTasks" role="tab" data-toggle="tab">All Tasks</a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <!-- Employee Tasks tab -->
+    <div role="tabpanel" class="tab-pane active" id="employeeTasks">
+        <div>
+            <h4>Employee-Specific Tasks</h4>
+            <hr />
+            @if (Model != null && Model.Any())
+            {
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Task Name</th>
+                            <th>Assigned To</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in Model)
+                        {
+                            <tr>
+                                <td>@task.TaskName</td>
+                                <td>@task.Employee.Name</td>
+                                <td>@task.Status.ToString()</td>
+                                <td>@task.StartDate.ToString("g")</td>
+                                <td>@task.EndDate.ToString("g")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No tasks available for this employee.</p>
+            }
+        </div>
+    </div>
+
+    <!-- All Tasks tab -->
+    <div role="tabpanel" class="tab-pane" id="allTasks">
+        <div>
+            <h4>All Tasks for Team</h4>
+            <hr />
+            @if (Model != null && Model.Any())
+            {
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Task Name</th>
+                            <th>Assigned To</th>
+                            <th>Status</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in Model)
+                        {
+                            <tr>
+                                <td>@task.TaskName</td>
+                                <td>@task.Employee.Name</td>
+                                <td>@task.Status.ToString()</td>
+                                <td>@task.StartDate.ToString("g")</td>
+                                <td>@task.EndDate.ToString("g")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No tasks available for this team.</p>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Script to handle tab navigation -->
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Activate the first tab
+            $('.nav-tabs a[href="#employeeTasks"]').tab('show');
+        });
+    </script>
+}

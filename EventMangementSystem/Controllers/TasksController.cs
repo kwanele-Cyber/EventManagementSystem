@@ -43,6 +43,12 @@ namespace EventMangementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                var dep = "";
+                foreach(var item in model.Dependencies)
+                {
+                    dep = item + ", ";
+                }
+
                 var task = new GroupTask
                 {
                     TaskName = model.TaskName,
@@ -50,7 +56,8 @@ namespace EventMangementSystem.Controllers
                     EndDate = model.EndDate,
                     EmployeeId = model.EmployeeId,
                     TeamId = model.TeamId,
-                    Status = GroupTaskStatus.NotStarted
+                    Status = GroupTaskStatus.NotStarted,
+                    Dependencies = dep,
                 };
 
                 db.Tasks.Add(task);
@@ -70,13 +77,22 @@ namespace EventMangementSystem.Controllers
             return View(model);
         }
 
-        // GET: Tasks/Index
-        public ActionResult Index(int teamId)
+        public ActionResult Index(int teamId, int? memberId, string returnUrl = null)
         {
             var tasks = db.Tasks.Where(t => t.TeamId == teamId).Include(t => t.Employee).ToList();
             ViewBag.TeamId = teamId;
+
+            // Save the returnUrl in ViewBag so the view can use it
+            ViewBag.ReturnUrl = returnUrl;
+
+            if (tasks != null && memberId != null)
+            {
+                tasks = tasks.Where(t => t.EmployeeId == memberId).ToList();  // Correct filtering by member ID
+            }
+
             return View(tasks);
         }
+
 
         // GET: Tasks/AssignRoles
         public ActionResult AssignRoles(int teamId)

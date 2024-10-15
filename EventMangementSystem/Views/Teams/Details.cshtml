@@ -2,149 +2,156 @@
 
 @{
     ViewBag.Title = "Team Details";
+
 }
 
-<h2>Team Details</h2>
+<div class="container-fluid">
 
-<!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item active">
-        <a class="nav-link active" href="#teamDetails" role="tab" data-toggle="tab">Team Details</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#allTasks" role="tab" data-toggle="tab">All Tasks</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#assignTask" role="tab" data-toggle="tab">Assign New Task</a>
-    </li>
-</ul>
 
-<!-- Tab panes -->
-<div class="tab-content">
-    <!-- Team Details tab -->
-    <div role="tabpanel" class="tab-pane active" id="teamDetails">
-        <div>
-            <h4>Team</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.TeamName)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.TeamName)
-                </dd>
+    <h2>Team Details</h2>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
+    <!-- Nav tabs -->
+    <ul class="container-fluid nav nav-tabs" role="tablist">
+        <li class="nav-item active">
+            <a class="nav-link active" href="#teamDetails" role="tab" data-toggle="tab">Team Details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#allTasks" role="tab" data-toggle="tab">All Tasks</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#assignTask" role="tab" data-toggle="tab">Assign New Task</a>
+        </li>
+    </ul>
 
-                <dt>Members</dt>
-                <dd>
-                    @foreach (var member in Model.TeamMembers)
-                    {
-                        <span>@member.Employee.Name (@member.Employee.Email)</span>
-                        <a class="btn btn-outline-primary" href="@Url.Action("EmployeeTasks", "Tasks", new { employeeId = member.Employee.EmployeeId })">View Tasks</a><br />
-                    }
-                </dd>
-            </dl>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <!-- Team Details tab -->
+        <div role="tabpanel" class="container-fluid tab-pane active" id="teamDetails">
+            <div>
+                <h4>Team</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>@Html.DisplayNameFor(model => model.TeamName)</dt>
+                    <dd>@Html.DisplayFor(model => model.TeamName)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.Description)</dt>
+                    <dd>@Html.DisplayFor(model => model.Description)</dd>
+
+                    <dt>Members</dt>
+                    <dd>
+                        @foreach (var member in Model.TeamMembers)
+                        {
+                            <span>@member.Employee.Name (@member.Employee.Email)</span>
+                            <a class="btn btn-outline-primary" href="@Url.Action("Index", "Tasks", new { teamId = Model.TeamId, memberId = member.Employee.EmployeeId,returnUrl = Url.Action("Details", "Teams", new {id = Model.TeamId}) })">View Tasks</a><br />
+                        }
+                    </dd>
+                </dl>
+            </div>
         </div>
-    </div>
 
-    <!-- All Tasks tab -->
-    <div role="tabpanel" class="tab-pane" id="allTasks">
-        <div>
-            <h4>All Tasks for Team</h4>
-            <hr />
-            <div class="row">
-                <!-- Left side: Scrollable Task Table (1/3 of the container) -->
-                <div class="col-md-4" style="overflow-y: auto; max-height: 400px;">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Task Name</th>
-                                <th>Status</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var task in Model.GroupTasks)
-                            {
+        <!-- All Tasks tab -->
+        <div role="tabpanel" class="container-fluid tab-pane" id="allTasks">
+            <div>
+                <h4>All Tasks for Team</h4>
+                <hr />
+                <div class="row">
+                    <!-- Left side: Scrollable Task Table (1/3 of the container) -->
+                    <div class="col-md-4" style="overflow-y: auto; max-height: 400px;">
+                        <table class="table table-striped table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>@task.TaskName</td>
-                                    <td>@task.Status.ToString()</td>
-                                    <td>@task.StartDate.ToString(@"g")</td>
-                                    <td>@task.EndDate.ToString(@"g")</td>
+                                    <th>Task Name</th>
+                                    <th>Status</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Asigned To</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                @foreach (var task in Model.GroupTasks)
+                                {
+                                    <tr>
+                                        <td>@task.TaskName</td>
+                                        <td>@task.Status.ToString()</td>
+                                        <td>@task.StartDate.ToString("g")</td>
+                                        <td>@task.EndDate.ToString("g")</td>
+                                        <td>@task.Employee.Name (@task.Employee.Email)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
 
-                <!-- Right side: Scrollable Gantt Chart (2/3 of the container) -->
-                <div class="col-md-8" style="overflow-y: auto; max-height: 400px;">
-                    <div id="gantt_chart_div" style="min-height: 400px;"></div>
+                    <!-- Right side: Scrollable Gantt Chart (2/3 of the container) -->
+                    <div class="col-md-8" style="overflow-y: auto; max-height: 400px;">
+                        <div id="chart_div" style="min-height: 400px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Assign Task tab (only visible to employees) -->
+        @if (User.IsInRole("ServiceProvider") || (User.IsInRole("Employee") && (ViewBag.IsLeader ?? false) == true))
+        {
+            <div role="tabpanel" class="container-fluid tab-pane" id="assignTask">
+                <div class="form-horizontal">
+                    @using (Html.BeginForm("Create", "Tasks", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h4>Assign New Task</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @Html.HiddenFor(model => model.TeamId)
+
+                        <div class="form-group">
+                            @Html.Label("Task Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBox("TaskName", null, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Assign Member", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("EmployeeId", new SelectList(Model.TeamMembers.Select(tm => tm.Employee), "EmployeeId", "Name"), "Select a Member", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBox("StartDate", null, new { @class = "form-control", type = "datetime-local" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBox("EndDate", null, new { @class = "form-control", type = "datetime-local" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Depandencies", "Select Dependencies", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.ListBox("Dependencies", new MultiSelectList(Model.GroupTasks, "TaskId", "TaskName"), new { @class = "form-control", multiple = "multiple" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Add Task" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
     </div>
-
-    @if (User.IsInRole("Employee"))
-    {
-    <!-- Assign Task tab -->
-    <div role="tabpanel" class="tab-pane" id="assignTask">
-        <div class="form-horizontal">
-            @using (Html.BeginForm("Create", "Tasks", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-
-                <h4>Assign New Task</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                @Html.HiddenFor(model => model.TeamId)
-
-                <div class="form-group">
-                    @Html.Label("Task Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBox("TaskName", null, new { @class = "form-control" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.Label("Assign Member", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("EmployeeId", new SelectList(Model.TeamMembers.Select(tm => tm.Employee), "EmployeeId", "Name"), "Select a Member", new { @class = "form-control" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBox("StartDate", null, new { @class = "form-control", type = "datetime-local" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBox("EndDate", null, new { @class = "form-control", type = "datetime-local" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Add Task" class="btn btn-primary" />
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-    }
 </div>
+
 
 <!-- Scripts for enabling tab navigation and Gantt chart -->
 @section Scripts {
@@ -154,48 +161,44 @@
             $('.nav-tabs a[href="#teamDetails"]').tab('show');
         });
 
-        // Load Google Charts
-        google.charts.load('current', { 'packages': ['gantt'] });
+
+        google.charts.load('current', {'packages':['gantt']});
         google.charts.setOnLoadCallback(drawChart);
 
+        function daysToMilliseconds(days) {
+            return days * 24 * 60 * 60 * 1000;
+        }
+
         function drawChart() {
-            var jsonData = @Html.Raw(Json.Encode(ViewBag.GanttData));
 
-            if (!jsonData || jsonData.length === 0) {
-                console.warn("No Gantt data available.");
-                return;
-            }
 
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Task ID');
-            data.addColumn('string', 'Task Name');
-            data.addColumn('datetime', 'Start Date');
-            data.addColumn('datetime', 'End Date');
-            data.addColumn('number', 'Duration');
-            data.addColumn('string', 'Dependencies');
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Task ID');
+          data.addColumn('string', 'Task Name');
+          data.addColumn('date', 'Start Date');
+          data.addColumn('date', 'End Date');
+          data.addColumn('number', 'Duration');
+          data.addColumn('number', 'Percent Complete');
+          data.addColumn('string', 'Dependencies');
+          data.addColumn('string', 'AssignedTo');
 
-            jsonData.forEach(function (task) {
-                var startDate = new Date(task.StartDate);
-                var endDate = new Date(task.EndDate);
-                var duration = parseFloat((endDate - startDate) / (1000 * 60 * 60)); 
+          data.addRows([
+                @foreach(var item in (List<EventMangementSystem.Models.GroupTaskViewModel>) ViewData["GanttData"])
+                {
+                    item.Dependencies = item.Dependencies ?? "";
+                    item.TaskId = item.TaskId.Replace(" ", "");
+                    @Html.Raw($"[\"{@item.TaskId}\", \"{ @item.TaskName}\",new Date({@item.StartDate.Year}, {(@item.StartDate.Month-1)}, {@item.StartDate.Day}, {@item.StartDate.Hour}, {@item.StartDate.Minute}, {@item.StartDate.Second}), new Date({@item.EndDate.Year}, {(@item.EndDate.Month-1)}, {@item.EndDate.Day}, {@item.EndDate.Hour}, {@item.EndDate.Minute}, {@item.EndDate.Second}), null, {@item.Progress}, \"{@item.Dependencies.Trim(' ')}\", \"{item.AssignedTo.Name}\"],")
+                }
+                
+          ]);
 
-                data.addRow([
-                    task.TaskId,
-                    task.TaskName,
-                    startDate,
-                    endDate,
-                    duration,
-                    task.Dependencies
-                ]);
-            });
+          var options = {
+            height: 275
+          };
 
-            var options = {
-                height: 400 // Adjust height to fit the scrollable area
-            };
+          var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
 
-            var chart = new google.visualization.Gantt(document.getElementById('gantt_chart_div'));
-            chart.draw(data, options);
+          chart.draw(data, options);
         }
     </script>
 }
-

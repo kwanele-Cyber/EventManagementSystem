@@ -24,5 +24,6 @@ namespace EventMangementSystem.ViewModels
         public int EmployeeId { get; set; } // The employee assigned to this task
 
         public List<Employee> TeamMembers { get; set; } // List of team members to assign the task
+        public List<string> Dependencies { get; set; }
     }
 }
