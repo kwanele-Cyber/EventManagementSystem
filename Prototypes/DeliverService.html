@@ -1,0 +1,91 @@
+<!-- ServiceDeliveryTasks.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Delivery Tasks</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Service Delivery Tasks</h1>
+
+        <!-- Task List Section -->
+        <section id="taskSection">
+            <h2>Tasks</h2>
+            <ul id="taskList">
+                <!-- Tasks will be dynamically populated here -->
+            </ul>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progressSection">
+            <h2>Service Delivery Progress</h2>
+            <p id="progressStatus">Progress: <span id="progressPercentage">0%</span></p>
+            <button id="endServiceButton" class="hidden">End Service</button>
+        </section>
+    </div>
+
+    <script>
+        // script.js
+        document.addEventListener("DOMContentLoaded", () => {
+            // Sample tasks data
+            const tasks = [
+                { id: 1, name: "Prepare Equipment", isCompleted: false },
+                { id: 2, name: "Set Up Venue", isCompleted: false },
+                { id: 3, name: "Conduct Service", isCompleted: false },
+            ];
+
+            const taskList = document.getElementById("taskList");
+            const progressPercentage = document.getElementById("progressPercentage");
+            const endServiceButton = document.getElementById("endServiceButton");
+
+            // Function to render tasks
+            function renderTasks() {
+                taskList.innerHTML = "";
+                tasks.forEach(task => {
+                    const li = document.createElement("li");
+                    li.textContent = task.name;
+
+                    // Create a button to mark the task as completed
+                    const completeButton = document.createElement("button");
+                    completeButton.textContent = task.isCompleted ? "Completed" : "Mark as Completed";
+                    completeButton.disabled = task.isCompleted; // Disable if already completed
+
+                    // Add click event to the button
+                    completeButton.addEventListener("click", () => {
+                        task.isCompleted = true;
+                        renderTasks();
+                        updateProgress();
+                    });
+
+                    li.appendChild(completeButton);
+                    taskList.appendChild(li);
+                });
+            }
+
+            // Function to update progress
+            function updateProgress() {
+                const totalTasks = tasks.length;
+                const completedTasks = tasks.filter(task => task.isCompleted).length;
+                const percentage = totalTasks ? Math.round((completedTasks / totalTasks) * 100) : 0;
+                progressPercentage.textContent = `${percentage}%`;
+
+                // Show the End Service button if all tasks are completed
+                if (percentage === 100) {
+                    endServiceButton.classList.remove("hidden");
+                    endServiceButton.addEventListener("click", () => {
+                        window.location.href = "/EndService.html"; // Redirect to End Service page
+                    });
+                } else {
+                    endServiceButton.classList.add("hidden");
+                }
+            }
+
+            // Initial rendering
+            renderTasks();
+        });
+    </script>
+</body>
+</html>

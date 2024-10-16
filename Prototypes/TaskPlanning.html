@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Preparation and Planning</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic styling for tabs */
+        .tabs {
+            display: flex;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007BFF;
+        }
+        .tab {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            transition: background-color 0.3s;
+        }
+        .tab:hover {
+            background-color: #e9e9e9;
+        }
+        .tab.active {
+            background-color: white;
+            border-color: #007BFF;
+            font-weight: bold;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+   <div class="wrapper">
+        <h1>Service Preparation and Planning</h1>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="task-form">Assign Task</div>
+            <div class="tab" data-tab="assigned-tasks">Assigned Tasks</div>
+        </div>
+
+        <form method="post" action="/Task/Assign" id="task-form" class="tab-content active">
+            <div>
+                <label for="TaskDescription">Task Description:</label>
+                <textarea id="TaskDescription" name="TaskDescription"></textarea>
+            </div>
+            <div>
+                <label for="AssignedTo">Assign to Team Member:</label>
+                <select id="AssignedTo" name="AssignedTo">
+                    <!-- Options populated from backend -->
+                </select>
+            </div>
+            <button type="submit">Assign Task</button>
+        </form>
+
+        <section id="assigned-tasks" class="tab-content">
+            <h2>Assigned Tasks</h2>
+            <ul>
+                <!-- Populate with tasks from backend -->
+                <li>Task 1 - Assigned to John - [Edit] [Delete]</li>
+                <li>Task 2 - Assigned to Jane - [Edit] [Delete]</li>
+            </ul>
+        </section>
+   </div>
+
+   <script>
+       // Tab functionality
+       const tabs = document.querySelectorAll('.tab');
+       const tabContents = document.querySelectorAll('.tab-content');
+
+       tabs.forEach(tab => {
+           tab.addEventListener('click', () => {
+               // Remove active class from all tabs and contents
+               tabs.forEach(t => t.classList.remove('active'));
+               tabContents.forEach(content => content.classList.remove('active'));
+
+               // Add active class to the clicked tab and corresponding content
+               tab.classList.add('active');
+               const activeTabContent = document.querySelector(`#${tab.dataset.tab}`);
+               activeTabContent.classList.add('active');
+           });
+       });
+   </script>
+</body>
+</html>

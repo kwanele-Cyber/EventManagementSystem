@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Analytics Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* Basic styles for tabs */
+        .tabs {
+            display: flex;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+        .tab {
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            border-bottom: none;
+            background: #f1f1f1;
+            margin-right: 5px;
+            transition: background 0.3s;
+        }
+        .tab.active {
+            background: #ffffff;
+            border-color: #ccc;
+        }
+        .tab:hover {
+            background: #e1e1e1;
+        }
+        .section {
+            display: none; /* Hide sections by default */
+        }
+        .section.active {
+            display: block; /* Show active section */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Service Provider Dashboard</h1>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <div class="tab active" data-target="summarySection">Summary</div>
+            <div class="tab" data-target="upcomingEventsSection">Upcoming Bookings</div>
+            <div class="tab" data-target="reviewsSection">Service Reviews</div>
+            <div class="tab" data-target="analyticsSection">Performance Analytics</div>
+        </div>
+
+        <!-- Summary Section -->
+        <section id="summarySection" class="section active">
+            <h2>Dashboard Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <p>Total Bids: <span id="totalBids">26</span></p>
+                    <p>Successful Bids: <span id="successfulBids">10</span></p>
+                </div>
+                <div class="summary-item">
+                    <p>Total Bookings: <span id="totalBookings">8</span></p>
+                    <p>Total Earnings: <span id="totalEarnings">$0.00</span></p>
+                </div>
+                <div class="summary-item">
+                    <p>Upcoming Events: <span id="upcomingEvents">0</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Events Section -->
+        <section id="upcomingEventsSection" class="section">
+            <h2>Upcoming Bookings</h2>
+            <ul id="upcomingBookingsList">
+                <!-- Upcoming bookings will be dynamically populated here -->
+            </ul>
+            <button>All Bookings</button>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviewsSection" class="section">
+            <h2>Service Reviews</h2>
+            <ul id="reviewsList">
+                <!-- Service reviews will be dynamically populated here -->
+            </ul>
+            <button>More Reviews</button>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analyticsSection" class="section">
+            <h2>Performance Analytics</h2>
+            <canvas id="revenueChart" width="400" height="200"></canvas>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Sample data for demonstration purposes
+            const bookings = [
+                { id: 1, event: "Wedding", date: "2024-10-15", earnings: 1500 },
+                { id: 2, event: "Corporate Event", date: "2024-10-20", earnings: 2000 },
+            ];
+
+            const reviews = [
+                { id: 1, reviewer: "Alice", rating: 5, comment: "Excellent service!" },
+                { id: 2, reviewer: "Bob", rating: 4, comment: "Very professional." },
+            ];
+
+            // Update summary information
+            document.getElementById("totalBookings").textContent = 8 + bookings.length;
+            document.getElementById("upcomingEvents").textContent = bookings.length;
+
+            const totalEarnings = bookings.reduce((sum, booking) => sum + booking.earnings, 0);
+            document.getElementById("totalEarnings").textContent = `$${totalEarnings.toFixed(2)}`;
+
+            // Populate upcoming bookings
+            const upcomingBookingsList = document.getElementById("upcomingBookingsList");
+            bookings.forEach(booking => {
+                const li = document.createElement("li");
+                li.textContent = `${booking.event} on ${booking.date} - Earnings: $${booking.earnings}`;
+                upcomingBookingsList.appendChild(li);
+            });
+
+            // Populate reviews
+            const reviewsList = document.getElementById("reviewsList");
+            reviews.forEach(review => {
+                const li = document.createElement("li");
+                li.textContent = `${review.reviewer} (${review.rating} stars): ${review.comment}`;
+                reviewsList.appendChild(li);
+            });
+
+            // Revenue chart setup
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    datasets: [{
+                        label: 'Revenue Over Time',
+                        data: [1200, 1900, 3000, 2500, 3200, 4000, 4500, 5000, 6000, totalEarnings],
+                        fill: false,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                    },
+                }
+            });
+
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            const sections = document.querySelectorAll('.section');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and hide all sections
+                    tabs.forEach(t => t.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+
+                    // Add active class to the clicked tab and show the corresponding section
+                    tab.classList.add('active');
+                    const target = tab.getAttribute('data-target');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
