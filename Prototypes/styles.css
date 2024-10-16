@@ -1,0 +1,223 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: #d4dbec;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    min-width: 300px;
+    max-width: 1000px;
+    width: 75%;
+    margin: 20px;
+    padding: 30px;
+    box-shadow: 5px 5px 30px #1d253a;
+    border-radius: 10px;
+    background: #e9ecef;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px; /* Space below the title */
+    color: #007BFF; /* Primary color */
+}
+
+h2 {
+    margin: 20px 0 10px; /* Space above and below headings */
+    border-bottom: 2px solid #007BFF; /* Underline for headings */
+    padding-bottom: 5px; /* Padding below the heading */
+}
+
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 10px 0;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    font-size: 1.1em; /* Slightly larger text */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #e9ecef; /* Light grey background for list items */
+    margin: 5px 0; /* Margin between items */
+    padding: 10px; /* Inner padding */
+    border-radius: 4px; /* Rounded corners */
+    display: flex; /* Flexbox for item layout */
+    justify-content: space-between; /* Space out items */
+    align-items: center; /* Center align vertically */
+}
+
+canvas {
+    max-width: 100%; /* Make chart responsive */
+    margin: 20px 0; /* Space above and below the chart */
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+.service-details {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.tasks {
+    margin-top: 30px;
+}
+
+.tasks h2 {
+    text-align: center;
+}
+
+.completed-tasks,
+.in-progress-tasks {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+}
+
+.completed-task {
+    background-color: #d4edda; /* Light green for completed tasks */
+    border-left: 4px solid #155724; /* Dark green border */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.in-progress-task {
+    background-color: #fff3cd; /* Light yellow for in-progress tasks */
+    border-left: 4px solid #856404; /* Dark yellow border */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.pending-task {
+    background-color: #f8d7da; /* Light red for pending tasks */
+    border-left: 4px solid #721c24; /* Dark red border */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#qrCodeReader {
+    background: gray;
+}
+
+#progressSection {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.verification-section {
+    margin: 10px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 15px; /* Less padding on smaller screens */
+    }
+
+    h1 {
+        font-size: 1.8em; /* Smaller title on mobile */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Smaller headings on mobile */
+    }
+
+    li {
+        flex-direction: column; /* Stack list items vertically on mobile */
+        align-items: flex-start; /* Left align items */
+    }
+
+    li span {
+        margin-top: 5px; /* Space above spans in list items */
+    }
+}
+
+/* Styles for Summary Section */
+#summarySection {
+    margin: 20px 0; /* Margin above and below the section */
+}
+
+#fileDamageReport {
+    display: none; /* Hide initially */
+    margin-top: 20px;
+}
+
+.summary-grid {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    gap: 20px; /* Space between grid items */
+}
+
+.summary-item {
+    background: #f8f9fa; /* Light grey background for summary items */
+    padding: 15px; /* Inner padding */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    font-size: 1.1em; /* Larger text */
+}
+
+.summary-item p {
+    margin: 0; /* Remove default margin */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .summary-grid {
+        grid-template-columns: 1fr; /* Stack items on small screens */
+    }
+}

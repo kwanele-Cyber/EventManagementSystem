@@ -1,0 +1,211 @@
+<!-- ViewAssignments.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Coordination and Assignments</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Team Coordination and Assignments</h1>
+
+        <button id="toggleCoordination">Show Team Coordination</button>
+        <button id="toggleAssignments" style="display: none;">Show Assignments</button>
+
+        <!-- Team Coordination Section -->
+        <section id="coordinationSection">
+            <form method="post" action="/Team/Coordinate">
+                <div>
+                    <label for="TeamName">Team Name:</label>
+                    <input type="text" id="TeamName" name="TeamName">
+                </div>
+                <div>
+                    <label for="TeamMembers">Select Team Members:</label>
+                    <select id="TeamMembers" name="TeamMembers[]" multiple>
+                        <option value="Alice">Alice</option>
+                        <option value="Bob">Bob</option>
+                        <option value="Charlie">Charlie</option>
+                        <option value="David">David</option>
+                    </select>
+                </div>
+                <button type="submit">Coordinate Team</button>
+            </form>
+
+            <!-- Add tasks section -->
+            <div class="tasks">
+                <h2>Add Tasks</h2>
+                <div>
+                    <label for="taskName">Task Name:</label>
+                    <input type="text" id="taskName">
+                </div>
+                <div>
+                    <label for="assignedMember">Assign to:</label>
+                    <select id="assignedMember">
+                        <option value="Alice">Alice</option>
+                        <option value="Bob">Bob</option>
+                        <option value="Charlie">Charlie</option>
+                        <option value="David">David</option>
+                    </select>
+                </div>
+                <button id="addTaskButton">Add Task</button>
+            </div>
+
+            <section>
+                <h2>Current Teams</h2>
+                <ul id="teamList">
+                    <li>
+                        Team A - [Edit] [Delete] <button onclick="showAssignToService('Team A')">Assign To Service</button>
+                    </li>
+                    <li>
+                        Team B - [Edit] [Delete] <button onclick="showAssignToService('Team B')">Assign To Service</button>
+                    </li>
+                </ul>
+            </section>
+        </section>
+
+        <!-- View Assignments Section -->
+        <section id="assignmentsSection" style="display: none;">
+            <h2>View Assignments</h2>
+            <div>
+                <label for="teamSelect">Select Team:</label>
+                <select id="teamSelect" onchange="displayAssignments(this.value)">
+                    <option value="">Select a team</option>
+                    <option value="Team A">Team A</option>
+                    <option value="Team B">Team B</option>
+                </select>
+            </div>
+
+            <ul id="assignmentsList"></ul>
+
+            <!-- Assign Team to Service Section -->
+            <div id="assignToServiceSection" style="display: none;">
+                <h3>Assign Team to Service</h3>
+                <div>
+                    <label for="serviceSelect">Select Service:</label>
+                    <select id="serviceSelect">
+                        <option value="">Select a service</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Inspection">Inspection</option>
+                    </select>
+                </div>
+                <button id="assignTeamButton">Assign Team</button>
+                <p id="assignmentMessage"></p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Sample data
+        const members = [
+            { name: "Alice", role: "Engineer" },
+            { name: "Bob", role: "Designer" },
+            { name: "Charlie", role: "Manager" },
+            { name: "David", role: "Technician" }
+        ];
+
+        const teams = [
+            { name: "Team A", members: ["Alice", "Bob"] },
+            { name: "Team B", members: ["Charlie", "David"] }
+        ];
+
+        const tasks = [
+            { name: "Task 1", assignedMember: "Alice", team: "Team A", status: "completed" },
+            { name: "Task 2", assignedMember: "Bob", team: "Team A", status: "in-progress" },
+            { name: "Task 3", assignedMember: "Charlie", team: "Team B", status: "pending" },
+            { name: "Task 4", assignedMember: "David", team: "Team B", status: "completed" }
+        ];
+
+        // Toggle sections
+        document.getElementById('toggleCoordination').onclick = function () {
+            document.getElementById('coordinationSection').style.display = 'block';
+            document.getElementById('assignmentsSection').style.display = 'none';
+            this.style.display = 'none';
+            document.getElementById('toggleAssignments').style.display = 'inline-block';
+        };
+
+        document.getElementById('toggleAssignments').onclick = function () {
+            document.getElementById('coordinationSection').style.display = 'none';
+            document.getElementById('assignmentsSection').style.display = 'block';
+            this.style.display = 'none';
+            document.getElementById('toggleCoordination').style.display = 'inline-block';
+        };
+
+        // Function to add a task
+        document.getElementById('addTaskButton').onclick = function () {
+            const taskName = document.getElementById('taskName').value;
+            const assignedMember = document.getElementById('assignedMember').value;
+
+            if (taskName && assignedMember) {
+                alert(`Task "${taskName}" assigned to ${assignedMember}`);
+                // Reset fields
+                document.getElementById('taskName').value = '';
+                document.getElementById('assignedMember').value = '';
+            } else {
+                alert('Please fill out both fields.');
+            }
+        };
+
+        // Function to display assignments for the selected team
+        function displayAssignments(selectedTeam) {
+            const assignmentsList = document.getElementById('assignmentsList');
+            assignmentsList.innerHTML = '';
+
+            if (selectedTeam) {
+                const assignedMembers = members.filter(member => teams.find(team => team.name === selectedTeam).members.includes(member.name));
+                assignedMembers.forEach(member => {
+                    const li = document.createElement('li');
+                    li.textContent = `Team Member: ${member.name}, Role: ${member.role}`;
+
+                    // Display tasks assigned to the member in the selected team
+                    const assignedTasks = tasks.filter(task => task.assignedMember === member.name && task.team === selectedTeam);
+                    if (assignedTasks.length > 0) {
+                        const taskList = document.createElement('ul');
+                        assignedTasks.forEach(task => {
+                            const taskItem = document.createElement('li');
+
+                            // Apply different styles based on task status
+                            if (task.status === 'completed') {
+                                taskItem.className = 'completed-task';
+                            } else if (task.status === 'in-progress') {
+                                taskItem.className = 'in-progress-task';
+                            } else {
+                                taskItem.className = 'pending-task';
+                            }
+
+                            taskItem.textContent = `Task: ${task.name}`;
+                            taskList.appendChild(taskItem);
+                        });
+                        li.appendChild(taskList);
+                    } else {
+                        li.textContent += ' - No assigned tasks.';
+                    }
+                    assignmentsList.appendChild(li);
+                });
+            } else {
+                assignmentsList.innerHTML = '<li>Please select a team to see assignments.</li>';
+            }
+        }
+
+        // Function to show the Assign To Service section
+        function showAssignToService(teamName) {
+            document.getElementById('assignToServiceSection').style.display = 'block';
+            document.getElementById('assignmentMessage').textContent = `Assign ${teamName} to a service.`;
+        }
+
+        // Assign team to service button action
+        document.getElementById('assignTeamButton').onclick = function () {
+            const selectedService = document.getElementById('serviceSelect').value;
+
+            if (selectedService) {
+                document.getElementById('assignmentMessage').textContent = `Team assigned to ${selectedService} successfully!`;
+                document.getElementById('serviceSelect').value = ''; // Reset selection
+            } else {
+                alert('Please select a service to assign the team.');
+            }
+        };
+    </script>
+</body>
+</html>

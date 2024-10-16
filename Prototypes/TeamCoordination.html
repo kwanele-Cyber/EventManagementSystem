@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinate Team</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic styles for tabs */
+        .tab {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: #ffffff;
+            font-weight: bold;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Coordinate Team</h1>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('addMember')">Add Team Members</div>
+            <div class="tab" onclick="showTab('assignTeam')">Assign Team to Service Booking</div>
+            <div class="tab" onclick="showTab('currentTeams')">Current Teams</div>
+            <div class="tab" onclick="showTab('addTask')">Add Task</div>
+            <div class="tab" onclick="showTab('currentTasks')">Current Tasks</div>
+        </div>
+
+        <!-- Tab Content -->
+        <section id="addMember" class="tab-content active">
+            <h2>Add Team Members</h2>
+            <form id="memberForm">
+                <div>
+                    <label for="MemberName">Member Name:</label>
+                    <input type="text" id="MemberName" name="MemberName" required>
+                </div>
+                <div>
+                    <label for="MemberRole">Role:</label>
+                    <input type="text" id="MemberRole" name="MemberRole" required placeholder="e.g. Technician, Supervisor">
+                </div>
+                <button type="submit">Add Team Member</button>
+            </form>
+        </section>
+
+        <section id="assignTeam" class="tab-content">
+            <h2>Assign Team to Service Booking</h2>
+            <form id="teamForm">
+                <div>
+                    <label for="ServiceBooking">Service Booking:</label>
+                    <input type="text" id="ServiceBooking" name="ServiceBooking" required placeholder="Enter service details">
+                </div>
+                <div>
+                    <label for="TeamMembers">Select Team Members:</label>
+                    <select id="TeamMembers" name="TeamMembers" multiple required>
+                        <!-- Options populated from JS -->
+                    </select>
+                </div>
+                <button type="submit">Assign Team</button>
+            </form>
+        </section>
+
+        <section id="currentTeams" class="tab-content">
+            <h2>Current Teams</h2>
+            <ul id="teamList">
+                <!-- Team list populated by JS -->
+            </ul>
+        </section>
+
+        <section id="addTask" class="tab-content">
+            <h2>Add Task</h2>
+            <form id="taskForm">
+                <div>
+                    <label for="TaskName">Task Name:</label>
+                    <input type="text" id="TaskName" name="TaskName" required>
+                </div>
+                <div>
+                    <label for="TaskMembers">Assign Member:</label>
+                    <select id="TaskMembersSelect" name="AssignedMember" required>
+                        <!-- Options populated from JS -->
+                    </select>
+                </div>
+                <button type="submit">Add Task</button>
+            </form>
+        </section>
+
+        <section id="currentTasks" class="tab-content">
+            <h2>Current Tasks</h2>
+            <ul id="taskList">
+                <!-- Task list populated by JS -->
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        // Function to switch tabs
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const tabLinks = document.querySelectorAll('.tab');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            tabLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Existing JavaScript code remains the same...
+        // Function to save team members to local storage
+        function saveMembers(members) {
+            localStorage.setItem('members', JSON.stringify(members));
+        }
+
+        // Function to load team members from local storage
+        function loadMembers() {
+            return JSON.parse(localStorage.getItem('members')) || [];
+        }
+
+        // Function to save teams to local storage
+        function saveTeams(teams) {
+            localStorage.setItem('teams', JSON.stringify(teams));
+        }
+
+        // Function to load teams from local storage
+        function loadTeams() {
+            return JSON.parse(localStorage.getItem('teams')) || [];
+        }
+
+        // Function to save tasks to local storage
+        function saveTasks(tasks) {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Function to load tasks from local storage
+        function loadTasks() {
+            return JSON.parse(localStorage.getItem('tasks')) || [];
+        }
+
+        // Function to render members in the team member selection
+        function renderMemberOptions() {
+            const memberSelect = document.getElementById('TeamMembers');
+            const taskMemberSelect = document.getElementById('TaskMembersSelect');
+            const members = loadMembers();
+            memberSelect.innerHTML = '';
+            taskMemberSelect.innerHTML = '';
+            members.forEach(member => {
+                const option = document.createElement('option');
+                option.value = member.id; // Unique ID for the member
+                option.textContent = `${member.name} (${member.role})`;
+                memberSelect.appendChild(option);
+                taskMemberSelect.appendChild(option.cloneNode(true)); // Clone option for task assignment
+            });
+        }
+
+        // Function to render teams
+        function renderTeams() {
+            const teamList = document.getElementById('teamList');
+            const teams = loadTeams();
+            teamList.innerHTML = '';
+            teams.forEach((team, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${team.serviceBooking} - Team Members: ${team.members.join(', ')}`;
+                li.innerHTML += ` - <button onclick="editTeam(${index})">Edit</button> <button onclick="deleteTeam(${index})">Delete</button>`;
+                teamList.appendChild(li);
+            });
+        }
+
+        // Function to render tasks
+        function renderTasks() {
+            const taskList = document.getElementById('taskList');
+            const tasks = loadTasks();
+            taskList.innerHTML = '';
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${task.name} - Assigned to: ${task.assignedMember}`;
+                li.innerHTML += ` - <button onclick="editTask(${index})">Edit</button> <button onclick="deleteTask(${index})">Delete</button>`;
+                taskList.appendChild(li);
+            });
+        }
+
+        // Event listener for the member form
+        document.getElementById('memberForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const memberName = document.getElementById('MemberName').value;
+            const memberRole = document.getElementById('MemberRole').value;
+            const members = loadMembers();
+            const memberId = members.length ? members[members.length - 1].id + 1 : 1; // Generate unique ID
+            members.push({ id: memberId, name: memberName, role: memberRole });
+            saveMembers(members);
+            renderMemberOptions();
+            this.reset();
+        });
+
+        // Event listener for the team form
+        document.getElementById('teamForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const serviceBooking = document.getElementById('ServiceBooking').value;
+            const selectedMembers = Array.from(document.getElementById('TeamMembers').selectedOptions).map(option => option.text);
+            const teams = loadTeams();
+            teams.push({ serviceBooking, members: selectedMembers });
+            saveTeams(teams);
+            renderTeams();
+            this.reset();
+        });
+
+        // Event listener for the task form
+        document.getElementById('taskForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const taskName = document.getElementById('TaskName').value;
+            const assignedMemberId = document.getElementById('TaskMembersSelect').value; // Get selected member ID
+            const assignedMemberName = loadMembers().find(member => member.id == assignedMemberId).name; // Get member name
+            const tasks = loadTasks();
+            tasks.push({ name: taskName, assignedMember: assignedMemberName });
+            saveTasks(tasks);
+            renderTasks();
+            this.reset();
+        });
+
+        // Initial render
+        renderMemberOptions();
+        renderTeams();
+        renderTasks();
+    </script>
+</body>
+</html>
