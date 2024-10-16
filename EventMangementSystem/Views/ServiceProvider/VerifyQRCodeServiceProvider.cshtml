@@ -1,0 +1,52 @@
+﻿@model EventMangementSystem.Models.ServiceRequest
+
+@{
+    ViewBag.Title = "Verify QR Code or Start Code";
+}
+
+<h2>Start the Service by Verifying the QR Code or Start Code</h2>
+
+<div class="container">
+    <div class="alert alert-info" role="alert">
+        Please scan the QR code or enter the 4-digit pin to verify and start the service.
+    </div>
+
+    <!-- QR Code Input Form -->
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Enter the Start Code Manually:</h4>
+
+            @using (Html.BeginForm("VerifyQRCode", "ServiceProvider", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label for="enteredCode">Enter 4-Digit Pin:</label>
+                    <input type="text" id="enteredCode" name="enteredCode" class="form-control" placeholder="Enter Start Code" required />
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" name="bidId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary">Submit Code</button>
+                </div>
+            }
+        </div>
+
+        <!-- QR Code Scanner (Placeholder for actual scanner integration) -->
+        <div class="col-md-6">
+            <h4>Scan the QR Code:</h4>
+
+            <!-- Placeholder for QR code scanner -->
+            <p>Use a QR code scanner to scan the QR code for service verification.</p>
+
+            <!-- If you want to integrate a real-time scanner, you can use JavaScript QR scanning libraries -->
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <a href="@Url.Action("ConfirmedBids", "ServiceProvider")" class="btn btn-secondary">Back to My Bids</a>
+        </div>
+    </div>
+</div>

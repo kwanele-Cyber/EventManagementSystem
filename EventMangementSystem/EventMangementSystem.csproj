@@ -262,6 +262,10 @@
     <Compile Include="Migrations\202410120800333_GroupsAndTasks.Designer.cs">
       <DependentUpon>202410120800333_GroupsAndTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202410160848116_StartCodeIntoServiceRequest.cs" />
+    <Compile Include="Migrations\202410160848116_StartCodeIntoServiceRequest.Designer.cs">
+      <DependentUpon>202410160848116_StartCodeIntoServiceRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Announcement.cs" />
@@ -465,6 +469,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <None Include="Views\ServiceProvider\VerifyQRCodeEventManager.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -587,6 +592,7 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Delet.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\ServiceProvider\VerifyQRCodeServiceProvider.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Dispatchinventories\" />
@@ -630,6 +636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202410120800333_GroupsAndTasks.resx">
       <DependentUpon>202410120800333_GroupsAndTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410160848116_StartCodeIntoServiceRequest.resx">
+      <DependentUpon>202410160848116_StartCodeIntoServiceRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

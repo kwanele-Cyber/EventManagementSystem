@@ -272,7 +272,7 @@ namespace EventMangementSystem.Controllers
             }
         }
 
-        /
+       
         // GET: Request multiple services
         public ActionResult RequestService()
         {
