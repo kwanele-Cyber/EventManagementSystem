@@ -3,98 +3,102 @@
   "WorkspaceRootPath": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\migrations\\202410162010116_updated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\migrations\\202410162010116_updated.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\controllers\\servicerequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\servicerequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\controllers\\serviceprovidercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\controllers\\serviceprovidercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\serviceprovidercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\teamscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\models\\servicerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\models\\servicerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\models\\servicerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\views\\teams\\assignservicerequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\views\\teams\\assignservicerequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\teams\\assignservicerequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\models\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\models\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\models\\team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\views\\serviceprovider\\viewservicerequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\views\\serviceprovider\\viewservicerequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\serviceprovider\\viewservicerequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\views\\eventorganizer\\servicerequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\views\\eventorganizer\\servicerequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\eventorganizer\\servicerequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\controllers\\eventorganizercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\controllers\\eventorganizercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\eventorganizercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\views\\eventorganizer\\confirmedrequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\views\\eventorganizer\\confirmedrequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\eventorganizer\\confirmedrequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\views\\serviceprovider\\confirmedbids.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\views\\serviceprovider\\confirmedbids.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\serviceprovider\\confirmedbids.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\views\\eventorganizer\\viewbids.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\views\\eventorganizer\\viewbids.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\eventorganizer\\viewbids.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\viewmodels\\teamemployeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\viewmodels\\teamemployeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\viewmodels\\teamemployeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\views\\teams\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\views\\teams\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\views\\teams\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\migrations\\202410161150410_relationship_servicerequest-team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\migrations\\202410161150410_relationship_servicerequest-team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\migrations\\202410161150410_relationship_servicerequest-team.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\viewmodels\\assignservicerequestviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\viewmodels\\assignservicerequestviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\viewmodels\\assignservicerequestviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\models\\reminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\models\\reminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\models\\reminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\controllers\\paypalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\controllers\\paypalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\paypalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\DriverAssignmentsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|c:\\users\\cash1\\onedrive\\documents\\github\\eventmanagementsystem\\eventmangementsystem\\controllers\\driverassignmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\eventmangementsystem\\controllers\\driverassignmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33F4F3B7-05FA-450E-95DF-9E520F145045}|EventMangementSystem\\EventMangementSystem.csproj|solutionrelative:eventmangementsystem\\controllers\\driverassignmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -110,6 +114,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "202410162010116_UpdateD.cs",
+              "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Migrations\\202410162010116_UpdateD.cs",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Migrations\\202410162010116_UpdateD.cs",
+              "ToolTip": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Migrations\\202410162010116_UpdateD.cs",
+              "RelativeToolTip": "EventMangementSystem\\Migrations\\202410162010116_UpdateD.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T20:10:18.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ServiceRequestController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Controllers\\ServiceRequestController.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\ServiceRequestController.cs",
@@ -122,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "ServiceRequests.cshtml",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Views\\EventOrganizer\\ServiceRequests.cshtml",
               "RelativeDocumentMoniker": "EventMangementSystem\\Views\\EventOrganizer\\ServiceRequests.cshtml",
@@ -130,12 +147,11 @@
               "RelativeToolTip": "EventMangementSystem\\Views\\EventOrganizer\\ServiceRequests.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-16T12:45:49Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T12:45:49Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "ViewServiceRequests.cshtml",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Views\\ServiceProvider\\ViewServiceRequests.cshtml",
               "RelativeDocumentMoniker": "EventMangementSystem\\Views\\ServiceProvider\\ViewServiceRequests.cshtml",
@@ -143,12 +159,11 @@
               "RelativeToolTip": "EventMangementSystem\\Views\\ServiceProvider\\ViewServiceRequests.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-16T12:43:35.687Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T12:43:35.687Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "TeamsController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Controllers\\TeamsController.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\TeamsController.cs",
@@ -156,12 +171,11 @@
               "RelativeToolTip": "EventMangementSystem\\Controllers\\TeamsController.cs",
               "ViewState": "AgIAAFkBAAAAAAAAAAAAAGoBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:47:25.501Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:47:25.501Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Team.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Models\\Team.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Models\\Team.cs",
@@ -169,12 +183,11 @@
               "RelativeToolTip": "EventMangementSystem\\Models\\Team.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAowBkAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:18:07.592Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:18:07.592Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "AssignServiceRequest.cshtml",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Views\\Teams\\AssignServiceRequest.cshtml",
               "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Teams\\AssignServiceRequest.cshtml",
@@ -182,12 +195,11 @@
               "RelativeToolTip": "EventMangementSystem\\Views\\Teams\\AssignServiceRequest.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-16T11:45:32.903Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:45:32.903Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "ServiceRequest.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Models\\ServiceRequest.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Models\\ServiceRequest.cs",
@@ -195,12 +207,11 @@
               "RelativeToolTip": "EventMangementSystem\\Models\\ServiceRequest.cs",
               "ViewState": "AgIAADQAAAAAAAAAAAAQwAIAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:16:14.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:16:14.322Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "ServiceProviderController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Controllers\\ServiceProviderController.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\ServiceProviderController.cs",
@@ -208,12 +219,11 @@
               "RelativeToolTip": "EventMangementSystem\\Controllers\\ServiceProviderController.cs",
               "ViewState": "AgIAACsBAAAAAAAAAAAqwPsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:29:29.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:29:29.669Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "ViewBids.cshtml",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Views\\EventOrganizer\\ViewBids.cshtml",
               "RelativeDocumentMoniker": "EventMangementSystem\\Views\\EventOrganizer\\ViewBids.cshtml",
@@ -221,12 +231,11 @@
               "RelativeToolTip": "EventMangementSystem\\Views\\EventOrganizer\\ViewBids.cshtml",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-16T12:43:17.019Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T12:43:17.019Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "TeamEmployeeViewModel.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\ViewModels\\TeamEmployeeViewModel.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\ViewModels\\TeamEmployeeViewModel.cs",
@@ -234,12 +243,24 @@
               "RelativeToolTip": "EventMangementSystem\\ViewModels\\TeamEmployeeViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:47:01.062Z",
+              "WhenOpened": "2024-10-16T11:47:01.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Web.config",
+              "RelativeDocumentMoniker": "EventMangementSystem\\Web.config",
+              "ToolTip": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Web.config",
+              "RelativeToolTip": "EventMangementSystem\\Web.config",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAkwCIAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-10-16T11:27:23.957Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "ConfirmedRequests.cshtml",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Views\\EventOrganizer\\ConfirmedRequests.cshtml",
               "RelativeDocumentMoniker": "EventMangementSystem\\Views\\EventOrganizer\\ConfirmedRequests.cshtml",
@@ -247,12 +268,11 @@
               "RelativeToolTip": "EventMangementSystem\\Views\\EventOrganizer\\ConfirmedRequests.cshtml",
               "ViewState": "AgIAAF0AAAAAAAAAAAAAAHEAAAB8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-16T12:45:55.111Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T12:45:55.111Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "EventOrganizerController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Controllers\\EventOrganizerController.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\EventOrganizerController.cs",
@@ -260,12 +280,11 @@
               "RelativeToolTip": "EventMangementSystem\\Controllers\\EventOrganizerController.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAowC0AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T13:02:10.272Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T13:02:10.272Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "ConfirmedBids.cshtml",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Views\\ServiceProvider\\ConfirmedBids.cshtml",
               "RelativeDocumentMoniker": "EventMangementSystem\\Views\\ServiceProvider\\ConfirmedBids.cshtml",
@@ -273,12 +292,11 @@
               "RelativeToolTip": "EventMangementSystem\\Views\\ServiceProvider\\ConfirmedBids.cshtml",
               "ViewState": "AgIAAHIAAAAAAAAAAAAAAIUAAAC3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-16T12:43:45.294Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T12:43:45.294Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "ReminderService.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Models\\ReminderService.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Models\\ReminderService.cs",
@@ -286,12 +304,11 @@
               "RelativeToolTip": "EventMangementSystem\\Models\\ReminderService.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAqwDQAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:29:29.165Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:29:29.165Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "PayPalController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Controllers\\PayPalController.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\PayPalController.cs",
@@ -299,12 +316,11 @@
               "RelativeToolTip": "EventMangementSystem\\Controllers\\PayPalController.cs",
               "ViewState": "AgIAANYAAAAAAAAAAAAAANsAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:29:25.06Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:29:25.06Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "Event.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Models\\Event.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Models\\Event.cs",
@@ -312,12 +328,11 @@
               "RelativeToolTip": "EventMangementSystem\\Models\\Event.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:25:20.007Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:25:20.007Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "202410161150410_RelationShip_ServiceRequest-Team.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Migrations\\202410161150410_RelationShip_ServiceRequest-Team.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Migrations\\202410161150410_RelationShip_ServiceRequest-Team.cs",
@@ -325,12 +340,11 @@
               "RelativeToolTip": "EventMangementSystem\\Migrations\\202410161150410_RelationShip_ServiceRequest-Team.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:50:48.609Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:50:48.609Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Views\\Teams\\Index.cshtml",
               "RelativeDocumentMoniker": "EventMangementSystem\\Views\\Teams\\Index.cshtml",
@@ -338,12 +352,11 @@
               "RelativeToolTip": "EventMangementSystem\\Views\\Teams\\Index.cshtml",
               "ViewState": "AgIAAE4AAAAAAAAAAAAAAF8AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-16T12:06:15.377Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T12:06:15.377Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "EventController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Controllers\\EventController.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\EventController.cs",
@@ -351,25 +364,11 @@
               "RelativeToolTip": "EventMangementSystem\\Controllers\\EventController.cs",
               "ViewState": "AgIAAO0AAAAAAAAAAAAlwP8AAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:29:24.097Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:29:24.097Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
-              "Title": "Web.config",
-              "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Web.config",
-              "RelativeDocumentMoniker": "EventMangementSystem\\Web.config",
-              "ToolTip": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Web.config",
-              "RelativeToolTip": "EventMangementSystem\\Web.config",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAACIAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-10-16T11:27:23.957Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
               "Title": "AssignServiceRequestViewModel.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\ViewModels\\AssignServiceRequestViewModel.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\ViewModels\\AssignServiceRequestViewModel.cs",
@@ -377,12 +376,11 @@
               "RelativeToolTip": "EventMangementSystem\\ViewModels\\AssignServiceRequestViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:15:08.949Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:15:08.949Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "DriverAssignmentsController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\DriverAssignmentsController.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\DriverAssignmentsController.cs",
@@ -390,12 +388,11 @@
               "RelativeToolTip": "..\\..\\..\\..\\Projects\\ApplicationDevelopment\\EventManagementSystem\\EventMangementSystem\\Controllers\\DriverAssignmentsController.cs",
               "ViewState": "AgIAAP0CAAAAAAAAAAAAAA4DAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:29:11.231Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:29:11.231Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "DriverAssignmentsController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Controllers\\DriverAssignmentsController.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\DriverAssignmentsController.cs",
@@ -403,12 +400,11 @@
               "RelativeToolTip": "EventMangementSystem\\Controllers\\DriverAssignmentsController.cs",
               "ViewState": "AgIAAP4CAAAAAAAAAAAawA4DAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:29:02.572Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:29:02.572Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "TasksController.cs",
               "DocumentMoniker": "C:\\Users\\cash1\\OneDrive\\Documents\\GitHub\\EventManagementSystem\\EventMangementSystem\\Controllers\\TasksController.cs",
               "RelativeDocumentMoniker": "EventMangementSystem\\Controllers\\TasksController.cs",
@@ -416,8 +412,7 @@
               "RelativeToolTip": "EventMangementSystem\\Controllers\\TasksController.cs",
               "ViewState": "AgIAAK0AAAAAAAAAAAAqwLcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T11:11:11.534Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T11:11:11.534Z"
             }
           ]
         }

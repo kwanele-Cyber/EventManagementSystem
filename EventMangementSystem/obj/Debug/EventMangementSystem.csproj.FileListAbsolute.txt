@@ -310,3 +310,4 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.pdb
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.StartCodeIntoServiceRequest.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.RelationShip_ServiceRequestTeam.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.UpdateD.resources
