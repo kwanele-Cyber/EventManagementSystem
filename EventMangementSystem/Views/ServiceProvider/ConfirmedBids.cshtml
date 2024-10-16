@@ -117,8 +117,13 @@
                             <td>@serviceRequest.Event.Name</td>
                             <td>@serviceCategory.Name</td>
                             <td>R @bid.Price</td>
+                            <td>@bid.ServiceRequest.Priority</td>
                             <td>@serviceRequest.Status.ToString()</td>
                             <td>
+                              
+                                
+                              @if (User.IsInRole("ServiceProvider")) 
+                              {
                                 @*(serviceRequest.IsAssigned && !serviceRequest.IsCompleted) for backwards complatability*@
                                 @if (serviceRequest.Status == ServiceRequestStatus.Assigned || (serviceRequest.IsAssigned && !serviceRequest.IsCompleted))
                                 {
@@ -127,14 +132,17 @@
                                 }
                                 else if (serviceRequest.Status == ServiceRequestStatus.InProgress)
                                 {
-                                    <!-- Verify QR Code/Start Code to Start the Service -->
-                                    <a href="@Url.Action("VerifyQRCode", "ServiceProvider", new { bidId = bid.Id })" class="btn btn-primary">Verify to Start</a>
+                                     <td>
+                                            <!-- Confirm Service Button -->
+                                            <a href="@Url.Action("ConfirmService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn">Complete Service</a>
+                                      </td>
                                 }
                                 else if (serviceRequest.Status == ServiceRequestStatus.Completed)
                                 {
                                     <!-- Service Completed Label -->
                                     <span class="badge badge-success">Service Completed</span>
                                 }
+                              }
                             </td>
                         </tr>
                     }
