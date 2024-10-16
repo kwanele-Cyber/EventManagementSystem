@@ -279,7 +279,7 @@ namespace EventMangementSystem.Controllers
         {
             var email = new MailMessage
             {
-                From = new MailAddress("DbnEventMangement@outlook.com"),
+                From = new MailAddress("eventproplanners@gmail.com"),
                 Subject = "Inventory Ready | " + assignment.EventInventoryId,
                 Body = $"Inventory Number: {assignment.EventInventoryId}\t\tDelivery Date: {assignment.DeliveryDate}\t\t Delivery Time: {assignment.DeliveryTime}\n\n" +
                        $"Hi {assignment.Driver.Name},\n\n" +
@@ -306,7 +306,7 @@ namespace EventMangementSystem.Controllers
             {
                 var email2 = new MailMessage
                 {
-                    From = new MailAddress("DbnEventMangement@outlook.com"),
+                    From = new MailAddress("eventproplanners@gmail.com"),
                     Subject = "Inventory Delivery Started | " + assignment.EventInventoryId,
                     Body = $"Inventory Number: " + assignment.EventInventoryId + "\t\t Estimated Arrival Time: " + time + " \n\n" +
                            $"Hi {assignment.Driver.Name}, \n\n" +
@@ -453,7 +453,7 @@ namespace EventMangementSystem.Controllers
                 {
                     var email2 = new MailMessage
                     {
-                        From = new MailAddress("DbnEventMangement@outlook.com"),
+                        From = new MailAddress("eventproplanners@gmail.com"),
                         Subject = "Inventory Delivered",
                         Body = $"Inventory Number: " + inventory.EventInventoryId + " \n\n" +
                                $"Hi {inventory.FirstName}, \n\n" +
@@ -510,7 +510,7 @@ namespace EventMangementSystem.Controllers
                 {
                     var email2 = new MailMessage
                     {
-                        From = new MailAddress("DbnEventMangement@outlook.com"),
+                        From = new MailAddress("eventproplanners@gmail.com"),
                         Subject = "No Response",
                         Body = $"Inventory Number: " + inventory.EventInventoryId + " \n\n" +
                                $"Hi {inventory.FirstName}, \n\n" +
@@ -653,7 +653,7 @@ namespace EventMangementSystem.Controllers
                         {
                             var email = new MailMessage
                             {
-                                From = new MailAddress("DbnEventMangement@outlook.com"),
+                                From = new MailAddress("eventproplanners@gmail.com"),
                                 Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
                                 Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
                                        $"Hi {driver.Name}, \n\n" +
@@ -668,7 +668,7 @@ namespace EventMangementSystem.Controllers
 
                             var email2 = new MailMessage
                             {
-                                From = new MailAddress("DbnEventMangement@outlook.com"),
+                                From = new MailAddress("eventproplanners@gmail.com"),
                                 Subject = "Delivery Scheduled |  " + inventory.EventInventoryId,
                                 Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
                                        $"Hi {inventory.FirstName}, \n\n" +
@@ -710,7 +710,7 @@ namespace EventMangementSystem.Controllers
                         {
                             var email = new MailMessage
                             {
-                                From = new MailAddress("DbnEventMangement@outlook.com"),
+                                From = new MailAddress("eventproplanners@gmail.com"),
                                 Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
                                 Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
                                        $"Hi {driver.Name}, \n\n" +
@@ -725,7 +725,7 @@ namespace EventMangementSystem.Controllers
 
                             var email2 = new MailMessage
                             {
-                                From = new MailAddress("DbnEventMangement@outlook.com"),
+                                From = new MailAddress("eventproplanners@gmail.com"),
                                 Subject = "Delivery Rescheduled |  " + inventory.EventInventoryId,
                                 Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
                                        $"Hi {inventory.FirstName}, \n\n" +
@@ -765,7 +765,7 @@ namespace EventMangementSystem.Controllers
                     {
                         var email = new MailMessage
                         {
-                            From = new MailAddress("DbnEventMangement@outlook.com"),
+                            From = new MailAddress("eventproplanners@gmail.com"),
                             Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
                             Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
                                    $"Hi {driver.Name}, \n\n" +
@@ -780,7 +780,7 @@ namespace EventMangementSystem.Controllers
 
                         var email2 = new MailMessage
                         {
-                            From = new MailAddress("DbnEventMangement@outlook.com"),
+                            From = new MailAddress("eventproplanners@gmail.com"),
                             Subject = "Delivery Rescheduled |  " + inventory.EventInventoryId,
                             Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
                                    $"Hi {inventory.FirstName}, \n\n" +

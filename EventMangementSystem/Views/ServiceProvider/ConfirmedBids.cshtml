@@ -103,6 +103,7 @@
                         <th>Event</th>
                         <th>Service Category</th>
                         <th>Bid Amount</th>
+                        <th>Priority</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -120,29 +121,36 @@
                             <td>@bid.ServiceRequest.Priority</td>
                             <td>@serviceRequest.Status.ToString()</td>
                             <td>
-                              
-                                
-                              @if (User.IsInRole("ServiceProvider")) 
-                              {
-                                @*(serviceRequest.IsAssigned && !serviceRequest.IsCompleted) for backwards complatability*@
-                                if (serviceRequest.Status == ServiceRequestStatus.Assigned || (serviceRequest.IsAssigned && !serviceRequest.IsCompleted))
+
+                                @if (User.IsInRole("ServiceProvider"))
                                 {
-                                    <!-- Start Service Button -->
-                                    <a href="@Url.Action("StartService", "ServiceProvider", new { bidId = bid.Id })" class="btn btn-success">Start Service</a>
+                                    @*(serviceRequest.IsAssigned && !serviceRequest.IsCompleted) for backwards complatability*@
+
+                                    if (serviceRequest.Status == ServiceRequestStatus.InProgress)
+                                    {
+                                        <!-- PerfomService Button -->
+                                        <a href="@Url.Action("PerfomService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn btn-warning">PerfomService</a> <span> | </span>
+                                        <!-- Confirm Service Button -->
+                                        <a href="@Url.Action("ConfirmService", "ServiceProvider", new { bidId = bid.Id })" class="btn btn-danger">Complete Service</a> <span> | </span>
+
+                                    }
+                                    else if (serviceRequest.Status == ServiceRequestStatus.Assigned || (serviceRequest.IsAssigned && !serviceRequest.IsCompleted))
+                                    {
+                                        <!-- Start Service Button -->
+                                        <a href="@Url.Action("StartService", "ServiceProvider", new { bidId = bid.Id })" class="btn btn-success">Start Service</a>
+                                    }
+                                    else if (serviceRequest.Status == ServiceRequestStatus.Completed)
+                                    {
+                                        <!-- Service Completed Label -->
+                                        <span style="color:lawngreen;" class="badge badge-success">Service Completed</span>
+                                    }
+                                    else if (serviceRequest.Status == ServiceRequestStatus.Cancelled)
+                                    {
+                                        <!-- Service Completed Label -->
+                                        <span style="color:red;" class="badge badge-success">Service Cancelled</span>
+                                    }
+
                                 }
-                                else if (serviceRequest.Status == ServiceRequestStatus.InProgress)
-                                {
-                                     <td>
-                                            <!-- Confirm Service Button -->
-                                            <a href="@Url.Action("ConfirmService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn">Complete Service</a>
-                                      </td>
-                                }
-                                else if (serviceRequest.Status == ServiceRequestStatus.Completed)
-                                {
-                                    <!-- Service Completed Label -->
-                                    <span class="badge badge-success">Service Completed</span>
-                                }
-                              }
                             </td>
                         </tr>
                     }

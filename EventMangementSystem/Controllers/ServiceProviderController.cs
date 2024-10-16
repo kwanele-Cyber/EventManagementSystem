@@ -100,8 +100,8 @@ namespace EventMangementSystem.Controllers
         }
 
 
+        //For verifying StartService
         [HttpPost]
-        [Authorize(Roles = "ServiceProvider")]
         public ActionResult VerifyQRCode(int bidId, string enteredCode)
         {
             var bid = db.Quotations.Include("ServiceRequest").FirstOrDefault(b => b.Id == bidId);
@@ -118,6 +118,8 @@ namespace EventMangementSystem.Controllers
             {
                 // Change status to InProgress and confirm start
                 serviceRequest.Status = ServiceRequestStatus.InProgress;
+                serviceRequest.IsAssigned = true;
+                serviceRequest.IsCompleted = false;
 
                 db.SaveChanges();
 
@@ -156,11 +158,17 @@ namespace EventMangementSystem.Controllers
         }
 
         [HttpGet]
-
         public ActionResult ConfirmedBids()
         {
-            // Get the logged-in service provider's ID
-            var provider = db.ServiceProviders.Where(x => x.email == User.Identity.Name).FirstOrDefault();
+            var provider = db.ServiceProviders.FirstOrDefault(x => x.email == User.Identity.Name);
+
+            // Check if the provider is null
+            if (provider == null)
+            {
+                // If the provider is null, you can either return an error or handle it gracefully
+                TempData["ErrorMessage"] = "Service provider not found. Please ensure you are logged in with the correct account.";
+                return RedirectToAction("Index", "Home"); // Redirect to a suitable page, e.g., home or login page
+            }
 
             // Fetch all bids that were confirmed/accepted by event organizers
             var confirmedBids = db.Quotations
@@ -171,8 +179,8 @@ namespace EventMangementSystem.Controllers
 
             return View(confirmedBids);
         }
-        [HttpGet]
 
+        [HttpGet]
         public ActionResult SubmitBid(int requestId)
         {
             var request = db.ServiceRequests.Find(requestId);
@@ -302,7 +310,7 @@ namespace EventMangementSystem.Controllers
             {
                 var email = new MailMessage
                 {
-                    From = new MailAddress("DbnEventMangement@outlook.com"),
+                    From = new MailAddress("eventproplanners@gmail.com"),
                     Subject = "Service Start Information",
                     Body = $@"
                 Service has started successfully. Below are the details:

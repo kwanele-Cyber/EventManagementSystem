@@ -50,7 +50,7 @@ namespace EventMangementSystem.Models
                 {
                     // Prepare email message
                     var email2 = new MailMessage();
-                    email2.From = new MailAddress("DbnEventMangement@outlook.com");
+                    email2.From = new MailAddress("eventproplanners@gmail.com");
                     email2.To.Add(tick.AttendeeEmail);
                     email2.Subject = "Event Reminder ";
                     string emailBody = rem+"\n\n" +

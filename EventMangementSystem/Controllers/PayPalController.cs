@@ -118,7 +118,7 @@ namespace EventMangementSystem.Controllers
                     {
                         // Prepare email message
                         var email2 = new MailMessage();
-                        email2.From = new MailAddress("DbnEventMangement@outlook.com");
+                        email2.From = new MailAddress("eventproplanners@gmail.com");
                         email2.To.Add(User.Identity.Name);
                         email2.Subject = "Payment Confirmation |  " + id;
                         string emailBody = $"Ticket Number: " + id + " \n\n" +
@@ -178,7 +178,7 @@ namespace EventMangementSystem.Controllers
                     try
                     {
                         var email2 = new MailMessage();
-                        email2.From = new MailAddress("DbnEventMangement@outlook.com");
+                        email2.From = new MailAddress("eventproplanners@gmail.com");
                         email2.To.Add(User.Identity.Name);
                         email2.Subject = "Payment Confirmation |  " + id;
                         string emailBody = $"Donation Number: " + id + " \n\n" +
@@ -217,7 +217,7 @@ namespace EventMangementSystem.Controllers
                     {
                         // Prepare email message
                         var email2 = new MailMessage();
-                        email2.From = new MailAddress("DbnEventMangement@outlook.com");
+                        email2.From = new MailAddress("eventproplanners@gmail.com");
                         email2.To.Add(User.Identity.Name);
                         email2.Subject = "Refund Confirmation |  " + id;
                         string emailBody = $"Ticket Number: " + id + " \n\n" +

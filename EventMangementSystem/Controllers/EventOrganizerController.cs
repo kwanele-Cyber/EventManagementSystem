@@ -41,7 +41,8 @@ namespace EventMangementSystem.Controllers
             {
                 foreach (var request in requests)
                 {
-                    
+                    var _event = db.Events.FirstOrDefault(t => t.EventId == request.EventId);
+                    request.ServiceName = $"{_event.Name}, requests For {request.ServiceCategory}";
                     db.ServiceRequests.Add(request);
                 }
 

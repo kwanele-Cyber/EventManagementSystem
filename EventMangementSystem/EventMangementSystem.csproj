@@ -234,6 +234,7 @@
     <Compile Include="Controllers\EventInventoriesController.cs" />
     <Compile Include="Controllers\EventOrganizerController.cs" />
     <Compile Include="Controllers\EventReminderController.cs" />
+    <Compile Include="Controllers\ServiceRequestController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -265,6 +266,10 @@
     <Compile Include="Migrations\202410160848116_StartCodeIntoServiceRequest.cs" />
     <Compile Include="Migrations\202410160848116_StartCodeIntoServiceRequest.Designer.cs">
       <DependentUpon>202410160848116_StartCodeIntoServiceRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410161150410_RelationShip_ServiceRequest-Team.cs" />
+    <Compile Include="Migrations\202410161150410_RelationShip_ServiceRequest-Team.Designer.cs">
+      <DependentUpon>202410161150410_RelationShip_ServiceRequest-Team.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -304,6 +309,7 @@
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Venue.cs" />
+    <Compile Include="ViewModels\AssignServiceRequestViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewMoodel.cs" />
     <Compile Include="PayPalConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -593,6 +599,7 @@
     <Content Include="Views\Employees\Delet.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\ServiceProvider\VerifyQRCodeServiceProvider.cshtml" />
+    <Content Include="Views\Teams\AssignServiceRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Dispatchinventories\" />
@@ -639,6 +646,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202410160848116_StartCodeIntoServiceRequest.resx">
       <DependentUpon>202410160848116_StartCodeIntoServiceRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410161150410_RelationShip_ServiceRequest-Team.resx">
+      <DependentUpon>202410161150410_RelationShip_ServiceRequest-Team.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

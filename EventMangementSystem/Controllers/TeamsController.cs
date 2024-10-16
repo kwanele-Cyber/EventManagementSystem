@@ -90,6 +90,9 @@ namespace EventMangementSystem.Controllers
             return View(viewModel);
         }
 
+
+
+
         // GET: Team/Index
         public ActionResult Index()
         {
@@ -298,6 +301,86 @@ namespace EventMangementSystem.Controllers
             ModelState.AddModelError("", "No team members found or team member roles were not provided.");
             return RedirectToAction(nameof(Index));
         }
+
+
+
+        [HttpGet]
+        [Authorize(Roles = "ServiceProvider")]
+        public ActionResult AssignServiceRequest(int teamId, string returnUrl)
+        {
+            // Reload the employees list in case of an error
+            var currentUserEmail = User.Identity.GetUserName();
+            var serviceProvider = db.ServiceProviders.FirstOrDefault(sp => sp.email == currentUserEmail);
+
+            // Fetch the team details using the teamId
+            var team = db.Teams.Include(t => t.ServiceRequests).FirstOrDefault(t => t.TeamId == teamId);
+
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Fetch available service requests that are not assigned to any team
+            var availableServiceRequests = db.ServiceRequests
+                .Include(t=> t.Event)
+                .Include(t=> t.ServiceProvider)
+                .Where(t=> (t.TeamId != teamId || t.Status == ServiceRequestStatus.Assigned) && t.ServiceProviderId == serviceProvider.Id)
+                .ToList();
+
+            // Create a ViewModel to pass to the view
+            var model = new AssignServiceRequestViewModel
+            {
+                TeamId = teamId,
+                TeamName = team.TeamName,
+                AvailableServiceRequests = availableServiceRequests,
+                ReturnUrl = returnUrl
+            };
+
+            return View(model); // Pass the ViewModel to the view
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AssignServiceRequest(int teamId, string returnUrl, int serviceRequestId)
+        {
+            var team = db.Teams.Include(t => t.ServiceRequests).FirstOrDefault(t => t.TeamId == teamId);
+            var serviceRequest = db.ServiceRequests.Include(sr => sr.Event).FirstOrDefault(sr => sr.Id == serviceRequestId);
+
+            if (team == null || serviceRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Check for time conflicts with existing service requests assigned to the team
+            bool hasTimeConflict = team.ServiceRequests.Any(sr =>
+                (serviceRequest.Event.Start < sr.Event.End && serviceRequest.Event.End > sr.Event.Start)
+            );
+
+
+
+            if (hasTimeConflict)
+            {
+                TempData["ErrorMessage"] = "Time conflict: The team is already assigned to another service request during this period.";
+                return RedirectToAction("AssignServiceRequest", new { teamId = teamId, returnUrl = returnUrl });
+            }
+
+            // Assign the service request to the team
+            serviceRequest.TeamId = teamId;
+            db.Entry(serviceRequest).State = EntityState.Modified;
+            db.SaveChanges();
+
+            TempData["SuccessMessage"] = $"Service request has been successfully assigned to team: {team.TeamName}.";
+
+            // Redirect to returnUrl or fallback to a default action
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            return RedirectToAction("Index", "Teams");
+        }
+
 
     }
 }

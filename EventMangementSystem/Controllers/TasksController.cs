@@ -153,6 +153,77 @@ namespace EventMangementSystem.Controllers
 
             return Json(ganttData, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        [HttpGet]
+        public ActionResult AssignServiceRequest(int teamId, string returnUrl)
+        {
+            // Fetch the team details using the teamId
+            var team = db.Teams.Find(teamId);
+
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Create a ViewModel (optional) to pass data to the view
+            var model = new AssignServiceRequestViewModel
+            {
+                TeamId = teamId,
+                TeamName = team.TeamName,
+                ReturnUrl = returnUrl
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AssignServiceRequest(int teamId, string returnUrl, int serviceRequestId)
+        {
+            var team = db.Teams.Include(t => t.ServiceRequests).FirstOrDefault(t => t.TeamId == teamId);
+            var serviceRequest = db.ServiceRequests.Include(sr => sr.Event).FirstOrDefault(sr => sr.Id == serviceRequestId);
+
+            if (team == null || serviceRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Check for time conflicts with existing service requests assigned to the team
+            bool hasTimeConflict = team.ServiceRequests.Any(sr =>
+                (serviceRequest.Event.Start < sr.Event.End && serviceRequest.Event.End > sr.Event.Start)
+            );
+
+            if (hasTimeConflict)
+            {
+                TempData["ErrorMessage"] = "Time conflict: The team is already assigned to another service request during this period.";
+                return RedirectToAction("AssignServiceRequest", new { teamId = teamId, returnUrl = returnUrl });
+            }
+
+            // Assign the service request to the team
+            serviceRequest.TeamId = teamId;
+            serviceRequest.IsAssigned = true;
+            serviceRequest.Status = ServiceRequestStatus.Assigned;
+            db.Entry(serviceRequest).State = EntityState.Modified;
+            db.SaveChanges();
+
+            TempData["SuccessMessage"] = $"Service request has been successfully assigned to team: {team.TeamName}.";
+
+            // Redirect to returnUrl or fallback to a default action
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            return RedirectToAction("Index", "Teams");
+        }
+
     }
 
+
+
 }
+
+

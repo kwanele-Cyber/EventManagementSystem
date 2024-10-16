@@ -101,6 +101,8 @@
                         }
                     </td>
                     <td>
+                        @Html.ActionLink("Assign Service Request", "AssignServiceRequest", new { teamId = item.TeamId, returnUrl = Request.Url.AbsoluteUri }, new { @class = "btn btn-primary" })
+                        |
                         @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) |
                         @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
                         @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })

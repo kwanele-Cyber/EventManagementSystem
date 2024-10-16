@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace EventMangementSystem.Models
 {
@@ -22,7 +22,10 @@ namespace EventMangementSystem.Models
         [ForeignKey(nameof(ServiceProviderId))]
         public virtual ServiceProvider ServiceProvider { get; set; }
 
-        // Add this property
+        // One team can have many ServiceRequests, but they should not overlap in time.
+        public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
+
+        // List Of Tasks
         public virtual ICollection<GroupTask> GroupTasks { get; set; }
     }
 }
