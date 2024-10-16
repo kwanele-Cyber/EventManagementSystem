@@ -18,7 +18,6 @@ namespace EventMangementSystem.Controllers
             // Pass the list of service requests to the view
             return View(serviceRequests);
         }
-
         // GET: Request multiple services
         public ActionResult RequestService()
         {

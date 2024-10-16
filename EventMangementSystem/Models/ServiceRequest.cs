@@ -25,22 +25,5 @@ namespace EventMangementSystem.Models
         public virtual Event Event { get; set; }
         public virtual ServiceProvider ServiceProvider { get; set; }
         public virtual ICollection<Quotation> Bids { get; set; }
-
-
-        public ServiceRequestStatus Status { get; set; }
-
-
-        public string StartCode { get; set; } // A four-digit code to start the service
-        public string FinishCode { get; set; } // The QR code used to finish the service
-
-    }
-
-    public enum ServiceRequestStatus
-    {
-        Open,
-        Assigned,
-        InProgress,
-        Completed,
-        Cancelled
     }
 }

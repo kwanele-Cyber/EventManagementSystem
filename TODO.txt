@@ -1,5 +1,0 @@
-TODO:     |                                                                                                                                              
-----------|----------------------------------------------------------------------------------------------------------------------------------------------
-[Done]    | Make "Assign Team Task" Tab from Action["GET /Teams/Details/1"] be visible for only roles[Employee(with team role Leader) and ServiceProvider]
-[Done]    | Fix "View Tasks" links from Action["GET /Teams/Details/1"] Team Members list to point to Action["GET /Tasks/EmployeeTasks?employeeId=1"]
-[Pending] | Implement ReturnUrls for all controllers so they can be called from anywhere and still point back to the origin url if needed.
