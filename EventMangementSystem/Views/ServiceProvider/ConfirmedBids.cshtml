@@ -125,7 +125,7 @@
                               @if (User.IsInRole("ServiceProvider")) 
                               {
                                 @*(serviceRequest.IsAssigned && !serviceRequest.IsCompleted) for backwards complatability*@
-                                @if (serviceRequest.Status == ServiceRequestStatus.Assigned || (serviceRequest.IsAssigned && !serviceRequest.IsCompleted))
+                                if (serviceRequest.Status == ServiceRequestStatus.Assigned || (serviceRequest.IsAssigned && !serviceRequest.IsCompleted))
                                 {
                                     <!-- Start Service Button -->
                                     <a href="@Url.Action("StartService", "ServiceProvider", new { bidId = bid.Id })" class="btn btn-success">Start Service</a>
