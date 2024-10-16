@@ -1,0 +1,115 @@
+<!-- ViewAssignments.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Assignments</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h1>View Assignments</h1>
+
+        <!-- Team Selection and Assignments -->
+        <section id="assignmentsSection">
+            <h2>Your Assignments</h2>
+            <div>
+                <label for="teamSelect">Select Team:</label>
+                <select id="teamSelect">
+                    <option value="">-- Select a Team --</option>
+                    <!-- Teams populated by JS -->
+                </select>
+            </div>
+            <ul id="assignmentsList">
+                <!-- Assignments populated by JS -->
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        // Sample data for teams, members, and tasks
+        const teams = [
+            { name: "Team A", members: ["Alice", "Bob"] },
+            { name: "Team B", members: ["Charlie", "David"] }
+        ];
+
+        const members = [
+            { name: "Alice", role: "Leader" },
+            { name: "Bob", role: "Member" },
+            { name: "Charlie", role: "Leader" },
+            { name: "David", role: "Member" }
+        ];
+
+        const tasks = [
+            { name: "Task 1", assignedMember: "Alice", team: "Team A", status: "completed" },
+            { name: "Task 2", assignedMember: "Bob", team: "Team A", status: "in-progress" },
+            { name: "Task 3", assignedMember: "Charlie", team: "Team B", status: "pending" },
+            { name: "Task 4", assignedMember: "David", team: "Team B", status: "completed" }
+        ];
+
+
+        // Function to load teams into the dropdown
+        function loadTeams() {
+            const teamSelect = document.getElementById('teamSelect');
+            teams.forEach(team => {
+                const option = document.createElement('option');
+                option.value = team.name;
+                option.textContent = team.name;
+                teamSelect.appendChild(option);
+            });
+        }
+
+        // Event listener for team selection
+        document.getElementById('teamSelect').addEventListener('change', function () {
+            const selectedTeam = this.value;
+            displayAssignments(selectedTeam);
+        });
+
+        // Function to display assignments for the selected team
+        function displayAssignments(selectedTeam) {
+            const assignmentsList = document.getElementById('assignmentsList');
+            assignmentsList.innerHTML = '';
+
+            if (selectedTeam) {
+                const assignedMembers = members.filter(member => teams.find(team => team.name === selectedTeam).members.includes(member.name));
+                assignedMembers.forEach(member => {
+                    const li = document.createElement('li');
+                    li.textContent = `Team Member: ${member.name}, Role: ${member.role}`;
+                    
+                    // Display tasks assigned to the member in the selected team
+                    const assignedTasks = tasks.filter(task => task.assignedMember === member.name && task.team === selectedTeam);
+                    if (assignedTasks.length > 0) {
+                        const taskList = document.createElement('ul');
+                        assignedTasks.forEach(task => {
+                            const taskItem = document.createElement('li');
+                            
+                            // Apply different styles based on task status (example status added for demonstration)
+                            if (task.status === 'completed') {
+                                taskItem.className = 'completed-task';
+                            } else if (task.status === 'in-progress') {
+                                taskItem.className = 'in-progress-task';
+                            } else {
+                                taskItem.className = 'pending-task';
+                            }
+                            
+                            taskItem.textContent = `Task: ${task.name}, Status: ${task.status}`;
+                            taskList.appendChild(taskItem);
+                        });
+                        li.appendChild(taskList);
+                    } else {
+                        li.textContent += ' - No assigned tasks.';
+                    }
+                    assignmentsList.appendChild(li);
+                });
+            } else {
+                assignmentsList.innerHTML = '<li>Please select a team to see assignments.</li>';
+            }
+
+        }
+
+        // Load teams on page load
+        loadTeams();
+    </script>
+</body>
+</html>
