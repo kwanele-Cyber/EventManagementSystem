@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Service</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Start Service</h1>
+    
+        <form id="startServiceForm" method="post" action="/Service/Start">
+            <div>
+                <label for="ServiceDescription">Service Description:</label>
+                <textarea id="ServiceDescription" name="ServiceDescription" readonly><!-- Populate dynamically from backend --></textarea>
+            </div>
+
+            <div>
+                <label for="CheckInTime">Check-In Time:</label>
+                <input type="datetime-local" id="CheckInTime" name="CheckInTime" value="" readonly><!-- Filled by system -->
+            </div>
+
+            <div>
+                <label for="VerificationMethod">Verification Method:</label>
+                <input type="radio" id="qrcode" name="VerificationMethod" value="QR Code" checked> QR Code
+                <input type="radio" id="pin" name="VerificationMethod" value="PIN"> 4-Digit PIN
+            </div>
+
+            <div id="qrCodeSection" class="verification-section">
+                <label>Scan QR Code:</label>
+                <div id="qrCodeReader" style="width: 300px; height: 300px;"></div>
+                <button type="button" id="startScan">Start Scanning</button>
+                <button type="button" id="stopScan" class="hidden">Stop Scanning</button>
+                <input type="hidden" id="qrCodeResult" name="qrCodeResult">
+            </div>
+
+            <div id="pinSection" class="verification-section hidden">
+                <label for="PinCode">Enter 4-Digit PIN:</label>
+                <input type="text" id="PinCode" name="PinCode" maxlength="4">
+            </div>
+
+            <button type="submit">Start Service</button>
+        </form>
+    </div>
+
+    <script src="/service.js"></script>
+</body>
+</html>
+
