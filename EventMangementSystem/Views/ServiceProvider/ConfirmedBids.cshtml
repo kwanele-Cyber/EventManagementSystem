@@ -120,10 +120,25 @@
                             }
                             else
                             {
-                                <td>
-                                    <!-- Confirm Service Button -->
-                                    <a href="@Url.Action("ConfirmService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn">Confirm Service</a>
-                                </td>
+
+
+                                if (User.IsInRole("ServiceProvider")) {
+                                    if (bid.ServiceRequest.Status == ServiceRequestStatus.Assigned)
+                                    {
+                                        <td>
+                                            <!-- Start Service Button -->
+                                            <a href="@Url.Action("StartService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn">Start Service</a>
+                                        </td>
+                                    }
+                                    else  if(bid.ServiceRequest.Status == ServiceRequestStatus.InProgress)
+                                    {
+                                        <td>
+                                            <!-- Confirm Service Button -->
+                                            <a href="@Url.Action("ConfirmService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn">Complete Service</a>
+                                        </td>
+                                    }
+                                }
+                                
                             }
                         </tr>
                     }
