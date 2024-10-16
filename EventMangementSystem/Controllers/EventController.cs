@@ -272,10 +272,43 @@ namespace EventMangementSystem.Controllers
             }
         }
 
-        
-        
+        /
+        // GET: Request multiple services
+        public ActionResult RequestService()
+        {
+            // Make sure both Id and Name properties are selected
+            ViewBag.Events = db.Events.Select(e => new { Id = e.EventId, Name = e.Name }).ToList();
+            ViewBag.ServiceCategories = db.ServiceCategories.Select(c => new { Id = c.Id, Name = c.Name }).ToList();
 
-        
+            // Initialize with one empty service request
+            var requests = new List<ServiceRequest> { new ServiceRequest() };
+
+            return View(requests);
+        }
+
+
+        // POST: Submit multiple service requests
+        [HttpPost]
+        public ActionResult RequestService(List<ServiceRequest> requests)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var request in requests)
+                {
+
+                    db.ServiceRequests.Add(request);
+                }
+
+                db.SaveChanges();
+                return RedirectToAction("ServiceRequests");
+            }
+            // If model validation fails, return to the view with the existing data
+            ViewBag.Events = db.Events.Select(e => new { e.EventId, e.Name }).ToList();
+            ViewBag.ServiceCategories = db.ServiceCategories.Select(c => new { c.Id, c.Name }).ToList();
+            return View(requests);
+        }
+
+
 
         // GET: Event/Purchase/5
         public ActionResult Purchase(int id)

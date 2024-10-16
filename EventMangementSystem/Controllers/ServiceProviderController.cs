@@ -1,9 +1,14 @@
 ﻿using EventMangementSystem.Models;
 using Microsoft.AspNet.Identity;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 
@@ -31,9 +36,78 @@ namespace EventMangementSystem.Controllers
                                     .ToList();
             return View(serviceRequests);
         }
-        [HttpPost]
 
-      
+
+        [HttpGet]
+        [Authorize(Roles = "ServiceProvider")]
+        public ActionResult StartService(int bidId)
+        {
+            var bid = db.Quotations.Include("ServiceRequest").FirstOrDefault(b => b.Id == bidId);
+
+            if (bid == null || bid.ServiceRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+            var serviceRequest = bid.ServiceRequest;
+
+            // Generate a random 4-digit code for starting the service
+            var random = new Random();
+            serviceRequest.StartCode = random.Next(1000, 9999).ToString();
+
+            // Generate a QR code for completing the service
+            serviceRequest.FinishCode = GenerateQRCode(serviceRequest.Id);
+
+            // Update the status of the service request
+            serviceRequest.Status = ServiceRequestStatus.Assigned;
+
+            db.SaveChanges();
+
+            // Send an email to the Event Organizer/Event Manager
+            var eventManagerEmail = serviceRequest.Event.EventMangerEmail; // Ensure the event has a manager's email
+            SendEmailWithQRCode(eventManagerEmail, serviceRequest.StartCode, serviceRequest.FinishCode);
+
+            ViewBag.StartCode = serviceRequest.StartCode;
+
+            // Return the view with the start code
+            return View(serviceRequest);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "ServiceProvider")]
+        public ActionResult VerifyStartCode(int bidId, string enteredCode)
+        {
+            var bid = db.Quotations.Include("ServiceRequest").FirstOrDefault(b => b.Id == bidId);
+
+            if (bid == null || bid.ServiceRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+            var serviceRequest = bid.ServiceRequest;
+
+            // Check if the entered code matches the StartCode
+            if (serviceRequest.StartCode == enteredCode)
+            {
+                // Change status to InProgress and confirm start
+                serviceRequest.Status = ServiceRequestStatus.InProgress;
+
+                db.SaveChanges();
+
+                TempData["SuccessMessage"] = "Service started successfully.";
+                return RedirectToAction("ConfirmedBids", "ServiceProvider");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Invalid start code. Please try again.";
+                return RedirectToAction("StartService", new { bidId = bidId });
+            }
+        }
+
+
+
+        [HttpPost]
         public ActionResult CompleteService(int requestId, string eventManagerSignatureData, string serviceProviderSignatureData)
         {
             var request = db.ServiceRequests.Find(requestId);
@@ -44,7 +118,10 @@ namespace EventMangementSystem.Controllers
             }
 
             // Mark the request as completed
+            // Mark the service as completed
+            request.Status = ServiceRequestStatus.Completed;
             request.IsCompleted = true;
+
             request.EventManagerSignature = eventManagerSignatureData;
             request.ServiceProviderSignature = serviceProviderSignatureData;
             db.SaveChanges();
@@ -124,6 +201,7 @@ namespace EventMangementSystem.Controllers
                 return RedirectToAction("InventoryError");
             }
         }
+
         [HttpGet]
         [Authorize(Roles = "ServiceProvider, EventManager")]
         public ActionResult ConfirmService(int bidId)
@@ -138,29 +216,113 @@ namespace EventMangementSystem.Controllers
             return View(bid);
         }
 
+        
+
         // POST: ConfirmService
         [HttpPost]
         [Authorize(Roles = "ServiceProvider, EventManager")]
-  
         public ActionResult ConfirmService(int bidId, string eventManagerSignatureData, string serviceProviderSignatureData)
         {
+            // Fetch the bid and associated service request
             var bid = db.Quotations.Include("ServiceRequest").FirstOrDefault(b => b.Id == bidId);
 
+            // Return a 404 error if the bid is not found
             if (bid == null)
             {
                 return HttpNotFound();
             }
 
-            // Mark the service as completed in the service request
+            // Get the service request from the bid
             var serviceRequest = bid.ServiceRequest;
+
+            // Set the service request status and mark it as completed
+            serviceRequest.Status = ServiceRequestStatus.Completed;
             serviceRequest.IsCompleted = true;
+
+            // Save the signatures for both the event manager and service provider
             serviceRequest.EventManagerSignature = eventManagerSignatureData;
             serviceRequest.ServiceProviderSignature = serviceProviderSignatureData;
 
             db.SaveChanges();
+
+            // Show a success message & Redirect back to the ConfirmedBids page
             TempData["SuccessMessage"] = "Service Delivery confirmed";
+
             return RedirectToAction("ConfirmedBids", "ServiceProvider");
         }
+
+
+        #region HelperMethods
+        private string GenerateQRCode(int requestId)
+        {
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(requestId.ToString(), QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Bitmap qrCodeImage = qrCode.GetGraphic(20); // Adjust the size as needed
+                qrCodeImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] byteImage = ms.ToArray();
+
+                // Convert the byte array to Base64 for storage
+                return Convert.ToBase64String(byteImage);
+            }
+        }
+
+        private void SendEmailWithQRCode(string eventManagerEmail, string startCode, string finishQRCode)
+        {
+            try
+            {
+                var email = new MailMessage
+                {
+                    From = new MailAddress("DbnEventMangement@outlook.com"),
+                    Subject = "Service Start Information",
+                    Body = $@"
+                Service has started successfully. Below are the details:
+                
+                Start Code: {startCode}
+                
+                Scan the attached QR code to complete the service.
+                
+                Regards,
+                EventManagement Team"
+                };
+
+                // Add the recipient (Event Manager's email)
+                email.To.Add(eventManagerEmail);
+
+                // Convert the Base64 QR code string into a byte array
+                byte[] qrCodeBytes = Convert.FromBase64String(finishQRCode);
+
+                // Save the QR code image to the server temporarily
+                string qrCodeFileName = $"{Guid.NewGuid()}.png";
+                string qrCodeFilePath = Path.Combine(Server.MapPath("~/images"), qrCodeFileName);
+                System.IO.File.WriteAllBytes(qrCodeFilePath, qrCodeBytes);
+
+                // Attach the QR code image to the email
+                Attachment qrCodeAttachment = new Attachment(qrCodeFilePath, MediaTypeNames.Image.Jpeg);
+                email.Attachments.Add(qrCodeAttachment);
+
+                // Send the email
+                var smtpClient = new SmtpClient();
+                smtpClient.Send(email);
+
+                // Cleanup: Optionally delete the QR code file from the server after sending
+                if (System.IO.File.Exists(qrCodeFilePath))
+                {
+                    System.IO.File.Delete(qrCodeFilePath);
+                }
+
+                TempData["SuccessMessage"] = "Email sent successfully!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Failed to send email due to: " + ex.Message;
+            }
+        }
+        #endregion
+
     }
 
 
