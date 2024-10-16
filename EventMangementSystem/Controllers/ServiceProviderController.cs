@@ -67,16 +67,42 @@ namespace EventMangementSystem.Controllers
             var eventManagerEmail = serviceRequest.Event.EventMangerEmail; // Ensure the event has a manager's email
             SendEmailWithQRCode(eventManagerEmail, serviceRequest.StartCode, serviceRequest.FinishCode);
 
-            ViewBag.StartCode = serviceRequest.StartCode;
+            // Redirect the service provider to the verification page
+            return RedirectToAction("VerifyQRCode", "ServiceProvider", new { bidId = bidId });
+        }
 
-            // Return the view with the start code
-            return View(serviceRequest);
+
+        [HttpGet]
+        public ActionResult VerifyQRCode(int bidId)
+        {
+            var bid = db.Quotations.Include("ServiceRequest").FirstOrDefault(b => b.Id == bidId);
+
+            if (bid == null || bid.ServiceRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+            var serviceRequest = bid.ServiceRequest;
+
+            // Differentiate between roles (EventManager and ServiceProvider)
+            if (User.IsInRole("EventManager"))
+            {
+                // EventManager should see the QR code and the start pin
+                return View("VerifyQRCodeEventManager", serviceRequest);
+            }
+            else if (User.IsInRole("ServiceProvider"))
+            {
+                // ServiceProvider should scan or enter the QR code
+                return View("VerifyQRCodeServiceProvider", serviceRequest);
+            }
+
+            return new HttpUnauthorizedResult(); // Unauthorized access if neither role is matched
         }
 
 
         [HttpPost]
         [Authorize(Roles = "ServiceProvider")]
-        public ActionResult VerifyStartCode(int bidId, string enteredCode)
+        public ActionResult VerifyQRCode(int bidId, string enteredCode)
         {
             var bid = db.Quotations.Include("ServiceRequest").FirstOrDefault(b => b.Id == bidId);
 
@@ -100,8 +126,8 @@ namespace EventMangementSystem.Controllers
             }
             else
             {
-                TempData["ErrorMessage"] = "Invalid start code. Please try again.";
-                return RedirectToAction("StartService", new { bidId = bidId });
+                TempData["ErrorMessage"] = "Invalid code. Please try again.";
+                return RedirectToAction("VerifyQRCode", new { bidId = bidId });
             }
         }
 
