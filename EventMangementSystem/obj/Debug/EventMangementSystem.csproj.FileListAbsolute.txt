@@ -308,3 +308,4 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMan.95CC28AF.Up2Date
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.pdb
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.StartCodeIntoServiceRequest.resources
