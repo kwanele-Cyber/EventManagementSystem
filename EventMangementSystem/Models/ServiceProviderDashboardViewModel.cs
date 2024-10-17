@@ -1,4 +1,5 @@
-﻿using Stripe;
+﻿
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace EventMangementSystem.Models
         public DateTime EventDateTime { get; set; }
         public string Status { get; set; }
         public int Id { get; set; }
+        public int ServiceProviderId { get; set; }
     }
 
 }

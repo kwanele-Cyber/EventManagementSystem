@@ -44,10 +44,14 @@ namespace EventMangementSystem.Controllers
             if (ModelState.IsValid)
             {
                 var dep = "";
-                foreach(var item in model.Dependencies)
+                if(model.Dependencies != null)
                 {
-                    dep = item + ", ";
+                    foreach (var item in model.Dependencies)
+                    {
+                        dep = item + ", ";
+                    }
                 }
+                
 
                 var task = new GroupTask
                 {

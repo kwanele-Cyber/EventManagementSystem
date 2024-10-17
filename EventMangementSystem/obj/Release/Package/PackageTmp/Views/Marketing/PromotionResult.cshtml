@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Promotion Result";
+}
+
+<h2>Promotion Result</h2>
+
+@if (ViewBag.Result != null)
+{
+    <pre>@Html.Raw(ViewBag.Result)</pre>
+}
+else
+{
+    <p>No result.</p>
+}

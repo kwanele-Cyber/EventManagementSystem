@@ -1,0 +1,44 @@
+﻿@model List<EventMangementSystem.Models.DriverAssignment>
+@using EventMangementSystem.Models
+
+<h2 class="page-title">Returned Equipment List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Driver Name</th>
+            <th>Event ID</th>
+            <th>Item Name</th>
+            <th>Quantity Delivered</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var assignment in Model)
+        {
+            var inventory = assignment.EventInventory; // Get the related EventInventory
+
+            if (inventory != null) // Check if inventory exists
+            {
+                <tr>
+                    <td>@assignment.Name</td> <!-- Adjust according to your model -->
+                    <td>@inventory.EventId</td>
+                    
+                    <td>@inventory.QuantityRequired</td>
+                    <
+                    <td>@inventory.Status</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

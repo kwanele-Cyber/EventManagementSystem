@@ -1,0 +1,145 @@
+﻿@model IEnumerable<EventMangementSystem.Models.Event>
+@using EventMangementSystem.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = "Events";
+}
+@if (User.IsInRole("EventManager"))
+{
+    <p>
+        @Html.ActionLink("Create New Event", "Create", null, new { @class = "btn btn-primary mb-4" })
+    </p>
+}
+
+<h2 class="page-title">Events</h2>
+
+<!-- Search Form -->
+<div class="search-container">
+    @using (Html.BeginForm("Search", "Event", FormMethod.Get, new { @class = "form-inline" }))
+    {
+        <div class="input-group input-group-sm" style="display:flex">
+            <input type="text" name="searchTerm" class="form-control form-control-sm" placeholder="Search for events..." value="@Request.QueryString["searchTerm"]" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="events-container">
+    @foreach (var item in Model)
+    {
+        <div class="event-card">
+            <div class="card mb-4 shadow-sm">
+                @if (!string.IsNullOrEmpty(item.PicturePath))
+                {
+                    <img class="card-img-top" src="@Url.Content(item.PicturePath)" alt="@item.Name" />
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">
+                        <strong>Date:</strong> @item.Date.ToString("MM/dd/yyyy")<br />
+                        <strong>Location:</strong> @item.Location<br />
+                        <strong>Venue:</strong> @item.Venue.Name<br />
+                        <strong>Price:</strong> @item.TicketPrice.ToString("R0.00")
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            @Html.ActionLink("Details", "Details", new { id = item.EventId }, new { @class = "btn btn-sm btn-outline-secondary" }) 
+                           
+                        </div>
+                        @if (!User.IsInRole("Admin") && !User.IsInRole("EventManager"))
+                        {
+                            @Html.ActionLink("Purchase Tickets", "Purchase", new { id = item.EventId }, new { @class = "btn btn-sm btn-primary" })
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        color: #343a40;
+    }
+
+    .search-container {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .events-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .event-card {
+        flex: 0 0 30%;
+        margin-bottom: 2rem;
+    }
+
+    .card {
+        border: 1px solid #e0e0e0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-text {
+        margin-bottom: 1.25rem;
+        color: #6c757d;
+    }
+
+    .btn-group .btn {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .btn-outline-secondary {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+</style>

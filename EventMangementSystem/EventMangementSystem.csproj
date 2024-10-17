@@ -49,6 +49,12 @@
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Hangfire.Core, Version=1.8.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hangfire.Core.1.8.12\lib\net46\Hangfire.Core.dll</HintPath>
     </Reference>
@@ -66,6 +72,12 @@
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.Base.3.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.3.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -165,12 +177,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.4\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -234,6 +240,7 @@
     <Compile Include="Controllers\EventInventoriesController.cs" />
     <Compile Include="Controllers\EventOrganizerController.cs" />
     <Compile Include="Controllers\EventReminderController.cs" />
+    <Compile Include="Models\ServiceProviderDashboardViewModel.cs" />
     <Compile Include="Controllers\ServiceRequestController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
@@ -344,9 +351,6 @@
     <Content Include="assets\css\owl.carousel.css" />
     <Content Include="assets\css\snow.css" />
     <Content Include="assets\css\style.css" />
-    <Content Include="assets\images\11.jpg" />
-    <Content Include="assets\images\a1.jpg" />
-    <Content Include="assets\images\a2.jpg" />
     <Content Include="assets\images\arrows.png" />
     <Content Include="assets\images\c1.png" />
     <Content Include="assets\images\close.png" />
@@ -391,8 +395,6 @@
     <Content Include="assets\js\lsb.min.js" />
     <Content Include="assets\js\move-top.js" />
     <Content Include="assets\js\owl.carousel.js" />
-    <Content Include="assets\js\responsiveslides.min.js" />
-    <Content Include="assets\js\simplyCountdown.js" />
     <Content Include="Content\alertifyjs\alertify.css" />
     <Content Include="Content\alertifyjs\alertify.min.css" />
     <Content Include="Content\alertifyjs\alertify.rtl.css" />
@@ -479,8 +481,8 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="libman.json" />
-    <None Include="Properties\PublishProfiles\EventMangementSystem20240523060732 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\EventMangementSystem20240903052811 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\EventMangementSystem20241017090354 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -510,6 +512,7 @@
     <Content Include="Views\DriverAssignments\Navigation.cshtml" />
     <Content Include="Views\DriverAssignments\ReturnedEquipment.cshtml" />
     <Content Include="Views\DriverAssignments\StartReturnProcess.cshtml" />
+    <Content Include="Views\ServiceProvider\Dashboard.cshtml" />
     <None Include="Views\ServiceProvider\VerifyQRCodeEventManager.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -623,6 +626,8 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\ServiceProvider\VerifyQRCodeServiceProvider.cshtml" />
     <Content Include="Views\Teams\AssignServiceRequest.cshtml" />
+    <Content Include="Views\ServiceRequests\Index.cshtml" />
+    <Content Include="Views\ServiceRequests\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Dispatchinventories\" />

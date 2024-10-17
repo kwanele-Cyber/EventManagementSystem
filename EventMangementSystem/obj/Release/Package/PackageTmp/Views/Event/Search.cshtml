@@ -1,0 +1,114 @@
+﻿@model IEnumerable<EventMangementSystem.Models.Event>
+
+
+@{
+
+    ViewBag.Title = "Search Events";
+}
+
+
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            color: #343a40;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .no-results {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.25rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+
+
+
+<div class="search-container">
+    @using (Html.BeginForm("Search", "Event", FormMethod.Get))
+    {
+        <div class="input-group input-group-sm">
+            <input type="text" name="searchTerm" class="form-control form-control-sm" placeholder="Enter event name or location" value="@Request.QueryString["searchTerm"]" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-secondary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <h3 class="page-title">Search Results</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Venue</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@item.Date.ToString("MM/dd/yyyy")</td>
+                    <td>@Html.DisplayFor(modelItem => item.Location)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Venue.Name)</td>
+
+                    @if (User.IsInRole("EventManager") || User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.EventId }, new { @class = "btn btn-sm btn-outline-secondary" }) |
+                            @Html.ActionLink("Edit", "Edit", new { id = item.EventId }, new { @class = "btn btn-sm btn-outline-primary" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.EventId }, new { @class = "btn btn-sm btn-outline-danger" })
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model != null)
+{
+    <p class="no-results">No events found matching your search criteria.</p>
+}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+

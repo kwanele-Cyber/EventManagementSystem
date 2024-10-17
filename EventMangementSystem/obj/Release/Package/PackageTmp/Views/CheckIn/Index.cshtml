@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Event Check-In";
+}
+
+<h2>Event Check-In</h2>
+
+<p>@ViewBag.Message</p>
+<div align="center">
+    
+        <form id="form"  method="post" action="@Url.Action("Scan", "CheckIn")">
+
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="code">Scan QR Code</label>
+                <input style="display:none" type="text" name="code" id="code" class="form-control" readonly />
+            </div>
+            <button style="display:none" type="submit" class="btn btn-primary">Check-In</button>
+        </form>
+    
+
+    <div id="qr-reader" style="width:500px; margin-top: 20px;"></div>
+    <div id="qr-reader-results" class="mt-3"></div>
+</div>
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.1.6/html5-qrcode.min.js"></script>
+
+    <script>
+        function onScanSuccess(decodedText) {
+            
+            document.getElementById('code').value = decodedText;
+            document.getElementById('form').submit();
+            
+        }
+
+        function onScanError(errorMessage) {
+            // Handle scan error if you want
+            console.error(`Error scanning: ${errorMessage}`);
+        }
+
+        window.onload = function () {
+            var html5QrCode = new Html5Qrcode("qr-reader");
+
+            // Start scanning
+            html5QrCode.start(
+                { facingMode: "environment" }, // Camera facing mode
+                {
+                    fps: 10, // Frames per second to scan
+                    qrbox: { width: 250, height: 250 } // QR code scanning box
+                },
+                onScanSuccess,
+                onScanError
+            ).catch((err) => {
+                console.error(`Unable to start scanning: ${err}`);
+            });
+        };
+    </script>
+}

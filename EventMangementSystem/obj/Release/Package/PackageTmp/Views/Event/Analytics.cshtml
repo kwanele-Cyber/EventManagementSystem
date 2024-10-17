@@ -1,0 +1,209 @@
+﻿@model EventMangementSystem.Models.EventAnalyticsViewModel
+
+@{
+    ViewBag.Title = "Event Analytics for " + Model.Event.Name;
+}
+
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            color: #343a40;
+            position: relative;
+        }
+
+            .page-title:after {
+                content: '';
+                width: 100px;
+                height: 2px;
+                background-color: #e74c3c;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -10px;
+            }
+
+        .dl-horizontal dt {
+            float: left;
+            width: 150px;
+            overflow: hidden;
+            clear: left;
+            text-align: left;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dl-horizontal dd {
+            margin-left: 160px;
+        }
+
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 400px;
+            width: 100%;
+        }
+
+        .chart-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .card-header {
+            background-color: #e74c3c;
+            color: #fff;
+            font-size: 1.25rem;
+            text-align: center;
+            padding: 10px 0;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+    </style>
+</head>
+<div class="container">
+    <h2 class="page-title">@ViewBag.Title</h2>
+
+    <div class="card">
+        <div class="card-header">Event Details</div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>Name</dt>
+                <dd>@Model.Event.Name</dd>
+
+                <dt>Date</dt>
+                <dd>@Model.Event.Date.ToString("MM/dd/yyyy")</dd>
+
+                <dt>Location</dt>
+                <dd>@Model.Event.Location</dd>
+
+                <dt>Description</dt>
+                <dd>@Model.Event.Description</dd>
+
+                <dt>Venue</dt>
+                <dd>@Model.Event.Venue.Name</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Event Performance</div>
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>Total Tickets Sold</dt>
+                <dd>@Model.TotalTicketsSold</dd>
+
+                <dt>Total Ticket Income</dt>
+                <dd>@Model.TotalTicketIncome.ToString("R0.00")</dd>
+
+                <dt>Total Donation Income</dt>
+                <dd>@Model.TotalDonations.ToString("R0.00")</dd>
+
+                <dt>Total Revenue</dt>
+                <dd>@Model.TotalRevenue.ToString("R0.00")</dd>
+
+                <dt>Average Rating</dt>
+                <dd>@Model.AverageRating</dd>
+
+                <dt>Total Feedback Count</dt>
+                <dd>@Model.TotalFeedbackCount</dd>
+
+                <dt>Total Attendees</dt>
+                <dd>@Model.TotalAttendees</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="chart-container">
+                <canvas id="ticketsVsAttendanceChart"></canvas>
+                <div class="chart-title">Tickets Sold vs. Attendance</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-container">
+                <canvas id="averageRatingPieChart"></canvas>
+                <div class="chart-title">Average Rating</div>
+            </div>
+        </div>
+    </div>
+
+    @Html.ActionLink("Back to Event Details", "Details", "Event", new { id = Model.Event.EventId }, new { @class = "btn btn-secondary" })
+</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ticketsVsAttendanceCtx = document.getElementById('ticketsVsAttendanceChart').getContext('2d');
+            var averageRatingPieCtx = document.getElementById('averageRatingPieChart').getContext('2d');
+
+            new Chart(ticketsVsAttendanceCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Tickets Sold', 'Attendance'],
+                    datasets: [{
+                        data: [@Model.TotalTicketsSold, @Model.TotalAttendees],
+                        backgroundColor: ['#36A2EB', '#FF6384'],
+                        hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            new Chart(averageRatingPieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Average Rating', 'Remaining'],
+                    datasets: [{
+                        data: [@Model.AverageRating, 5 - @Model.AverageRating],
+                        backgroundColor: ['#FFCE56', '#E7E9ED'],
+                        hoverBackgroundColor: ['#FFCE56', '#E7E9ED']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        });
+    </script>
+

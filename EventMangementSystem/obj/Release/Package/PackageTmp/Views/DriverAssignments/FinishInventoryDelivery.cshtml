@@ -1,0 +1,79 @@
+﻿@{
+   
+}
+<script src="~/Scripts/html5-qrcode.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<link href="~/css/Finishdelivcss.css" rel="stylesheet" />
+
+<section class="w3l-index-about py-5" id="about2">
+    <div class="container py-md-5 py-2">
+        <h2>Finish Inventory Delivery</h2>
+        <div id="countdown"></div>
+        <form id="noResponseForm" action="@Url.Action("NoResponseAction", "DriverAssignments")" method="post">
+            <button type="submit" id="submitButton" style="display: none;">Submit No Response</button>
+        </form>
+        <div class="container2">
+            <div id="qr-code-scanner"></div>
+        </div>
+        <div id="manual-code-input">
+            <form id="code-form" method="post" action="@Url.Action("FinishInventoryDelivery", "DriverAssignments")">
+                <label for="code-input">Enter code manually:</label>
+                <input type="text" id="code-input" name="code">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    var duration = 660;
+    var timeLeft = duration;
+
+    function updateCountdown() {
+        var countdownElement = document.getElementById('countdown');
+        var minutes = Math.floor(timeLeft / 60);
+        var seconds = timeLeft % 60;
+        countdownElement.innerHTML = 'Time Left: ' + minutes + 'm ' + seconds + 's';
+        timeLeft--;
+        if (timeLeft < 0) {
+            clearInterval(timer);
+            document.getElementById('submitButton').style.display = 'block';
+            document.getElementById('noResponseForm').submit();
+        }
+    }
+    var timer = setInterval(updateCountdown, 1000);
+</script>
+
+<script>
+    function submitManualCode() {
+        var manualCode = document.getElementById('code-input').value;
+        if (manualCode.trim() !== '') {
+            document.getElementById('code-form').submit();
+        } else {
+            alert('Please enter a code.');
+        }
+    }
+
+    function sendCodeToServer(code) {
+        var codeToSend = code || document.getElementById('code-input').value;
+        document.getElementById('code-input').value = codeToSend;
+        document.getElementById('code-form').submit();
+    }
+
+    const html5QrCodeScanner = new Html5QrcodeScanner("qr-code-scanner", {
+        formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+        fps: 10,
+        qrbox: 250
+    });
+
+    html5QrCodeScanner.render(onScanSuccess, onScanFailure);
+
+    function onScanSuccess(qrCodeMessage) {
+        sendCodeToServer(qrCodeMessage);
+        html5QrCodeScanner.clear();
+    }
+
+    function onScanFailure(error) {
+        console.error("QR code scanning failed:", error);
+    }
+</script>

@@ -3,7 +3,26 @@
     "mssql1": {
       "restored": true,
       "restoreTime": "2024-05-20T13:38:19.5495367Z"
+    },
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2024-10-17T06:45:55.9108578Z"
+    },
+    "signalr1": {
+      "restored": true,
+      "restoreTime": "2024-10-17T06:47:03.0117079Z"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "signalr1.resourceGroupName": {
+      "Name": "signalr1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "DefaultResourceGroup-CCAN"
+    },
+    "signalr1.subscriptionId": {
+      "Name": "signalr1.subscriptionId",
+      "Type": "subscription",
+      "Value": "eb950b7b-2c1f-4f90-ad2d-09104013272f"
+    }
+  }
 }

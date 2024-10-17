@@ -219,6 +219,8 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Configuration.ConfigurationBuilders.Base.dll
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Owin.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Owin.Security.Cookies.dll
@@ -247,6 +249,8 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\System.Web.WebPages.Razor.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\WebGrease.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\BouncyCastle.Cryptography.xml
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\EntityFramework.xml
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\EntityFramework.SqlServer.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Hangfire.Core.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Hangfire.SqlServer.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\itextsharp.xml
@@ -255,6 +259,8 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Configuration.ConfigurationBuilders.Base.xml
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Newtonsoft.Json.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\PayPal.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\SendGrid.pdb
@@ -270,8 +276,6 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\System.Web.WebPages.Deployment.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\System.Web.WebPages.Razor.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Antlr3.Runtime.pdb
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\EntityFramework.xml
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\EntityFramework.SqlServer.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
@@ -303,14 +307,14 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.init.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.fix_ServProviderFK_conflict.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.GroupsAndTasks.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.csproj.GenerateResource.cache
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.csproj.CoreCompileInputs.cache
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMan.95CC28AF.Up2Date
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.dll
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.pdb
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.StartCodeIntoServiceRequest.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.RelationShip_ServiceRequestTeam.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.UpdateD.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.AddActualEndTimeinGroupTasks.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.NullableActualEndTimeinGroupTasks.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.ReturnEquipment.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.csproj.GenerateResource.cache
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.csproj.CoreCompileInputs.cache
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMan.95CC28AF.Up2Date
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.dll
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.pdb

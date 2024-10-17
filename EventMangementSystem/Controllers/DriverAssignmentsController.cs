@@ -329,7 +329,7 @@ namespace EventMangementSystem.Controllers
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                return RedirectToAction("MyAssignments");
+                //return RedirectToAction("MyAssignments");
             }
 
             db.SaveChanges();
@@ -829,7 +829,7 @@ namespace EventMangementSystem.Controllers
                         catch (Exception ex)
                         {
                             TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                            return RedirectToAction("Index", "EventInventories");
+                            //return RedirectToAction("Index", "EventInventories");
                         }
                         db.SaveChanges();
 
@@ -886,7 +886,7 @@ namespace EventMangementSystem.Controllers
                         catch (Exception ex)
                         {
                             TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                            return RedirectToAction("Index", "EventInventories");
+                            //return RedirectToAction("Index", "EventInventories");
                         }
                         db.SaveChanges();
 
@@ -941,7 +941,7 @@ namespace EventMangementSystem.Controllers
                     catch (Exception ex)
                     {
                         TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                        return RedirectToAction("Index", "EventInventories");
+                        //return RedirectToAction("Index", "EventInventories");
                     }
                     db.SaveChanges();
                     Session["InvId"] = null;

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
+using System.EnterpriseServices;
 
 namespace EventMangementSystem.Controllers
 {
@@ -107,7 +108,7 @@ namespace EventMangementSystem.Controllers
         [HttpPost]
         public ActionResult VerifyQRCode(int bidId, string enteredCode)
         {
-            var bid = db.Quotations.Include("ServiceRequest").FirstOrDefault(b => b.Id == bidId);
+            var bid = db.Quotations.Include("ServiceRequest").FirstOrDefault(b => b.ServiceRequest.Id == bidId);
 
             if (bid == null || bid.ServiceRequest == null)
             {
@@ -311,7 +312,7 @@ namespace EventMangementSystem.Controllers
                 ServiceRequest = serviceRequest,
                 Tasks = tasks,
                 ReturnUrl = returnUrl,
-                BidId = bidId,
+                BidId = bid.Id,
             };
 
             return View(viewModel);
@@ -347,7 +348,7 @@ namespace EventMangementSystem.Controllers
 
         // POST: ServiceProvider/InspectServiceDelivery
         [HttpPost]
-        public ActionResult InspectServiceDelivery(int serviceRequestId, string returnUrl = null)
+        public ActionResult InspectServiceDelivery(int bidId, int serviceRequestId, string returnUrl = null)
         {
             var serviceRequest = db.ServiceRequests.Find(serviceRequestId);
 
@@ -360,8 +361,8 @@ namespace EventMangementSystem.Controllers
             db.Entry(serviceRequest).State = EntityState.Modified;
             db.SaveChanges();
 
-            TempData["SuccessMessage"] = "Service delivery completed successfully.";
-            return RedirectToAction("ConfirmedBids");
+            TempData["SuccessMessage"] = "Service delivery under Inspection";
+            return RedirectToAction("ConfirmService", new {bidId = bidId});
         }
 
 
@@ -370,11 +371,13 @@ namespace EventMangementSystem.Controllers
 
         public async Task<ActionResult> Dashboard()
         {
-            var provider = db.ServiceProviders.Where(x => x.email == User.Identity.Name).FirstOrDefault();
+            var provider = db.ServiceProviders
+                .Where(x => x.email == User.Identity.Name).FirstOrDefault();
             var serviceProviderId = provider.Id;
 
             var quotations = await db.Quotations
                 .Include(q => q.ServiceRequest)
+                .Include(q => q.ServiceRequest.Team)
                 .Where(q => q.ServiceProviderId == serviceProviderId)
                 .ToListAsync();
 
@@ -383,12 +386,12 @@ namespace EventMangementSystem.Controllers
             var upcomingBookings = quotations
                 .Where(q => q.ServiceRequest.IsCompleted == false )
                 .Select(q => new UpcomingBooking
-                
                 {
                     EventName = q.ServiceRequest.Event.Name,
                     EventDateTime = q.ServiceRequest.Event.Start,
                     Status = q.ServiceRequest.Status.ToString(),
-                    Id = q.ServiceRequest.Id
+                    Id = q.ServiceRequest.Id,
+                    ServiceProviderId = serviceProviderId,
                 })
                 .ToList();
 

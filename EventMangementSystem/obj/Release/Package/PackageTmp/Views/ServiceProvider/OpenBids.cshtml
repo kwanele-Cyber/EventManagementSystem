@@ -1,0 +1,31 @@
+﻿@model IEnumerable<EventMangementSystem.Models.Quotation>
+
+@{
+    ViewBag.Title = "My Bids";
+}
+
+<h2>My Bids</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Service Request</th>
+            <th>Event</th>
+            <th>Bid Amount</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bid in Model)
+        {
+            <tr>
+                <td>@bid.ServiceRequest.ServiceCategory</td>
+                <td>@bid.ServiceRequest.Event.Name</td>
+                <td>@bid.Price.ToString("R,00")</td>
+                <td>@bid.Description</td>
+                <td>@(bid.ServiceRequest.IsAssigned ? "Assigned" : "Pending")</td>
+            </tr>
+        }
+    </tbody>
+</table>

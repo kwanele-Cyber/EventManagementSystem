@@ -1,0 +1,332 @@
+﻿@model IEnumerable<EventMangementSystem.Models.EventInventory>
+@using EventMangementSystem.Models
+@{ ApplicationDbContext db = new ApplicationDbContext();}
+
+
+
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+    /* Custom Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1050;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+        transition: opacity 0.3s ease;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        animation: fadeIn 0.5s;
+    }
+
+    .modal-header-left {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .modal-header-left h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+    .close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .pill {
+        background-color: #f7f7f7;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+        .modal-footer a {
+            text-decoration: none;
+            color: #333;
+        }
+
+    .card {
+        margin-bottom: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-title {
+        font-family: 'Georgia', serif;
+    }
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-footer {
+        background-color: #f9f9f9;
+        border-top: none;
+        padding: 15px;
+        border-radius: 0 0 15px 15px;
+    }
+
+    .btn-outline-dark {
+        border: 2px solid #343a40;
+        color: #343a40;
+        padding: 10px 20px;
+        font-weight: bold;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-dark:hover {
+            background-color: #343a40;
+            color: #fff;
+        }
+</style>
+<h2 class="page-title">Deliveries</h2>
+<section class="w3l-index-about py-5" id="about2">
+    <div class="container py-md-5 py-2">
+       
+
+        @foreach (var item in Model)
+        {
+            var assignment = db.DriverAssignments.Where(x => x.EventInventoryId == item.EventInventoryId).ToList();
+
+            <div id="@item.EventInventoryId" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header-left">
+                        <span onclick="closeModal('@item.EventInventoryId')" class="close">&times;</span>
+                        <h2>Delivery Information</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="pill">
+                            <h4>Manager Names</h4>
+                            <strong>@item.FirstName</strong>
+                        </div>
+                        <div class="pill">
+                            <h4>Delivery Address</h4>
+                            <strong>@item.Address</strong>
+                        </div>
+                        @try
+                        {
+                            <div class="pill">
+                                <h4>Delivery Date</h4>
+                                <strong>@assignment.FirstOrDefault().DeliveryDate</strong>
+                            </div>
+                        }
+                        catch { }
+                        @try
+                        {
+                            <div class="pill">
+                                <h4>Assignment Date</h4>
+                                <strong>@assignment.FirstOrDefault().Created</strong>
+                            </div>
+                        }
+                        catch { }
+                        @try
+                        {
+                            <div class="pill">
+                                <h4>Delivery Time</h4>
+                                <strong>@assignment.FirstOrDefault().DeliveryTime</strong>
+                            </div>
+                        }
+                        catch { }
+                        <div class="modal-footer">
+                            <div class="btn btn-outline-dark">
+                                <a onclick="closeModal('@item.EventInventoryId')">Close</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="card mt-5 pt-2 pb-0 px-3">
+                    <div class="card-body">
+                        <div class="row">
+                            @try
+                            {
+                                <div class="col-12">
+                                    <h3 class="card-title"><b>Delivery Number: @assignment.FirstOrDefault().EventInventoryId</b></h3>
+                                    <h4 class="card-title"><b>Date: @assignment.FirstOrDefault().DeliveryDate</b></h4>
+                                </div>
+                            }
+                            catch
+                            {
+
+                            }
+                            @{var inventory = db.Inventories.Where(x => x.InventoryId == item.InventoryId).ToList(); }
+                            @foreach (var inv in inventory)
+                            {
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mb-2 text-muted">
+                                                    <p class="card-text text-muted small">
+                                                        <a href="#" onclick="showBiggerImage('@inv.picture')">
+                                                            <img src="~/assets/images/@inv.picture" class="mr-1" width="50" height="50">
+                                                            <span class="vl mr-2 ml-0"></span>
+                                                        </a>
+
+                                                        <label for="price" style="font-size:15px">Inventory Name:</label>
+                                                        <span style="padding-left: 1%; color: red; font-size: 15px">@inv.ItemName</span>
+
+                                                        <label for="quantity" style="padding-left: 10%; margin-left: -8px; font-size: 15px">Quantity:</label>
+                                                        <span style="padding-left: 1%; color: red; font-size: 15px">@item.QuantityRequired</span>
+
+                                                        <label for="quantity" style="padding-left: 10%; margin-left: -8px; font-size: 15px">Status:</label>
+                                                        <span style="padding-left: 1%; color: red; font-size: 15px">@item.Status</span>
+                                                    </p>
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                @if (@item.Status == "Delivery Scheduled")
+                                {
+                                    <button class="btn btn-outline-dark" style="margin-left: 20px;" onclick="openReadyModal(@assignment.FirstOrDefault().AssDrivId)">Inventory Ready</button>
+                                }
+                                else if (@item.Status == "Ready for pickup")
+                                {
+                                    <button class="btn btn-outline-dark" style="margin-left: 20px;" onclick="openDispatchModal(@item.EventInventoryId)">Dispatch Inventory</button>
+                                }
+                                <button class="btn btn-outline-dark" style="margin-left: 5px;" onclick="openModal('@item.EventInventoryId')">Delivery Info</button>
+                                @if (item.AdminSignature != null)
+                                {
+                                    <button class="btn btn-outline-dark" style="margin-left: 5px;" onclick="downloadPdf('@item.EventInventoryId')">Dispatch Info</button>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Modal for Inventory Ready Confirmation -->
+<div id="readyModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inventory Ready</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to mark this inventory as ready for delivery?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmReady">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Dispatch Inventory Confirmation -->
+<div id="dispatchModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dispatch Inventory</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to dispatch this inventory?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-warning" id="confirmDispatch">Dispatch</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let readyId;
+    let dispatchId;
+
+    function openReadyModal(id) {
+        readyId = id;
+        $('#readyModal').modal('show');
+    }
+
+    function openDispatchModal(id) {
+        dispatchId = id;
+        $('#dispatchModal').modal('show');
+    }
+
+    document.getElementById('confirmReady').addEventListener('click', function () {
+        window.location.href = '@Url.Action("InventoryReady", "DriverAssignments")/' + readyId;
+    });
+
+    document.getElementById('confirmDispatch').addEventListener('click', function () {
+        window.location.href = '@Url.Action("DispatchInventory", "DriverAssignments")/' + dispatchId;
+    });
+
+    function openModal(modalId) {
+        var modal = document.getElementById(modalId);
+        modal.style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        var modal = document.getElementById(modalId);
+        modal.style.display = "none";
+    }
+
+    window.addEventListener('click', function (event) {
+        if (event.target.classList.contains('modal')) {
+            closeModal(event.target.getAttribute('id'));
+        }
+    });
+
+    function downloadPdf(eventInventoryId) {
+        window.location.href = '@Url.Action("DispatchedInventoryDetails", "DriverAssignments")/' + eventInventoryId;
+    }
+</script>

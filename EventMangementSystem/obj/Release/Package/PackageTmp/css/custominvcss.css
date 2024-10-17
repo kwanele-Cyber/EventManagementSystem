@@ -1,0 +1,156 @@
+﻿/* Custom Scoped CSS for the Delivery Assignment View */
+#delivery-assignments-section {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 60px 0;
+}
+
+    #delivery-assignments-section #about2 {
+        background: linear-gradient(to right, #4e54c8, #8f94fb);
+        padding: 60px 0;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    #delivery-assignments-section h2.text-center {
+        font-size: 42px;
+        margin-bottom: 50px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* Modal Styling */
+    #delivery-assignments-section .modal-content {
+        border-radius: 10px;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #delivery-assignments-section .modal-header {
+        background-color: #4e54c8;
+        color: #fff;
+        border-bottom: none;
+        border-radius: 10px 10px 0 0;
+    }
+
+    #delivery-assignments-section .modal-title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    #delivery-assignments-section .modal-body h4 {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    #delivery-assignments-section .modal-body p {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    #delivery-assignments-section .modal-footer .btn-secondary {
+        background-color: #555;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    /* Card Styling */
+    #delivery-assignments-section .card {
+        background-color: #fff;
+        border-radius: 15px;
+        border: none;
+        margin-bottom: 20px;
+        transition: transform 0.3s;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+        #delivery-assignments-section .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+    #delivery-assignments-section .card-header {
+        background-color: #4e54c8;
+        color: #fff;
+        padding: 15px;
+        border-radius: 15px 15px 0 0;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    #delivery-assignments-section .card-body {
+        padding: 20px;
+    }
+
+        #delivery-assignments-section .card-body h5 {
+            font-size: 18px;
+            color: #4e54c8;
+            margin-bottom: 15px;
+        }
+
+    #delivery-assignments-section .card-footer {
+        background-color: #f9f9f9;
+        padding: 15px;
+        border-radius: 0 0 15px 15px;
+    }
+
+        #delivery-assignments-section .card-footer .btn {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin-right: 10px;
+            border-radius: 25px;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        #delivery-assignments-section .card-footer .btn-success {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        #delivery-assignments-section .card-footer .btn-warning {
+            background-color: #ff9800;
+            color: #fff;
+        }
+
+        #delivery-assignments-section .card-footer .btn-info {
+            background-color: #00bcd4;
+            color: #fff;
+        }
+
+    /* Custom Button Styles */
+    #delivery-assignments-section .btn-success:hover {
+        background-color: #45a049;
+    }
+
+    #delivery-assignments-section .btn-warning:hover {
+        background-color: #e68a00;
+    }
+
+    #delivery-assignments-section .btn-info:hover {
+        background-color: #0097a7;
+    }
+
+    /* Image Styling */
+    #delivery-assignments-section .card-img-top {
+        border-radius: 15px;
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    #delivery-assignments-section .card-body,
+    #delivery-assignments-section .card-footer {
+        text-align: center;
+    }
+
+        #delivery-assignments-section .card-footer .btn {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+}

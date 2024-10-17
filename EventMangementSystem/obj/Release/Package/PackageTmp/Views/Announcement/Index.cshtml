@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EventMangementSystem.Models.Announcement>
+
+@{
+    ViewBag.Title = "Announcements";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2>Announcements for @ViewBag.EventName</h2>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h4>
+            </div>
+            <div class="card-body">
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Content)</p>
+                <p class="card-text">
+                    <small class="text-muted">Created At: @Html.DisplayFor(modelItem => item.CreatedAt)</small>
+                </p>
+            </div>
+        </div>
+    }
+
+    @Html.ActionLink("Back to Event Details", "Details", "Event", new { id = Model.FirstOrDefault().EventId }, new { @class = "btn btn-secondary" })
+</div>
+
+<style>
+    .card {
+        margin: 0 auto;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+        padding: 1rem;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        margin-bottom: 0;
+    }
+</style>

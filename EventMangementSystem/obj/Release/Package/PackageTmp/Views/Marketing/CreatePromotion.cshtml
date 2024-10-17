@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Create Promotion";
+}
+
+<h2>Create Promotion</h2>
+
+@using (Html.BeginForm("CreatePromotion", "Marketing", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.Label("Message")
+        @Html.TextArea("message", null, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Poster")
+        <input type="file" name="poster" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Publish to Facebook</button>
+}

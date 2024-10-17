@@ -34,9 +34,9 @@ namespace EventMangementSystem.Controllers
 
 
         [HttpGet]
-        public ActionResult ViewQRCode(int Id)
+        public ActionResult ViewQRCode(int bidId)
         {
-            var serviceRequest = db.ServiceRequests.FirstOrDefault(b => b.Id == Id);
+            var serviceRequest = db.ServiceRequests.FirstOrDefault(b => b.Id == bidId);
 
             if (serviceRequest == null)
             {
@@ -100,7 +100,7 @@ namespace EventMangementSystem.Controllers
         // POST: Select a serviceRequest for a service request
         [HttpPost]
       
-        public ActionResult SelectBid(int requestId, int serviceRequestId)
+        public ActionResult SelectBid(int requestId, int? bidId)
         {
             var request = db.ServiceRequests.Find(requestId);
             if (request == null)
@@ -108,7 +108,7 @@ namespace EventMangementSystem.Controllers
                 return HttpNotFound();
             }
 
-            var selectedBid = request.Bids.FirstOrDefault(b => b.Id == serviceRequestId);
+            var selectedBid = request.Bids.FirstOrDefault(b => b.Id == bidId);
             if (selectedBid == null)
             {
                 return HttpNotFound();

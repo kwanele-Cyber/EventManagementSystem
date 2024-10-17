@@ -1,0 +1,31 @@
+﻿@model IEnumerable<EventMangementSystem.Models.ServiceCategory>
+
+@{
+    ViewBag.Title = "Service Categories List";
+}
+
+<div class="container">
+    <h2 class="animated-title">Service Categories</h2>
+
+    <div class="button-container">
+        <a href="@Url.Action("CreateServiceCategory", "Administrator")" class="btn btn-success create-button">Create New Category</a>
+    </div>
+
+    <table class="table table-striped custom-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

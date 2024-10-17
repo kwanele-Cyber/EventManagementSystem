@@ -1,0 +1,34 @@
+﻿@model IEnumerable<EventMangementSystem.Models.Venue>
+
+@{
+    ViewBag.Title = "Venues";
+}
+
+<h2>Venues</h2>
+
+<p>
+    @Html.ActionLink("Create New Venue", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Address)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.VenueId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.VenueId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.VenueId })
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,11 @@
+﻿@model EventMangementSystem.Models.Quotation
+
+<h2>Approve Quotation</h2>
+
+<p>Are you sure you want to approve this quotation?</p>
+
+@using (Html.BeginForm("Approve", "Quotation", new { id = Model.QuotationId }, FormMethod.Post))
+{
+    <button type="submit" class="btn btn-success">Yes, Approve</button>
+    @Html.ActionLink("No, Cancel", "Index", new { serviceRequestId = Model.ServiceRequestId }, new { @class = "btn btn-secondary" })
+}
