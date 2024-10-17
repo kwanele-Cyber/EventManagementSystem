@@ -13,6 +13,7 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace EventMangementSystem.Controllers
 {
@@ -364,6 +365,64 @@ namespace EventMangementSystem.Controllers
         }
 
 
+
+        //Begining of dashboad
+
+        public async Task<ActionResult> Dashboard()
+        {
+            var provider = db.ServiceProviders.Where(x => x.email == User.Identity.Name).FirstOrDefault();
+            var serviceProviderId = provider.Id;
+
+            var quotations = await db.Quotations
+                .Include(q => q.ServiceRequest)
+                .Where(q => q.ServiceProviderId == serviceProviderId)
+                .ToListAsync();
+
+
+
+            var upcomingBookings = quotations
+                .Where(q => q.ServiceRequest.IsCompleted == false )
+                .Select(q => new UpcomingBooking
+                
+                {
+                    EventName = q.ServiceRequest.Event.Name,
+                    EventDateTime = q.ServiceRequest.Event.Start,
+                    Status = q.ServiceRequest.Status.ToString(),
+                    Id = q.ServiceRequest.Id
+                })
+                .ToList();
+
+
+            var totalEarnings = quotations
+                .Where(q => q.ServiceRequest.IsCompleted)
+                .Sum(q => q.Price);
+            var upcomingBookingsCount = upcomingBookings.Count;
+
+            var revenueData = await db.Quotations
+            .Where(q => q.ServiceProviderId == serviceProviderId && q.ServiceRequest.IsCompleted == true)
+            .Select(q => new
+            {
+                TransactionId = q.Id, 
+                Revenue = q.Price
+                }       )
+            .ToListAsync();
+
+            // Create labels and amounts based on each transaction
+            var revenueLabels = revenueData.Select(d => $"Transaction {d.TransactionId}").ToList(); // Use a descriptive label
+            var revenueAmounts = revenueData.Select(d => d.Revenue).ToList();
+
+            var viewModel = new ServiceProviderDashboardViewModel
+            {
+                TotalEarnings = totalEarnings,
+                UpcomingBookingsCount = upcomingBookingsCount,
+                UpcomingBookings = upcomingBookings,
+                RevenueLabels = revenueLabels,
+                RevenueData = revenueAmounts
+            };
+
+            return View(viewModel);
+        }
+        //End of dashboad
 
         #region HelperMethods
         private string GenerateQRCode(int requestId)
