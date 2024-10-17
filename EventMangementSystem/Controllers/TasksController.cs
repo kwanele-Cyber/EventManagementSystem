@@ -54,10 +54,12 @@ namespace EventMangementSystem.Controllers
                     TaskName = model.TaskName,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
+
                     EmployeeId = model.EmployeeId,
                     TeamId = model.TeamId,
                     Status = GroupTaskStatus.NotStarted,
                     Dependencies = dep,
+
                 };
 
                 db.Tasks.Add(task);

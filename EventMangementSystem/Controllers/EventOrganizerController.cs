@@ -33,6 +33,32 @@ namespace EventMangementSystem.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ViewQRCode(int Id)
+        {
+            var serviceRequest = db.ServiceRequests.FirstOrDefault(b => b.Id == Id);
+
+            if (serviceRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            // Differentiate between roles (EventManager and ServiceProvider)
+            if (User.IsInRole("EventManager"))
+            {
+                // EventManager should see the QR code and the start pin
+                return View("VerifyQRCodeEventManager", serviceRequest);
+            }
+            else if (User.IsInRole("ServiceProvider"))
+            {
+                // ServiceProvider should scan or enter the QR code
+                return View("VerifyQRCodeServiceProvider", serviceRequest);
+            }
+
+            return new HttpUnauthorizedResult(); // Unauthorized access if neither role is matched
+        }
+
         // POST: Submit multiple service requests
         [HttpPost]
         public ActionResult RequestService(List<ServiceRequest> requests)
@@ -55,11 +81,11 @@ namespace EventMangementSystem.Controllers
             return View(requests);
         }
 
-        // GET: View bids for a specific service request
+        // GET: View serviceRequests for a specific service request
         [HttpGet]
         public ActionResult ViewBids(int requestId)
         {
-            // Disable lazy loading and load bids explicitly
+            // Disable lazy loading and load serviceRequests explicitly
             db.Configuration.LazyLoadingEnabled = false;
 
             var request = db.ServiceRequests.Include("Bids").FirstOrDefault(r => r.Id == requestId);
@@ -71,10 +97,10 @@ namespace EventMangementSystem.Controllers
             return View(request);
         }
 
-        // POST: Select a bid for a service request
+        // POST: Select a serviceRequest for a service request
         [HttpPost]
       
-        public ActionResult SelectBid(int requestId, int bidId)
+        public ActionResult SelectBid(int requestId, int serviceRequestId)
         {
             var request = db.ServiceRequests.Find(requestId);
             if (request == null)
@@ -82,7 +108,7 @@ namespace EventMangementSystem.Controllers
                 return HttpNotFound();
             }
 
-            var selectedBid = request.Bids.FirstOrDefault(b => b.Id == bidId);
+            var selectedBid = request.Bids.FirstOrDefault(b => b.Id == serviceRequestId);
             if (selectedBid == null)
             {
                 return HttpNotFound();

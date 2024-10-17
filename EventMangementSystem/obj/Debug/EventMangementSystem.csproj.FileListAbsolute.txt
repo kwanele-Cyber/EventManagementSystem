@@ -311,3 +311,6 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.StartCodeIntoServiceRequest.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.RelationShip_ServiceRequestTeam.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.UpdateD.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.AddActualEndTimeinGroupTasks.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.NullableActualEndTimeinGroupTasks.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.ReturnEquipment.resources

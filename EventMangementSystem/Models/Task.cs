@@ -19,6 +19,8 @@ namespace EventMangementSystem.Models
         [Required]
         public DateTime EndDate { get; set; }
 
+        public DateTime? ActualEndTime { get; set; }
+
         public int EmployeeId { get; set; }
 
         [ForeignKey("EmployeeId")]

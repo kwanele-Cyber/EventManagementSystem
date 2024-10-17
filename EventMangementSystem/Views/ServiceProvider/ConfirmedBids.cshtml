@@ -129,25 +129,30 @@
                                     if (serviceRequest.Status == ServiceRequestStatus.InProgress)
                                     {
                                         <!-- PerfomService Button -->
-                                        <a href="@Url.Action("PerfomService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn btn-warning">PerfomService</a> <span> | </span>
+                                        <a href="@Url.Action("PerformService", "ServiceProvider", new { bidId = bid.Id })" class="confirm-btn btn-warning">PerfomService</a> <span> | </span>
                                         <!-- Confirm Service Button -->
                                         <a href="@Url.Action("ConfirmService", "ServiceProvider", new { bidId = bid.Id })" class="btn btn-danger">Complete Service</a> <span> | </span>
 
                                     }
-                                    else if (serviceRequest.Status == ServiceRequestStatus.Assigned || (serviceRequest.IsAssigned && !serviceRequest.IsCompleted))
+                                    else if (serviceRequest.Status == ServiceRequestStatus.UnderInspection)
                                     {
-                                        <!-- Start Service Button -->
-                                        <a href="@Url.Action("StartService", "ServiceProvider", new { bidId = bid.Id })" class="btn btn-success">Start Service</a>
+                                        <!-- Service Completed Label -->
+                                        <span style="color:purple;" class="badge badge-warning p-4">Service Under Inspection</span>
                                     }
                                     else if (serviceRequest.Status == ServiceRequestStatus.Completed)
                                     {
                                         <!-- Service Completed Label -->
-                                        <span style="color:lawngreen;" class="badge badge-success">Service Completed</span>
+                                        <span style="color:lawngreen;" class="badge badge-success p-4">Service Completed</span>
                                     }
                                     else if (serviceRequest.Status == ServiceRequestStatus.Cancelled)
                                     {
                                         <!-- Service Completed Label -->
                                         <span style="color:red;" class="badge badge-success">Service Cancelled</span>
+                                    }
+                                    else if (serviceRequest.Status == ServiceRequestStatus.Assigned || (serviceRequest.IsAssigned && !serviceRequest.IsCompleted))
+                                    {
+                                        <!-- Start Service Button -->
+                                        <a href="@Url.Action("StartService", "ServiceProvider", new { bidId = bid.Id })" class="btn btn-success">Start Service</a>
                                     }
 
                                 }

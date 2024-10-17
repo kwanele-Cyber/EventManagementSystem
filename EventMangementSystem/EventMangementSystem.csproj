@@ -275,6 +275,18 @@
     <Compile Include="Migrations\202410162010116_UpdateD.Designer.cs">
       <DependentUpon>202410162010116_UpdateD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202410170337071_Add ActualEndTime in GroupTasks.cs" />
+    <Compile Include="Migrations\202410170337071_Add ActualEndTime in GroupTasks.Designer.cs">
+      <DependentUpon>202410170337071_Add ActualEndTime in GroupTasks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410170341560_Nullable ActualEndTime in GroupTasks.cs" />
+    <Compile Include="Migrations\202410170341560_Nullable ActualEndTime in GroupTasks.Designer.cs">
+      <DependentUpon>202410170341560_Nullable ActualEndTime in GroupTasks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410170427011_Return Equipment.cs" />
+    <Compile Include="Migrations\202410170427011_Return Equipment.Designer.cs">
+      <DependentUpon>202410170427011_Return Equipment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Announcement.cs" />
@@ -303,6 +315,8 @@
     <Compile Include="Models\Promotion.cs" />
     <Compile Include="Models\Quotation.cs" />
     <Compile Include="Models\ReminderService.cs" />
+    <Compile Include="Models\ReturnInventoryViewModel.cs" />
+    <Compile Include="Models\ReturnProcess.cs" />
     <Compile Include="Models\ServiceCategory.cs" />
     <Compile Include="Models\ServiceProvider.cs" />
     <Compile Include="Models\ServiceRequest.cs" />
@@ -318,6 +332,7 @@
     <Compile Include="PayPalConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\PerformServiceViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\TeamEmployeeViewModel.cs" />
   </ItemGroup>
@@ -479,6 +494,22 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\ServiceProvider\PerformService.cshtml" />
+    <Content Include="Views\EventOrganizer\VerifyQRCodeEventManager.cshtml" />
+    <Content Include="Views\DriverAssignments\ConfirmDelivery.cshtml" />
+    <Content Include="Views\DriverAssignments\Create.cshtml" />
+    <Content Include="Views\DriverAssignments\Delete.cshtml" />
+    <Content Include="Views\DriverAssignments\Details.cshtml" />
+    <Content Include="Views\DriverAssignments\DispatchedInventory.cshtml" />
+    <Content Include="Views\DriverAssignments\DispatchedInventoryDetails.cshtml" />
+    <Content Include="Views\DriverAssignments\DispatchInventory.cshtml" />
+    <Content Include="Views\DriverAssignments\Edit.cshtml" />
+    <Content Include="Views\DriverAssignments\FinishInventoryDelivery.cshtml" />
+    <Content Include="Views\DriverAssignments\Index.cshtml" />
+    <Content Include="Views\DriverAssignments\MyAssignments.cshtml" />
+    <Content Include="Views\DriverAssignments\Navigation.cshtml" />
+    <Content Include="Views\DriverAssignments\ReturnedEquipment.cshtml" />
+    <Content Include="Views\DriverAssignments\StartReturnProcess.cshtml" />
     <None Include="Views\ServiceProvider\VerifyQRCodeEventManager.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -549,17 +580,6 @@
     <Content Include="Views\Donations\Edit.cshtml" />
     <Content Include="Views\Donations\Index.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
-    <Content Include="Views\DriverAssignments\Create.cshtml" />
-    <Content Include="Views\DriverAssignments\Delete.cshtml" />
-    <Content Include="Views\DriverAssignments\Details.cshtml" />
-    <Content Include="Views\DriverAssignments\DispatchedInventoryDetails.cshtml" />
-    <Content Include="Views\DriverAssignments\DispatchedInventory.cshtml" />
-    <Content Include="Views\DriverAssignments\DispatchInventory.cshtml" />
-    <Content Include="Views\DriverAssignments\Edit.cshtml" />
-    <Content Include="Views\DriverAssignments\FinishInventoryDelivery.cshtml" />
-    <Content Include="Views\DriverAssignments\Index.cshtml" />
-    <Content Include="Views\DriverAssignments\MyAssignments.cshtml" />
-    <Content Include="Views\DriverAssignments\Navigation.cshtml" />
     <Content Include="Views\Drivers\Create.cshtml" />
     <Content Include="Views\Drivers\Delete.cshtml" />
     <Content Include="Views\Drivers\Details.cshtml" />
@@ -588,7 +608,6 @@
     <Content Include="Views\ServiceProvider\ViewServiceRequests.cshtml" />
     <Content Include="Views\ServiceProvider\OpenBids.cshtml" />
     <Content Include="Views\EventOrganizer\ConfirmedRequests.cshtml" />
-    <Content Include="Views\DriverAssignments\ConfirmDelivery.cshtml" />
     <Content Include="Views\ServiceProvider\ConfirmedBids.cshtml" />
     <Content Include="Views\ServiceProvider\ConfirmService.cshtml" />
     <Content Include="Views\Teams\Index.cshtml" />
@@ -656,6 +675,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202410162010116_UpdateD.resx">
       <DependentUpon>202410162010116_UpdateD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410170337071_Add ActualEndTime in GroupTasks.resx">
+      <DependentUpon>202410170337071_Add ActualEndTime in GroupTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410170341560_Nullable ActualEndTime in GroupTasks.resx">
+      <DependentUpon>202410170341560_Nullable ActualEndTime in GroupTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410170427011_Return Equipment.resx">
+      <DependentUpon>202410170427011_Return Equipment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

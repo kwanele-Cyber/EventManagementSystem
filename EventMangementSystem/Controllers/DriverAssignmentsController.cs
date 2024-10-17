@@ -15,6 +15,7 @@ using EventMangementSystem.Models;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using QRCoder;
+using Stripe;
 using Image = iTextSharp.text.Image;
 
 namespace EventMangementSystem.Controllers
@@ -252,7 +253,7 @@ namespace EventMangementSystem.Controllers
             if (!System.IO.File.Exists(pdfPath))
             {
                 TempData["ErrorMessage"] = "PDF not found.";
-                return RedirectToAction("DispatchedInventoryDetails", new {id = id});
+                return RedirectToAction("DispatchedInventoryDetails", new { id = id });
             }
 
             byte[] pdfContent = System.IO.File.ReadAllBytes(pdfPath);
@@ -365,7 +366,7 @@ namespace EventMangementSystem.Controllers
                 int id = int.Parse(ordId);
                 var inventory = db.EventInventories.Find(id);
 
-               
+
                 if (int.Parse(code) == inventory.UniqueCode)
                 {
                     return RedirectToAction("ConfirmDelivery", new { id = id });
@@ -375,7 +376,7 @@ namespace EventMangementSystem.Controllers
                     TempData["ErrorMessage"] = "Incorrect Code, Please Try Again";
                     return RedirectToAction("FinishInventoryDelivery");
                 }
-                
+
             }
             else
             {
@@ -510,7 +511,7 @@ namespace EventMangementSystem.Controllers
                 {
                     var email2 = new MailMessage
                     {
-                        From = new MailAddress("eventproplanners@gmail.com"),
+                        From = new MailAddress("eventproplanners@gmail  "),
                         Subject = "No Response",
                         Body = $"Inventory Number: " + inventory.EventInventoryId + " \n\n" +
                                $"Hi {inventory.FirstName}, \n\n" +
@@ -541,6 +542,151 @@ namespace EventMangementSystem.Controllers
             TempData["ErrorMessage"] = "Inventory Delivery marked as no response from customer.";
             return RedirectToAction("MyAssignments");
         }
+
+        public ActionResult StartReturnProcess(int inventoryId)
+        {
+            // Find the associated driver assignment
+            var driverAssignment = db.DriverAssignments
+                .Where(x => x.EventInventoryId == inventoryId && x.Email == User.Identity.Name)
+                .FirstOrDefault();
+
+            if (driverAssignment == null)
+            {
+                TempData["ErrorMessage"] = "Driver assignment not found.";
+                return RedirectToAction("Index");
+            }
+
+            // Fetch the specific EventInventory
+            var eventInventory = db.EventInventories.Find(inventoryId);
+            if (eventInventory == null)
+            {
+                TempData["ErrorMessage"] = "Event Inventory not found.";
+                return RedirectToAction("Index");
+            }
+
+            // Retrieve the associated inventory items
+            var deliveredItems = db.Inventories
+                .Where(i => i.InventoryId == eventInventory.InventoryId)
+                .ToList();
+
+            if (!deliveredItems.Any())
+            {
+                TempData["ErrorMessage"] = "No delivered items found.";
+                return RedirectToAction("Index");
+            }
+
+            // Pass the driver assignment and the delivered items to the view
+            ViewBag.DriverAssignment = driverAssignment;
+            ViewBag.EventInventory = eventInventory; // Pass EventInventory for quantity details
+            return View(deliveredItems);
+        }
+
+
+        // [HttpPost]
+        //public ActionResult SubmitReturnProcess(int assignmentId, FormCollection form)
+        //{
+        //    // Find the driver assignment (you may not need this based on your requirements)
+        //    var driverAssignment = db.DriverAssignments.Find(assignmentId);
+
+        //    // Process returned quantities
+        //    foreach (var key in form.AllKeys)
+        //    {
+        //        if (key.StartsWith("quantityReturned["))
+        //        {
+        //            // Extract EventInventoryId from the key
+        //            var inventoryId = int.Parse(key.Substring("quantityReturned[".Length, key.Length - "quantityReturned[".Length - 1));
+        //            var returnedQuantity = int.Parse(form[key]);
+
+        //            // Find the corresponding EventInventory item
+        //            var inventoryItem = db.EventInventories.Find(inventoryId);
+        //            if (inventoryItem != null)
+        //            {
+        //                // Update the QuantityReturned property
+        //                inventoryItem.QuantityReturned = returnedQuantity;
+
+
+        //                // Save changes to the inventory item
+        //                db.Entry(inventoryItem).State = EntityState.Modified;
+        //            }
+        //        }
+        //    }
+
+        //    // Save all changes
+        //    db.SaveChanges();
+
+        //    TempData["SuccessMessage"] = "Return process completed successfully.";
+        //    return RedirectToAction("Index");
+        //}
+
+
+        #region Condition
+        //// Check if the quantity returned is less than the quantity required
+        //              if (returnedQuantity<inventoryItem.QuantityRequired)
+        //              {
+        //                  inventoryItem.Status = "Returned with issue"; // Less returned than required
+        //              }
+        //              else
+        //              {
+        //                  inventoryItem.Status = "Equipment Returned"; // Fully returned
+        //              }
+
+
+        #endregion
+
+
+        [HttpPost]
+        public ActionResult SubmitReturnProcess(int assignmentId, FormCollection form)
+        {
+            foreach (var key in form.AllKeys)
+            {
+                if (key.StartsWith("quantityReturned["))
+                {
+                    // Extract EventInventoryId from the key
+                    var inventoryId = int.Parse(key.Substring("quantityReturned[".Length, key.Length - "quantityReturned[".Length - 1));
+                    var returnedQuantity = int.Parse(form[key]);
+
+                    // Find the EventInventory and create a new ReturnProcess record
+                    var inventoryItem = db.EventInventories.Find(inventoryId);
+                    if (inventoryItem != null)
+                    {
+                        // Create a new ReturnProcess record
+                        var returnProcess = new ReturnProcess
+                        {
+                            DriverAssignmentId = assignmentId,
+                            EventInventoryId = inventoryItem.EventInventoryId,
+                            QuantityReturned = returnedQuantity,
+                            Status = returnedQuantity < inventoryItem.QuantityRequired ? "Returned with issue" : "Equipment Returned",
+                            ReturnSubmittedOn = DateTime.Now
+                        };
+
+                        // Add the return process to the database
+                        db.ReturnProcesses.Add(returnProcess);
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            TempData["SuccessMessage"] = "Return process completed successfully.";
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult ReturnedEquipment()
+        {
+            // Fetch driver assignments with related event inventories that have specific statuses
+            var assignmentsWithReturnedEquipments = db.DriverAssignments
+                .Include(da => da.EventInventory) // Include EventInventory details
+                .Where(da => da.EventInventory.Status == "Returned" ||
+                             da.EventInventory.Status == "Returned but Missing")
+                .ToList();
+
+            return View(assignmentsWithReturnedEquipments); // Pass the list to the view
+        }
+
+
+
+
+
 
         // GET: DriverAssignments/Details/5
         public ActionResult Details(int? id)
@@ -806,6 +952,8 @@ namespace EventMangementSystem.Controllers
 
             return View(driverAssignment);
         }
+
+
 
         // GET: DriverAssignments/Edit/5
         public ActionResult Edit(int? id)

@@ -19,6 +19,11 @@
     </script>
 
     <style>
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 30px;
+            margin-top: 3px;
+        }
+
         #chat-toggle {
             position: fixed;
             bottom: 20px;
@@ -188,8 +193,9 @@
                                                 <li><a href="@Url.Action("Index", "Venue")">Venues</a></li>
                                                 <li><a href="@Url.Action("Index", "Inventory")">Inventories</a></li>
                                                 <li><a href="@Url.Action("ServiceCategoriesList", "Administrator")">Service Categories</a></li>
-                                                <li><a href="@Url.Action("Index", "EventInventories")">Event Inventories</a></li>
+                                                <li><a href="@Url.Action("Index", "EventInventories")">Delivery Schedule</a></li>
                                                 <li><a href="@Url.Action("Index", "DriverAssignments")">Deliveries</a></li>
+                                                <li><a href="@Url.Action("ReturnedEquipment", "DriverAssignments")" class="btn btn-info">Returned Equipment</a></li>
                                                 <li><a href="@Url.Action("Create", "Users")">Team</a></li>
                                             </ul>
                                         </li>
@@ -291,7 +297,7 @@
                         @errorMessage
                     </div>
                 }
-                <p class="sub_para">@ViewBag.Title</p>
+
                 @RenderBody()
             </div>
         </div>

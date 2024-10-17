@@ -1,0 +1,49 @@
+﻿@model List<EventMangementSystem.Models.Inventory>
+@using EventMangementSystem.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    var driverAssignment = ViewBag.DriverAssignment as EventMangementSystem.Models.DriverAssignment;
+    var eventInventory = ViewBag.EventInventory as EventMangementSystem.Models.EventInventory;
+}
+
+<h2 class="page-title"> Return Delivered Equipment</h2>
+
+<form action="@Url.Action("SubmitReturnProcess", "DriverAssignments")" method="post">
+    <input type="hidden" name="AssignmentId" value="@driverAssignment.AssDrivId" />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Picture</th>
+                <th>Item Name</th>
+                <th>Quantity Delivered</th>
+                <th>Quantity Returned</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><img src="~/assets/images/@item.picture" class="mr-1" width="100" height="100"></td>
+                    <td>@item.ItemName</td>
+                    <td>@eventInventory.QuantityRequired</td> <!-- Use the quantity from EventInventory -->
+                    <td>
+                        <input type="number" name="quantityReturned[@eventInventory.EventInventoryId]" min="0" 
+                                max="@eventInventory.QuantityRequired" width="70" required  />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Return Equipment</button>
+</form>
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

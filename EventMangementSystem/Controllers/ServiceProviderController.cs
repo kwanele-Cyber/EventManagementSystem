@@ -1,4 +1,5 @@
 ﻿using EventMangementSystem.Models;
+using EventMangementSystem.ViewModels;
 using Microsoft.AspNet.Identity;
 using QRCoder;
 using System;
@@ -9,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -250,8 +252,6 @@ namespace EventMangementSystem.Controllers
             return View(bid);
         }
 
-        
-
         // POST: ConfirmService
         [HttpPost]
         [Authorize(Roles = "ServiceProvider, EventManager")]
@@ -284,6 +284,85 @@ namespace EventMangementSystem.Controllers
 
             return RedirectToAction("ConfirmedBids", "ServiceProvider");
         }
+
+        // GET: ServiceProvider/PerformService
+        [HttpGet]
+        public ActionResult PerformService(int bidId, string returnUrl = null)
+        {
+            var bid = db.Quotations
+                .Include(q => q.ServiceRequest)
+                .Include(q => q.ServiceRequest.Team)
+                .Include(q => q.ServiceRequest.Team.GroupTasks)
+                .FirstOrDefault(q => q.Id == bidId);
+
+            if (bid == null)
+            {
+                return HttpNotFound();
+            }
+
+            var serviceRequest = bid.ServiceRequest;
+
+            // Fetch all tasks related to this service request
+            var tasks = bid.ServiceRequest.Team.GroupTasks.ToList();
+
+            var viewModel = new PerformServiceViewModel
+            {
+                ServiceRequest = serviceRequest,
+                Tasks = tasks,
+                ReturnUrl = returnUrl,
+                BidId = bidId,
+            };
+
+            return View(viewModel);
+        }
+
+        // POST: ServiceProvider/CompleteTask
+        [HttpPost]
+        public ActionResult CompleteTask(int taskId, int? serviceRequestId = null, string returnUrl = null)
+        {
+            //TODO:To be fixed
+            var task = db.Tasks.Find(taskId);
+
+            var bid = db.Quotations
+                .Include(t => t.ServiceProvider)
+                .Include(t => t.ServiceRequest)
+                .Include(t => t.ServiceRequest.GroupTasks)
+                .Where(t => t.ServiceRequest.TeamId == task.TeamId).FirstOrDefault();
+
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+
+            task.Status = GroupTaskStatus.Completed;
+            task.Progress = 100;
+            task.ActualEndTime = DateTime.Now;
+
+            db.Entry(task).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("PerformService", new { bidId = bid.Id , returnUrl = returnUrl});
+        }
+
+        // POST: ServiceProvider/InspectServiceDelivery
+        [HttpPost]
+        public ActionResult InspectServiceDelivery(int serviceRequestId, string returnUrl = null)
+        {
+            var serviceRequest = db.ServiceRequests.Find(serviceRequestId);
+
+            if (serviceRequest == null)
+            {
+                return HttpNotFound();
+            }
+
+            serviceRequest.Status = ServiceRequestStatus.UnderInspection;
+            db.Entry(serviceRequest).State = EntityState.Modified;
+            db.SaveChanges();
+
+            TempData["SuccessMessage"] = "Service delivery completed successfully.";
+            return RedirectToAction("ConfirmedBids");
+        }
+
 
 
         #region HelperMethods

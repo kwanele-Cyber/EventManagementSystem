@@ -45,6 +45,7 @@ namespace EventMangementSystem.Models
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<DriverAssignment> DriverAssignments { get; set; }
+        public DbSet<ReturnProcess> ReturnProcesses { get; set; }
 
         public DbSet<Notification> Notifications { get; set; }
 
@@ -60,6 +61,25 @@ namespace EventMangementSystem.Models
         public DbSet<TeamMember> TeamMembers { get; set; }
 
         public DbSet<GroupTask> Tasks { get; set; }
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // Configuring foreign key for ReturnProcess -> EventInventory
+            modelBuilder.Entity<ReturnProcess>()
+                .HasRequired(rp => rp.EventInventory)
+                .WithMany() // or WithOptional(), depending on the relationship
+                .HasForeignKey(rp => rp.EventInventoryId)
+                .WillCascadeOnDelete(false);  // This prevents cascading deletes
+
+            modelBuilder.Entity<ReturnProcess>()
+                .HasRequired(rp => rp.DriverAssignment)
+                .WithMany() // or WithOptional()
+                .HasForeignKey(rp => rp.DriverAssignmentId)
+                .WillCascadeOnDelete(false); // This prevents cascading deletes
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
 

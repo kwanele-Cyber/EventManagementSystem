@@ -14,21 +14,21 @@
 <style>
     /* Applying the new font to the entire section */
     #delivery-assignments-section {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Georgia', serif;
     }
 
         /* Updating the font for specific elements */
         #delivery-assignments-section h2,
         #delivery-assignments-section .card-title,
         #delivery-assignments-section .modal-title {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 700; /* Use bold weight for titles */
+            font-family: 'Georgia', serif;
+            font-weight: 500; /* Use bold weight for titles */
         }
 
         #delivery-assignments-section .card-text,
         #delivery-assignments-section p,
         #delivery-assignments-section h5 {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Georgia', serif;
             font-weight: 400; /* Use regular weight for body text */
         }
 </style>
@@ -36,7 +36,7 @@
 <section id="delivery-assignments-section">
     <div class="py-5 bg-gradient" id="about2">
         <div class="container py-md-5 py-2">
-            <h2 class="text-center text-light display-4">@ViewBag.Title</h2>
+            <h2 class="text-center text-light display-4">My Assignments</h2>
             <div class="row">
                 @foreach (var item in Model)
                 {
@@ -44,91 +44,123 @@
                         <!-- Card -->
                         <div class="card mt-5">
                             <div class="card-header">
-                                <h4 class="card-title"><b>Delivery Date: @item.EventInventory.Event.Start.ToLongDateString()</b></h4>
+                                <h4 class="card-title"><b>Delivery Number: @item.EventInventory.InventoryId</b></h4>
+                                <h5 class="card-title"><b>Delivery Date: @item.EventInventory.Event.Start.ToLongDateString()</b></h5>
                             </div>
-                            <div class="card-body">
-                                @foreach (var inv in db.Inventories.Where(x => x.InventoryId == item.EventInventory.InventoryId).ToList())
-                                {
+                            @foreach (var inv in db.Inventories.Where(x => x.InventoryId == item.EventInventory.InventoryId).ToList())
+                            {
+                                <div class="card-body">
                                     <img src="~/assets/images/@inv.picture" class="card-img-top rounded" alt="@inv.ItemName">
                                     <h5 class="card-title mt-3">@inv.ItemName</h5>
                                     <p class="card-text">
                                         <strong>Quantity:</strong> @item.EventInventory.QuantityRequired
                                     </p>
-                                }
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    @if (item.Status == "Dispatched" && User.IsInRole("Driver"))
-                                    {
-                                        <button class="btn btn-success" onclick="openDeliveryModal(@item.AssDrivId)">Start Inventory Delivery</button>
-                                    }
-                                    else if (item.EventInventory.Status == "No Response" && User.IsInRole("Driver"))
-                                    {
-                                        <button class="btn btn-warning" onclick="openRevertModal()">Reset Counter</button>
-                                    }
-                                    <button class="btn btn-info" data-toggle="modal" data-target="#@item.EventInventoryId">Delivery Info</button>
+                                    <p class="card-text">
+                                        <strong>Status:</strong> @item.EventInventory.Status
+                                    </p>
                                 </div>
-                            </div>
+
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        @if (item.Status == "Dispatched" && User.IsInRole("Driver"))
+                                        {
+                                            <button class="btn btn-success" onclick="openDeliveryModal(@item.AssDrivId)">Start Inventory Delivery</button>
+                                        }
+                                        @if (item.EventInventory.Status == "Delivered")
+                                        {
+                                            <!-- Button to trigger the return modal -->
+                                            <button class="btn btn-primary" onclick="openReturnModal(@item.EventInventory.InventoryId, '@inv.picture', '@inv.ItemName', @item.EventInventory.QuantityRequired)">Start Return</button>
+                                        }
+                                        <button class="btn btn-info" data-toggle="modal" data-target="#@item.EventInventoryId">Delivery Info</button>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 }
             </div>
         </div>
     </div>
+</section>
 
-    @foreach (var item in Model)
-    {
-        <!-- Modal for Delivery Info -->
-        <div id="@item.EventInventoryId" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Delivery Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+<!-- Modal for Start Return Equipment Confirmation -->
+<div id="returnModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Start Return Equipment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to start the return process for this equipment?</p>
+                <!-- Dynamically update the details in the modal -->
+                <p><strong>Item Name:</strong> <span id="modalItemName"></span></p>
+                <p><strong>Quantity:</strong> <span id="modalQuantity"></span></p>
+                <img id="modalImage" class="img-fluid" alt="Equipment Image" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmReturn">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <!-- Modal for Delivery Info -->
+    <div id="@item.EventInventoryId" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delivery Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row text-center mb-3">
+                        <div class="col-md-6">
+                            <h5>Recipient Names</h5>
+                            <p><strong>@item.Name</strong></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Delivery Address</h5>
+                            <p><strong>@item.EventInventory.Event.Venue.Address</strong></p>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <div class="row text-center mb-3">
-                            <div class="col-md-6">
-                                <h5>Recipient Names</h5>
-                                <p><strong>@item.Name</strong></p>
-                            </div>
-                            <div class="col-md-6">
-                                <h5>Delivery Address</h5>
-                                <p><strong>@item.EventInventory.Event.Location</strong></p>
-                            </div>
+                    <div class="row text-center mb-3">
+                        <div class="col-md-6">
+                            <h5>Delivery Date</h5>
+                            <p><strong>@DateTime.Now.ToString("MMMM dd, yyyy")</strong></p>
                         </div>
-                        <div class="row text-center mb-3">
-                            <div class="col-md-6">
-                                <h5>Delivery Date</h5>
-                                <p><strong>@item.DeliveryDate</strong></p>
-                            </div>
-                            <div class="col-md-6">
-                                <h5>Assignment Date</h5>
-                                <p><strong>@item.Created.ToString("MMMM dd, yyyy HH:mm")</strong></p>
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <h5>Delivery Time</h5>
-                                <p><strong>@item.DeliveryTime</strong></p>
-                            </div>
-                        </div>
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <h5>Status</h5>
-                                <p><strong>@item.Status</strong></p>
-                            </div>
+                        <div class="col-md-6">
+                            <h5>Assignment Date</h5>
+                            <p><strong>@item.Created.ToString("MMMM dd, yyyy HH:mm")</strong></p>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <h5>Delivery Time</h5>
+                            <p><strong>@DateTime.Now.ToString("HH:mm")</strong></p>
+                        </div>
                     </div>
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <h5>Status</h5>
+                            <p><strong>@item.Status</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    }
+    </div>
+}
 </section>
 
 <!-- Modal for Start Inventory Delivery Confirmation -->
@@ -153,18 +185,44 @@
     </div>
 </div>
 
-<!-- Modal for Reset Counter Confirmation -->
-<div id="revertModal" class="modal fade" tabindex="-1" role="dialog">
+<!-- Modal for Start Return Equipment Confirmation -->
+<div id="returnModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Reset Counter</h5>
+                <h5 class="modal-title">Start Return Equipment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to reset the countdown to complete inventory delivery?</p>
+                <p>Are you sure you want to start the return process for this equipment?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmReturn">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal for Start Return Equipment Confirmation -->
+<div id="returnModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Start Return Equipment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to start the return process for this equipment?</p>
+                <!-- Dynamically update the details in the modal -->
+                <p><strong>Item Name:</strong> <span id="modalItemName"></span></p>
+                <p><strong>Quantity:</strong> <span id="modalQuantity"></span></p>
+               
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -194,6 +252,31 @@
             alert('Please enter a valid time.');
         }
     });
+
+    //Return equipment
+    let currentInventoryId; // To store the current InventoryId for return
+
+    // Function to open the return modal and set item details dynamically
+    function openReturnModal(inventoryId, picture, itemName, quantity) {
+        currentInventoryId = inventoryId;
+
+        // Update modal content with the selected item's details
+        document.getElementById('modalItemName').textContent = itemName;
+        document.getElementById('modalQuantity').textContent = quantity;
+       
+
+        // Show the modal
+        $('#returnModal').modal('show');
+    }
+
+    // Event listener for confirming the return process
+    document.getElementById('confirmReturn').addEventListener('click', function () {
+        // Redirect to the StartReturnProcess action with the selected inventory details
+        window.location.href = '@Url.Action("StartReturnProcess", "DriverAssignments")'
+            + '?inventoryId=' + currentInventoryId;
+    });
+
+
 
     document.getElementById('confirmRevert').addEventListener('click', function () {
         window.location.href = '@Url.Action("FinishInventoryDelivery", "DriverAssignments")';
