@@ -56,7 +56,7 @@ namespace EventMangementSystem.Models
         public virtual Team Team { get; set; }
 
         // List of tasks associated with this service request
-        public virtual ICollection<GroupTask> GroupTasks => Team.GroupTasks;
+        public virtual ICollection<GroupTask> GroupTasks { get; set; }
 
         // New property: Whether a team has been assigned to handle the service request
         public bool IsTeamAssigned { get; set; } = false; // New boolean to track team assignment
