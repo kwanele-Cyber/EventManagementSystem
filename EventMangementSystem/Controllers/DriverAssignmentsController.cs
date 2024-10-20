@@ -795,8 +795,48 @@ namespace EventMangementSystem.Controllers
                         // Update the EventInventory status based on repair cost
                         eventInventory.Status = returnProcess.Status == "Not Paid" ? "Returned with bill" : "Returned";
 
+
+
                         // Add the ReturnProcess entry to the context
                         db.ReturnProcesses.Add(returnProcess);
+                        db.SaveChanges();
+
+
+
+                        var returnprocess2 = new ReturnProcess
+                        {
+
+                        };
+
+                        DamageReport damageReport = new DamageReport
+                        {
+                            ReportId = returnProcess.ReturnProcessId,
+                            EventId = returnProcess.EventInventory.EventId,
+                            DamageDescription = returnProcess.InspectionDetails.Condition,
+                            ReportDate = DateTime.Now,
+                            TotalCost = 0.00,
+                            findRecord = returnProcess.ReturnProcessId,
+                            EquipmentId = returnProcess.EventInventory.InventoryId
+                        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        db.DamageReports.Add(damageReport);
+
+
+
                     }
                     catch (Exception ex)
                     {
@@ -810,6 +850,7 @@ namespace EventMangementSystem.Controllers
                 // Check if any records were saved
                 if (recordsSaved > 0)
                 {
+
                     TempData["SuccessMessage"] = "Return process submitted successfully.";
                 }
                 else
@@ -822,6 +863,11 @@ namespace EventMangementSystem.Controllers
                     TempData["ErrorMessage"] = string.Join("<br />", errorMessages);
                 }
             }
+
+
+
+
+
             catch (Exception ex)
             {
                 // Log the error (optional)
