@@ -1,0 +1,59 @@
+﻿@model EventMangementSystem.Models.DamageReport
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DamageReport</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Event.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inventory.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inventory.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DamageDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DamageDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReportDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReportDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReportId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

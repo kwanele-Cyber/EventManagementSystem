@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -231,6 +231,7 @@
     <Compile Include="Controllers\AnnouncementController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CheckInController.cs" />
+    <Compile Include="Controllers\DamageReportsController.cs" />
     <Compile Include="Controllers\DonationsController.cs" />
     <Compile Include="Controllers\DriverAssignmentsController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
@@ -240,6 +241,24 @@
     <Compile Include="Controllers\EventInventoriesController.cs" />
     <Compile Include="Controllers\EventOrganizerController.cs" />
     <Compile Include="Controllers\EventReminderController.cs" />
+    <Compile Include="Migrations\202410191843134_initial.cs" />
+    <Compile Include="Migrations\202410191843134_initial.Designer.cs">
+      <DependentUpon>202410191843134_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410191930350_PriceAndServ.cs" />
+    <Compile Include="Migrations\202410191930350_PriceAndServ.Designer.cs">
+      <DependentUpon>202410191930350_PriceAndServ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410192018108_Report.cs" />
+    <Compile Include="Migrations\202410192018108_Report.Designer.cs">
+      <DependentUpon>202410192018108_Report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410200923503_Last.cs" />
+    <Compile Include="Migrations\202410200923503_Last.Designer.cs">
+      <DependentUpon>202410200923503_Last.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DamageReport.cs" />
     <Compile Include="Models\ServiceProviderDashboardViewModel.cs" />
     <Compile Include="Controllers\ServiceRequestController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
@@ -258,43 +277,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202410111711380_init.cs" />
-    <Compile Include="Migrations\202410111711380_init.Designer.cs">
-      <DependentUpon>202410111711380_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202410111850231_fix_ServProviderFK_conflict.cs" />
-    <Compile Include="Migrations\202410111850231_fix_ServProviderFK_conflict.Designer.cs">
-      <DependentUpon>202410111850231_fix_ServProviderFK_conflict.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202410120800333_GroupsAndTasks.cs" />
-    <Compile Include="Migrations\202410120800333_GroupsAndTasks.Designer.cs">
-      <DependentUpon>202410120800333_GroupsAndTasks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202410160848116_StartCodeIntoServiceRequest.cs" />
-    <Compile Include="Migrations\202410160848116_StartCodeIntoServiceRequest.Designer.cs">
-      <DependentUpon>202410160848116_StartCodeIntoServiceRequest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202410161150410_RelationShip_ServiceRequest-Team.cs" />
-    <Compile Include="Migrations\202410161150410_RelationShip_ServiceRequest-Team.Designer.cs">
-      <DependentUpon>202410161150410_RelationShip_ServiceRequest-Team.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202410162010116_UpdateD.cs" />
-    <Compile Include="Migrations\202410162010116_UpdateD.Designer.cs">
-      <DependentUpon>202410162010116_UpdateD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202410170337071_Add ActualEndTime in GroupTasks.cs" />
-    <Compile Include="Migrations\202410170337071_Add ActualEndTime in GroupTasks.Designer.cs">
-      <DependentUpon>202410170337071_Add ActualEndTime in GroupTasks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202410170341560_Nullable ActualEndTime in GroupTasks.cs" />
-    <Compile Include="Migrations\202410170341560_Nullable ActualEndTime in GroupTasks.Designer.cs">
-      <DependentUpon>202410170341560_Nullable ActualEndTime in GroupTasks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202410170427011_Return Equipment.cs" />
-    <Compile Include="Migrations\202410170427011_Return Equipment.Designer.cs">
-      <DependentUpon>202410170427011_Return Equipment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\ChatHub.cs" />
@@ -513,6 +495,12 @@
     <Content Include="Views\DriverAssignments\ReturnedEquipment.cshtml" />
     <Content Include="Views\DriverAssignments\StartReturnProcess.cshtml" />
     <Content Include="Views\ServiceProvider\Dashboard.cshtml" />
+    <Content Include="Views\DamageReports\Create.cshtml" />
+    <Content Include="Views\DamageReports\Delete.cshtml" />
+    <Content Include="Views\DamageReports\Details.cshtml" />
+    <Content Include="Views\DamageReports\Edit.cshtml" />
+    <Content Include="Views\DamageReports\Index.cshtml" />
+    <Content Include="Views\DamageReports\ViewQuote.cshtml" />
     <None Include="Views\ServiceProvider\VerifyQRCodeEventManager.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -663,32 +651,17 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202410111711380_init.resx">
-      <DependentUpon>202410111711380_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202410191843134_initial.resx">
+      <DependentUpon>202410191843134_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410111850231_fix_ServProviderFK_conflict.resx">
-      <DependentUpon>202410111850231_fix_ServProviderFK_conflict.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202410191930350_PriceAndServ.resx">
+      <DependentUpon>202410191930350_PriceAndServ.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410120800333_GroupsAndTasks.resx">
-      <DependentUpon>202410120800333_GroupsAndTasks.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202410192018108_Report.resx">
+      <DependentUpon>202410192018108_Report.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410160848116_StartCodeIntoServiceRequest.resx">
-      <DependentUpon>202410160848116_StartCodeIntoServiceRequest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410161150410_RelationShip_ServiceRequest-Team.resx">
-      <DependentUpon>202410161150410_RelationShip_ServiceRequest-Team.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410162010116_UpdateD.resx">
-      <DependentUpon>202410162010116_UpdateD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410170337071_Add ActualEndTime in GroupTasks.resx">
-      <DependentUpon>202410170337071_Add ActualEndTime in GroupTasks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410170341560_Nullable ActualEndTime in GroupTasks.resx">
-      <DependentUpon>202410170341560_Nullable ActualEndTime in GroupTasks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410170427011_Return Equipment.resx">
-      <DependentUpon>202410170427011_Return Equipment.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202410200923503_Last.resx">
+      <DependentUpon>202410200923503_Last.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -723,9 +696,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

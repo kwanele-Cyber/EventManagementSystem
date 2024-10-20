@@ -61,6 +61,7 @@ namespace EventMangementSystem.Models
         public DbSet<TeamMember> TeamMembers { get; set; }
 
         public DbSet<GroupTask> Tasks { get; set; }
+        public DbSet<DamageReport> DamageReports { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -80,6 +81,8 @@ namespace EventMangementSystem.Models
 
             base.OnModelCreating(modelBuilder);
         }
+
+        object placeHolderVariable;
     }
 }
 

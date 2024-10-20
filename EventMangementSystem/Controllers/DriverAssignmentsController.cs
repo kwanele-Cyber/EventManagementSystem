@@ -647,7 +647,24 @@ namespace EventMangementSystem.Controllers
 
                     // Find the EventInventory and create a new ReturnProcess record
                     var inventoryItem = db.EventInventories.Find(inventoryId);
-                    if (inventoryItem != null)
+                    var EventId = inventoryItem.EventId;
+
+
+
+                    //FINDING IF ANY ARE DAMAGED or missing
+                    var FullSet = inventoryItem.QuantityRequired;
+
+
+                    if (inventoryItem != null && returnedQuantity != FullSet)
+                    {
+                        return RedirectToAction("Create", "DamageReports", new { InventoryId = inventoryId , eventId = EventId});
+
+                    }
+
+
+
+
+                    if (inventoryItem != null )
                     {
                         // Create a new ReturnProcess record
                         var returnProcess = new ReturnProcess
