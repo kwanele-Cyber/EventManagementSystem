@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -30,6 +31,17 @@ namespace EventMangementSystem.Models
         [Column(TypeName = "datetime2")]
         public DateTime DeliveredOn { get; set; }
         public bool IsDeliveryRescheduled { get; set; }
+        // This stores the quantity required for the event
+        public int QuantityNeeded { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Quantity returned cannot be negative.")]
+        public int QuantityReturned { get; set; } // Add this property
+
+        // Indicates if there were missing items during the return
+        public bool IsMissingItems { get; set; } // Add this property
+
+        // Tracking the date of return
+        public DateTime? ReturnedOn { get; set; } // Add this property
 
         // Updated to a collection of Inventory items
         public virtual ICollection<Inventory> Inventories { get; set; }

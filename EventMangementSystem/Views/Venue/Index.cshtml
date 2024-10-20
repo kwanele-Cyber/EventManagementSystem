@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<EventMangementSystem.Models.Venue>
 
 @{
-    ViewBag.Title = "Venues";
+
 }
 
-<h2>Venues</h2>
+<h2 class="page-title">Venues</h2>
 
 <p>
     @Html.ActionLink("Create New Venue", "Create", null, new { @class = "btn btn-primary" })
@@ -32,3 +32,12 @@
         </tr>
     }
 </table>
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

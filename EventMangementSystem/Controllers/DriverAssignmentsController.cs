@@ -54,7 +54,7 @@ namespace EventMangementSystem.Controllers
             db.Entry(assignment).State = EntityState.Modified;
             db.Entry(inventory).State = EntityState.Modified;
             db.SaveChanges();
-            SendInventoryReadyEmail(assignment);
+            //SendInventoryReadyEmail(assignment);
             TempData["SuccessMessage"] = "Inventory marked as ready for delivery, Email sent to driver.";
             return RedirectToAction("Index");
         }
@@ -303,34 +303,34 @@ namespace EventMangementSystem.Controllers
             db.Entry(assignment).State = EntityState.Modified;
             db.Entry(inventory).State = EntityState.Modified;
 
-            try
-            {
-                var email2 = new MailMessage
-                {
-                    From = new MailAddress("eventproplanners@gmail.com"),
-                    Subject = "Inventory Delivery Started | " + assignment.EventInventoryId,
-                    Body = $"Inventory Number: " + assignment.EventInventoryId + "\t\t Estimated Arrival Time: " + time + " \n\n" +
-                           $"Hi {assignment.Driver.Name}, \n\n" +
-                           $"Please note that, inventory {assignment.EventInventoryId} is picked up by driver for delivery to address .\n\n" +
-                           $"Your inventory is now out for delivery. The driver will be at your venue around {time}.\n\n" +
-                           $"Please present this unique code to the driver: {inventory.UniqueCode}\n\n or the attached QR Code.\n\n" +
-                           "Regards,\r\nEventManagement Team"
-                };
-                var _event = db.Events.Find(inventory.EventId);
-                email2.To.Add(_event.EventMangerEmail);
+            //try
+            //{
+            //    var email2 = new MailMessage
+            //    {
+            //        From = new MailAddress("eventproplanners@gmail.com"),
+            //        Subject = "Inventory Delivery Started | " + assignment.EventInventoryId,
+            //        Body = $"Inventory Number: " + assignment.EventInventoryId + "\t\t Estimated Arrival Time: " + time + " \n\n" +
+            //               $"Hi {assignment.Driver.Name}, \n\n" +
+            //               $"Please note that, inventory {assignment.EventInventoryId} is picked up by driver for delivery to address .\n\n" +
+            //               $"Your inventory is now out for delivery. The driver will be at your venue around {time}.\n\n" +
+            //               $"Please present this unique code to the driver: {inventory.UniqueCode}\n\n or the attached QR Code.\n\n" +
+            //               "Regards,\r\nEventManagement Team"
+            //    };
+            //    var _event = db.Events.Find(inventory.EventId);
+            //    email2.To.Add(_event.EventMangerEmail);
 
-                string imagePath = Server.MapPath("~/images/" + inventory.QrCodePicture);
-                Attachment attachment = new Attachment(imagePath, MediaTypeNames.Image.Jpeg);
-                email2.Attachments.Add(attachment);
+            //    string imagePath = Server.MapPath("~/images/" + inventory.QrCodePicture);
+            //    Attachment attachment = new Attachment(imagePath, MediaTypeNames.Image.Jpeg);
+            //    email2.Attachments.Add(attachment);
 
-                var smtpClient = new SmtpClient();
-                smtpClient.Send(email2);
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                //return RedirectToAction("MyAssignments");
-            }
+            //    var smtpClient = new SmtpClient();
+            //    smtpClient.Send(email2);
+            //}
+            //catch (Exception ex)
+            //{
+            //    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
+            //    //return RedirectToAction("MyAssignments");
+            //}
 
             db.SaveChanges();
             TempData["SuccessMessage"] = "Inventory Delivery Successfully Started. Please Navigate to Event Location";
@@ -507,29 +507,29 @@ namespace EventMangementSystem.Controllers
                 inventory.Status = "No Response";
                 assign.Status = "No Response";
                 assign.IsActive = false;
-                try
-                {
-                    var email2 = new MailMessage
-                    {
-                        From = new MailAddress("eventproplanners@gmail  "),
-                        Subject = "No Response",
-                        Body = $"Inventory Number: " + inventory.EventInventoryId + " \n\n" +
-                               $"Hi {inventory.FirstName}, \n\n" +
-                               $"Your inventory {inventory.EventInventoryId} could not be delivered, the driver tried to reach you at {inventory.Address} on {DateTime.Now.Date.ToLongDateString()} around {DateTime.Now.ToShortTimeString()} but there was no one to receive inventory.\n\n" +
-                               "Your delivery will be rescheduled for another day.\n\n" +
-                               "Regards,\r\nEventManagement Team"
-                    };
-                    var _event = db.Events.Find(inventory.EventId);
-                    email2.To.Add(_event.EventMangerEmail);
+                //try
+                //{
+                //    var email2 = new MailMessage
+                //    {
+                //        From = new MailAddress("eventproplanners@gmail  "),
+                //        Subject = "No Response",
+                //        Body = $"Inventory Number: " + inventory.EventInventoryId + " \n\n" +
+                //               $"Hi {inventory.FirstName}, \n\n" +
+                //               $"Your inventory {inventory.EventInventoryId} could not be delivered, the driver tried to reach you at {inventory.Address} on {DateTime.Now.Date.ToLongDateString()} around {DateTime.Now.ToShortTimeString()} but there was no one to receive inventory.\n\n" +
+                //               "Your delivery will be rescheduled for another day.\n\n" +
+                //               "Regards,\r\nEventManagement Team"
+                //    };
+                //    var _event = db.Events.Find(inventory.EventId);
+                //    email2.To.Add(_event.EventMangerEmail);
 
-                    var smtpClient = new SmtpClient();
-                    smtpClient.Send(email2);
-                }
-                catch (Exception ex)
-                {
-                    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                    return RedirectToAction("FinishInventoryDelivery");
-                }
+                //    var smtpClient = new SmtpClient();
+                //    smtpClient.Send(email2);
+                //}
+                //catch (Exception ex)
+                //{
+                //    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
+                //    return RedirectToAction("FinishInventoryDelivery");
+                //}
 
                 db.SaveChanges();
             }
@@ -543,6 +543,112 @@ namespace EventMangementSystem.Controllers
             return RedirectToAction("MyAssignments");
         }
 
+        [HttpPost]
+        public ActionResult MarkAsReadyForReturn(int EventInventoryId)
+        {
+            var eventInventory = db.EventInventories.Find(EventInventoryId);
+            if (eventInventory != null)
+            {
+                eventInventory.Status = "Ready for Return";
+                db.SaveChanges();
+            }
+            TempData["ErrorMessage"] = "Equipment marked as ready for return.";
+            return RedirectToAction("Index"); // Redirect to the relevant page
+        }
+
+        #region working return
+        //public ActionResult StartReturnProcess(int inventoryId)
+        //{
+        //    // Find the associated driver assignment
+        //    var driverAssignment = db.DriverAssignments
+        //        .Where(x => x.EventInventoryId == inventoryId && x.Email == User.Identity.Name)
+        //        .FirstOrDefault();
+
+        //    if (driverAssignment == null)
+        //    {
+        //        TempData["ErrorMessage"] = "Driver assignment not found.";
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    // Fetch the specific EventInventory
+        //    var eventInventory = db.EventInventories.Find(inventoryId);
+        //    if (eventInventory == null)
+        //    {
+        //        TempData["ErrorMessage"] = "Event Inventory not found.";
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    // Retrieve the associated inventory items
+        //    var deliveredItems = db.Inventories
+        //        .Where(i => i.InventoryId == eventInventory.InventoryId)
+        //        .ToList();
+
+        //    if (!deliveredItems.Any())
+        //    {
+        //        TempData["ErrorMessage"] = "No delivered items found.";
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    // Pass the driver assignment and the delivered items to the view
+        //    ViewBag.DriverAssignment = driverAssignment;
+        //    ViewBag.EventInventory = eventInventory; // Pass EventInventory for quantity details
+        //    return View(deliveredItems);
+        //}
+
+
+
+        //[HttpPost]
+        //public ActionResult SubmitReturnProcess(int assignmentId, FormCollection form)
+        //{
+        //    // Find the driver assignment (you may not need this based on your requirements)
+        //    var driverAssignment = db.DriverAssignments.Find(assignmentId);
+
+        //    // Process returned quantities
+        //    foreach (var key in form.AllKeys)
+        //    {
+        //        if (key.StartsWith("quantityReturned["))
+        //        {
+        //            // Extract EventInventoryId from the key
+        //            var inventoryId = int.Parse(key.Substring("quantityReturned[".Length, key.Length - "quantityReturned[".Length - 1));
+        //            var returnedQuantity = int.Parse(form[key]);
+
+        //            // Find the corresponding EventInventory item
+        //            var inventoryItem = db.EventInventories.Find(inventoryId);
+        //            if (inventoryItem != null)
+        //            {
+        //                // Update the QuantityReturned property
+        //                inventoryItem.QuantityReturned = returnedQuantity;
+
+        //                if (returnedQuantity < inventoryItem.QuantityRequired)
+        //                {
+        //                    inventoryItem.Status = "Returned with issue"; // Less returned than required
+        //                }
+        //                else
+        //                {
+        //                    inventoryItem.Status = "Equipment Returned"; // Fully returned
+        //                }
+        //                // Save changes to the inventory item
+        //                db.Entry(inventoryItem).State = EntityState.Modified;
+        //            }
+        //        }
+        //    }
+
+        //    // Save all changes
+        //    db.SaveChanges();
+
+        //    TempData["SuccessMessage"] = "Return process completed successfully.";
+
+
+        //    // Store relevant data in TempData or session for later use in other methods (like for inspection and reporting)
+        //    TempData["assignmentId"] = assignmentId;
+        //    TempData["returnStatuses"] = db.EventInventories
+        //                                 .Where(e => e.Status == "Returned with issue" || e.Status == "Equipment Returned")
+        //                                 .ToList();
+        //    return RedirectToAction("Index");
+        //}
+        #endregion
+
+        #region Condition
         public ActionResult StartReturnProcess(int inventoryId)
         {
             // Find the associated driver assignment
@@ -582,105 +688,178 @@ namespace EventMangementSystem.Controllers
         }
 
 
-        // [HttpPost]
-        //public ActionResult SubmitReturnProcess(int assignmentId, FormCollection form)
-        //{
-        //    // Find the driver assignment (you may not need this based on your requirements)
-        //    var driverAssignment = db.DriverAssignments.Find(assignmentId);
-
-        //    // Process returned quantities
-        //    foreach (var key in form.AllKeys)
-        //    {
-        //        if (key.StartsWith("quantityReturned["))
-        //        {
-        //            // Extract EventInventoryId from the key
-        //            var inventoryId = int.Parse(key.Substring("quantityReturned[".Length, key.Length - "quantityReturned[".Length - 1));
-        //            var returnedQuantity = int.Parse(form[key]);
-
-        //            // Find the corresponding EventInventory item
-        //            var inventoryItem = db.EventInventories.Find(inventoryId);
-        //            if (inventoryItem != null)
-        //            {
-        //                // Update the QuantityReturned property
-        //                inventoryItem.QuantityReturned = returnedQuantity;
-
-
-        //                // Save changes to the inventory item
-        //                db.Entry(inventoryItem).State = EntityState.Modified;
-        //            }
-        //        }
-        //    }
-
-        //    // Save all changes
-        //    db.SaveChanges();
-
-        //    TempData["SuccessMessage"] = "Return process completed successfully.";
-        //    return RedirectToAction("Index");
-        //}
-
-
-        #region Condition
-        //// Check if the quantity returned is less than the quantity required
-        //              if (returnedQuantity<inventoryItem.QuantityRequired)
-        //              {
-        //                  inventoryItem.Status = "Returned with issue"; // Less returned than required
-        //              }
-        //              else
-        //              {
-        //                  inventoryItem.Status = "Equipment Returned"; // Fully returned
-        //              }
-
-
-        #endregion
-
-
         [HttpPost]
-        public ActionResult SubmitReturnProcess(int assignmentId, FormCollection form)
+        public ActionResult SubmitReturnProcess(int AssignmentId)
         {
-            foreach (var key in form.AllKeys)
+            try
             {
-                if (key.StartsWith("quantityReturned["))
+                // Fetch the driver assignment
+                var driverAssignment = db.DriverAssignments.Find(AssignmentId);
+                if (driverAssignment == null)
                 {
-                    // Extract EventInventoryId from the key
-                    var inventoryId = int.Parse(key.Substring("quantityReturned[".Length, key.Length - "quantityReturned[".Length - 1));
-                    var returnedQuantity = int.Parse(form[key]);
+                    TempData["ErrorMessage"] = "Driver assignment not found.";
+                    return RedirectToAction("Index");
+                }
 
-                    // Find the EventInventory and create a new ReturnProcess record
-                    var inventoryItem = db.EventInventories.Find(inventoryId);
-                    if (inventoryItem != null)
+                // Initialize dictionaries to store form data manually
+                Dictionary<int, int> quantityReturned = new Dictionary<int, int>();
+                Dictionary<int, int> quantityDelivered = new Dictionary<int, int>();
+                Dictionary<int, string> inspectionCondition = new Dictionary<int, string>();
+                Dictionary<int, string> inspectionNotes = new Dictionary<int, string>();
+                Dictionary<int, decimal> repairCost = new Dictionary<int, decimal>();
+                Dictionary<int, decimal> missingItemCost = new Dictionary<int, decimal>();
+
+                // Get all keys from the form
+                var formKeys = this.HttpContext.Request.Form.AllKeys;
+
+                // Loop through form keys and manually extract values
+                foreach (var key in formKeys)
+                {
+                    try
                     {
-                        // Create a new ReturnProcess record
-                        var returnProcess = new ReturnProcess
+                        if (key.StartsWith("quantityDelivered["))
                         {
-                            DriverAssignmentId = assignmentId,
-                            EventInventoryId = inventoryItem.EventInventoryId,
-                            QuantityReturned = returnedQuantity,
-                            Status = returnedQuantity < inventoryItem.QuantityRequired ? "Returned with issue" : "Equipment Returned",
-                            ReturnSubmittedOn = DateTime.Now
-                        };
-
-                        // Add the return process to the database
-                        db.ReturnProcesses.Add(returnProcess);
-                        db.SaveChanges();
+                            int eventInventoryId = ExtractInventoryId(key);
+                            string val = this.HttpContext.Request.Form[key].Replace("R ", "");
+                            int qty = string.IsNullOrEmpty(val) ? 0 : int.Parse(val);
+                            quantityDelivered.Add(eventInventoryId, qty);
+                        }
+                        else if (key.StartsWith("quantityReturned["))
+                        {
+                            int eventInventoryId = ExtractInventoryId(key);
+                            string val = this.HttpContext.Request.Form[key].Replace("R ", "");
+                            int qtyReturned = string.IsNullOrEmpty(val) ? 0 : int.Parse(val);
+                            quantityReturned.Add(eventInventoryId, qtyReturned);
+                        }
+                        else if (key.StartsWith("inspectionCondition["))
+                        {
+                            int eventInventoryId = ExtractInventoryId(key);
+                            string condition = this.HttpContext.Request.Form[key];
+                            inspectionCondition.Add(eventInventoryId, condition);
+                        }
+                        else if (key.StartsWith("repairCost["))
+                        {
+                            int eventInventoryId = ExtractInventoryId(key);
+                            string val = this.HttpContext.Request.Form[key].Replace("R ", "");
+                            decimal cost = string.IsNullOrEmpty(val) ? 0 : decimal.Parse(val);
+                            repairCost.Add(eventInventoryId, cost);
+                        }
+                        else if (key.StartsWith("inspectionNotes["))
+                        {
+                            int eventInventoryId = ExtractInventoryId(key);
+                            string notes = this.HttpContext.Request.Form[key];
+                            inspectionNotes.Add(eventInventoryId, notes);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Catch any errors during parsing
+                        TempData["ErrorMessage"] = $"Error processing form field '{key}': {ex.Message}";
+                        return RedirectToAction("Index");
                     }
                 }
+
+                // Initialize a list to capture error messages
+                List<string> errorMessages = new List<string>();
+
+                foreach (var eventInventoryId in quantityReturned.Keys)
+                {
+                    // Find the EventInventory
+                    var eventInventory = db.EventInventories.Find(eventInventoryId);
+                    if (eventInventory == null)
+                    {
+                        errorMessages.Add($"Event Inventory with ID {eventInventoryId} not found.");
+                        continue; // Skip this entry and proceed with others
+                    }
+
+                    try
+                    {
+                        // Create a new ReturnProcess entry
+                        var returnProcess = new ReturnProcess
+                        {
+                            DriverAssignmentId = driverAssignment.AssDrivId,
+                            EventInventoryId = eventInventoryId,
+                            QuantityReturned = quantityReturned[eventInventoryId],
+                            ReturnSubmittedOn = DateTime.Now,
+                            InspectionDetails = new InspectionDetails
+                            {
+                                Condition = inspectionCondition[eventInventoryId],
+                                Notes = inspectionNotes[eventInventoryId],
+                                RepairCost = repairCost.ContainsKey(eventInventoryId) ? repairCost[eventInventoryId] : 0,
+                                MissingItemCost = missingItemCost.ContainsKey(eventInventoryId) ? missingItemCost[eventInventoryId] : 0,
+                                InspectionCompletedOn = DateTime.Now
+                            },
+                            Status = repairCost[eventInventoryId] > 0 ? "Not Paid" : "Settled" // Determine the status based on repair cost
+                        };
+
+                        // Update the EventInventory status based on repair cost
+                        eventInventory.Status = returnProcess.Status == "Not Paid" ? "Returned with bill" : "Returned";
+
+                        // Add the ReturnProcess entry to the context
+                        db.ReturnProcesses.Add(returnProcess);
+                    }
+                    catch (Exception ex)
+                    {
+                        errorMessages.Add($"Error processing inventory ID {eventInventoryId}: {ex.Message}");
+                    }
+                }
+
+                // Attempt to save all changes to the database
+                var recordsSaved = db.SaveChanges();
+
+                // Check if any records were saved
+                if (recordsSaved > 0)
+                {
+                    TempData["SuccessMessage"] = "Return process submitted successfully.";
+                }
+                else
+                {
+                    errorMessages.Add("No records were saved. Please try again.");
+                }
+
+                if (errorMessages.Any())
+                {
+                    TempData["ErrorMessage"] = string.Join("<br />", errorMessages);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error (optional)
+                TempData["ErrorMessage"] = $"An unexpected error occurred: {ex.Message}";
             }
 
-            TempData["SuccessMessage"] = "Return process completed successfully.";
             return RedirectToAction("Index");
         }
 
+        // Helper method to extract the eventInventoryId from the form key
+        private int ExtractInventoryId(string key)
+        {
+            var startIndex = key.IndexOf('[') + 1;
+            var endIndex = key.IndexOf(']');
+            return int.Parse(key.Substring(startIndex, endIndex - startIndex));
+        }
+
+        
+        #endregion
+
 
         public ActionResult ReturnedEquipment()
-        {
-            // Fetch driver assignments with related event inventories that have specific statuses
-            var assignmentsWithReturnedEquipments = db.DriverAssignments
-                .Include(da => da.EventInventory) // Include EventInventory details
-                .Where(da => da.EventInventory.Status == "Returned" ||
-                             da.EventInventory.Status == "Returned but Missing")
+        {// Ensure to include all necessary entities when fetching ReturnProcess records
+            var inspectedItems = db.ReturnProcesses
+                .Include(rp => rp.DriverAssignment)
+                .Include(rp => rp.EventInventory)
+                .Include(rp => rp.EventInventory.Inventories)
+                .Include(rp => rp.EventInventory.Inventory)
+                .Include(rp => rp.InspectionDetails) // Include Inspection Details
                 .ToList();
 
-            return View(assignmentsWithReturnedEquipments); // Pass the list to the view
+            if (!inspectedItems.Any())
+            {
+                TempData["ErrorMessage"] = "No inspected items found.";
+                return RedirectToAction("Index");
+            }
+
+            return View(inspectedItems);
         }
 
 
@@ -795,42 +974,42 @@ namespace EventMangementSystem.Controllers
 
                         db.Entry(inventory).State = EntityState.Modified;
                         db.DriverAssignments.Add(driverAssignment);
-                        try
-                        {
-                            var email = new MailMessage
-                            {
-                                From = new MailAddress("eventproplanners@gmail.com"),
-                                Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
-                                Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
-                                       $"Hi {driver.Name}, \n\n" +
-                                       $"Please note that, you have been assigned to a new delivery for inventory {inventory.EventInventoryId} to {inventory.Address}.\n\n" +
-                                       "We'll email you the moment the inventory is ready for pickup.\n\n" +
-                                       "Regards,\r\nEventManagement Team"
-                            };
-                            email.To.Add(User.Identity.Name);
+                        //try
+                        //{
+                        //    var email = new MailMessage
+                        //    {
+                        //        From = new MailAddress("eventproplanners@gmail.com"),
+                        //        Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
+                        //        Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
+                        //               $"Hi {driver.Name}, \n\n" +
+                        //               $"Please note that, you have been assigned to a new delivery for inventory {inventory.EventInventoryId} to {inventory.Address}.\n\n" +
+                        //               "We'll email you the moment the inventory is ready for pickup.\n\n" +
+                        //               "Regards,\r\nEventManagement Team"
+                        //    };
+                        //    email.To.Add(User.Identity.Name);
 
-                            var smtpClient = new SmtpClient();
-                            smtpClient.Send(email);
+                        //    var smtpClient = new SmtpClient();
+                        //    smtpClient.Send(email);
 
-                            var email2 = new MailMessage
-                            {
-                                From = new MailAddress("eventproplanners@gmail.com"),
-                                Subject = "Delivery Scheduled |  " + inventory.EventInventoryId,
-                                Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
-                                       $"Hi {inventory.FirstName}, \n\n" +
-                                       $"Please note that, we’ve scheduled delivery for inventory {inventory.EventInventoryId}\n\n" +
-                                       $"Your inventory is not out for delivery yet. It should arrive on {driverAssignment.DeliveryDate} at {driverAssignment.DeliveryTime}.\n\n" +
-                                       "We'll email you the moment the delivery starts.\n\n" +
-                                       "Regards,\r\nEventManagement Team"
-                            };
-                            email2.To.Add(User.Identity.Name);
-                            smtpClient.Send(email2);
-                        }
-                        catch (Exception ex)
-                        {
-                            TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                            //return RedirectToAction("Index", "EventInventories");
-                        }
+                        //    var email2 = new MailMessage
+                        //    {
+                        //        From = new MailAddress("eventproplanners@gmail.com"),
+                        //        Subject = "Delivery Scheduled |  " + inventory.EventInventoryId,
+                        //        Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
+                        //               $"Hi {inventory.FirstName}, \n\n" +
+                        //               $"Please note that, we’ve scheduled delivery for inventory {inventory.EventInventoryId}\n\n" +
+                        //               $"Your inventory is not out for delivery yet. It should arrive on {driverAssignment.DeliveryDate} at {driverAssignment.DeliveryTime}.\n\n" +
+                        //               "We'll email you the moment the delivery starts.\n\n" +
+                        //               "Regards,\r\nEventManagement Team"
+                        //    };
+                        //    email2.To.Add(User.Identity.Name);
+                        //    smtpClient.Send(email2);
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
+                        //    //return RedirectToAction("Index", "EventInventories");
+                        //}
                         db.SaveChanges();
 
                         TempData["SuccessMessage"] = "Driver Assigned Successfully";
@@ -852,42 +1031,42 @@ namespace EventMangementSystem.Controllers
                         driverAssignment.IsActive = true;
                         db.Entry(inventory).State = EntityState.Modified;
                         db.DriverAssignments.Add(driverAssignment);
-                        try
-                        {
-                            var email = new MailMessage
-                            {
-                                From = new MailAddress("eventproplanners@gmail.com"),
-                                Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
-                                Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
-                                       $"Hi {driver.Name}, \n\n" +
-                                       $"Please note that, you have been assigned to a new delivery for inventory {inventory.EventInventoryId} to {inventory.Address}.\n\n" +
-                                       "We'll email you the moment the inventory is ready for pickup.\n\n" +
-                                       "Regards,\r\nEventManagement Team"
-                            };
-                            email.To.Add(User.Identity.Name);
+                        //try
+                        //{
+                        //    var email = new MailMessage
+                        //    {
+                        //        From = new MailAddress("eventproplanners@gmail.com"),
+                        //        Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
+                        //        Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
+                        //               $"Hi {driver.Name}, \n\n" +
+                        //               $"Please note that, you have been assigned to a new delivery for inventory {inventory.EventInventoryId} to {inventory.Address}.\n\n" +
+                        //               "We'll email you the moment the inventory is ready for pickup.\n\n" +
+                        //               "Regards,\r\nEventManagement Team"
+                        //    };
+                        //    email.To.Add(User.Identity.Name);
 
-                            var smtpClient = new SmtpClient();
-                            smtpClient.Send(email);
+                        //    var smtpClient = new SmtpClient();
+                        //    smtpClient.Send(email);
 
-                            var email2 = new MailMessage
-                            {
-                                From = new MailAddress("eventproplanners@gmail.com"),
-                                Subject = "Delivery Rescheduled |  " + inventory.EventInventoryId,
-                                Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
-                                       $"Hi {inventory.FirstName}, \n\n" +
-                                       $"Please note that, we’ve rescheduled delivery for inventory {inventory.EventInventoryId}\n\n" +
-                                       $"Your inventory is not out for delivery yet. It should arrive on {driverAssignment.DeliveryDate} at {driverAssignment.DeliveryTime}.\n\n" +
-                                       "We'll email you the moment the delivery starts.\n\n" +
-                                       "Regards,\r\nEventManagement Team"
-                            };
-                            email2.To.Add(User.Identity.Name);
-                            smtpClient.Send(email2);
-                        }
-                        catch (Exception ex)
-                        {
-                            TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                            //return RedirectToAction("Index", "EventInventories");
-                        }
+                        //    var email2 = new MailMessage
+                        //    {
+                        //        From = new MailAddress("eventproplanners@gmail.com"),
+                        //        Subject = "Delivery Rescheduled |  " + inventory.EventInventoryId,
+                        //        Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
+                        //               $"Hi {inventory.FirstName}, \n\n" +
+                        //               $"Please note that, we’ve rescheduled delivery for inventory {inventory.EventInventoryId}\n\n" +
+                        //               $"Your inventory is not out for delivery yet. It should arrive on {driverAssignment.DeliveryDate} at {driverAssignment.DeliveryTime}.\n\n" +
+                        //               "We'll email you the moment the delivery starts.\n\n" +
+                        //               "Regards,\r\nEventManagement Team"
+                        //    };
+                        //    email2.To.Add(User.Identity.Name);
+                        //    smtpClient.Send(email2);
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
+                        //    //return RedirectToAction("Index", "EventInventories");
+                        //}
                         db.SaveChanges();
 
                         TempData["SuccessMessage"] = "Driver Assigned Successfully";
@@ -907,42 +1086,42 @@ namespace EventMangementSystem.Controllers
                     db.Entry(inventory).State = EntityState.Modified;
                     db.Entry(assign).State = EntityState.Modified;
 
-                    try
-                    {
-                        var email = new MailMessage
-                        {
-                            From = new MailAddress("eventproplanners@gmail.com"),
-                            Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
-                            Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
-                                   $"Hi {driver.Name}, \n\n" +
-                                   $"Please note that, you have been assigned to a new delivery for inventory {inventory.EventInventoryId} to {inventory.Address}.\n\n" +
-                                   "We'll email you the moment the inventory is ready for pickup.\n\n" +
-                                   "Regards,\r\nEventManagement Team"
-                        };
-                        email.To.Add(User.Identity.Name);
+                    //try
+                    //{
+                    //    var email = new MailMessage
+                    //    {
+                    //        From = new MailAddress("eventproplanners@gmail.com"),
+                    //        Subject = "Delivery Assignment |  " + inventory.EventInventoryId,
+                    //        Body = $"Delivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
+                    //               $"Hi {driver.Name}, \n\n" +
+                    //               $"Please note that, you have been assigned to a new delivery for inventory {inventory.EventInventoryId} to {inventory.Address}.\n\n" +
+                    //               "We'll email you the moment the inventory is ready for pickup.\n\n" +
+                    //               "Regards,\r\nEventManagement Team"
+                    //    };
+                    //    email.To.Add(User.Identity.Name);
 
-                        var smtpClient = new SmtpClient();
-                        smtpClient.Send(email);
+                    //    var smtpClient = new SmtpClient();
+                    //    smtpClient.Send(email);
 
-                        var email2 = new MailMessage
-                        {
-                            From = new MailAddress("eventproplanners@gmail.com"),
-                            Subject = "Delivery Rescheduled |  " + inventory.EventInventoryId,
-                            Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
-                                   $"Hi {inventory.FirstName}, \n\n" +
-                                   $"Please note that, we’ve rescheduled delivery for inventory {inventory.EventInventoryId}\n\n" +
-                                   $"Your inventory is not out for delivery yet. It should arrive on {driverAssignment.DeliveryDate} at {driverAssignment.DeliveryTime}.\n\n" +
-                                   "We'll email you the moment the delivery starts.\n\n" +
-                                   "Regards,\r\nEventManagement Team"
-                        };
-                        email2.To.Add(User.Identity.Name);
-                        smtpClient.Send(email2);
-                    }
-                    catch (Exception ex)
-                    {
-                        TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                        //return RedirectToAction("Index", "EventInventories");
-                    }
+                    //    var email2 = new MailMessage
+                    //    {
+                    //        From = new MailAddress("eventproplanners@gmail.com"),
+                    //        Subject = "Delivery Rescheduled |  " + inventory.EventInventoryId,
+                    //        Body = $"Inventory Number: " + inventory.EventInventoryId + "\t\tDelivery Date: " + driverAssignment.DeliveryDate + "\t\t Estimated Delivery Time: " + driverAssignment.DeliveryTime + " \n\n" +
+                    //               $"Hi {inventory.FirstName}, \n\n" +
+                    //               $"Please note that, we’ve rescheduled delivery for inventory {inventory.EventInventoryId}\n\n" +
+                    //               $"Your inventory is not out for delivery yet. It should arrive on {driverAssignment.DeliveryDate} at {driverAssignment.DeliveryTime}.\n\n" +
+                    //               "We'll email you the moment the delivery starts.\n\n" +
+                    //               "Regards,\r\nEventManagement Team"
+                    //    };
+                    //    email2.To.Add(User.Identity.Name);
+                    //    smtpClient.Send(email2);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
+                    //    //return RedirectToAction("Index", "EventInventories");
+                    //}
                     db.SaveChanges();
                     Session["InvId"] = null;
                     TempData["SuccessMessage"] = "Driver Assigned Successfully";

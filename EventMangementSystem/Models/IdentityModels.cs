@@ -46,6 +46,7 @@ namespace EventMangementSystem.Models
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<DriverAssignment> DriverAssignments { get; set; }
         public DbSet<ReturnProcess> ReturnProcesses { get; set; }
+        public DbSet<InspectionDetails> InspectDetails { get; set; }
 
         public DbSet<Notification> Notifications { get; set; }
 

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EventMangementSystem.Models
 {
@@ -32,11 +30,28 @@ namespace EventMangementSystem.Models
         [Column(TypeName = "datetime2")]
         public DateTime ReturnSubmittedOn { get; set; }
 
-        // Additional fields for inspection details
-        public string InspectionCondition { get; set; } // Condition of the item after return
-        public string InspectionNotes { get; set; } // Additional notes from inspection
-        public decimal RepairCost { get; set; } // Cost for repairs, if needed
-        public decimal MissingItemCost { get; set; } // Cost for missing items
+        // Inspection details as a separate class
+        public virtual InspectionDetails InspectionDetails { get; set; }
+    }
+
+    public class InspectionDetails
+    {
+        [Key]
+        public int InspectionDetailsId { get; set; }
+
+        // Condition of the item after return
+        public string Condition { get; set; }
+
+        // Additional notes from inspection
+        public string Notes { get; set; }
+
+        // Cost for repairs, if needed (with precision)
+        
+        public decimal RepairCost { get; set; }
+
+        // Cost for missing items (with precision)
+       
+        public decimal MissingItemCost { get; set; }
 
         // Inspection completion timestamp
         [Column(TypeName = "datetime2")]
