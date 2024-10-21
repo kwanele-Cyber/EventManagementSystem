@@ -66,8 +66,9 @@ namespace EventMangementSystem
             //});
             CreateRolesAndUsers();
         }
+      
         private void CreateRolesAndUsers()
-            {
+        {
                 ApplicationDbContext db = new ApplicationDbContext();
             
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -209,9 +210,7 @@ namespace EventMangementSystem
             
                 // Save all changes to the database
                 db.SaveChanges();
-            }
-
-
+      
         }
 
     }

@@ -12,6 +12,11 @@ namespace EventMangementSystem.Models
         public string Description { get; set; }
         public string picture { get; set; }
         public int QuantityAvailable { get; set; }
+
+        //Added for the  billing and damage usecase
+        public int PriceToRelace { get; set; }
+        public int PriceToService { get; set; }
+
     }
 
 }

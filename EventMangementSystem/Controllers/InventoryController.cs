@@ -69,11 +69,11 @@ namespace EventMangementSystem.Controllers
         // POST: Inventory/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InventoryId,ItemName,Description,QuantityAvailable")] Inventory inventory, HttpPostedFileBase pictureFile)
+        public ActionResult Create([Bind(Include = "InventoryId,ItemName,Description,QuantityAvailable,PriceToService,PriceToRelace")] Inventory inventory, HttpPostedFileBase pictureFile)
         {
             if (ModelState.IsValid)
             {
-                
+
                 string pictureFileName = Guid.NewGuid().ToString() + Path.GetExtension(pictureFile.FileName);
                 string picturePath = Path.Combine(Server.MapPath("~/assets/images/"), pictureFileName);
                 pictureFile.SaveAs(picturePath);

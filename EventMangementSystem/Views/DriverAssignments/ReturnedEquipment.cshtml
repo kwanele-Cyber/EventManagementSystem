@@ -7,8 +7,9 @@
     <div class="card-container">
         @foreach (var item in Model)
         {
-            var inspectionTime = @item.InspectionDetails.InspectionCompletedOn?.ToString("yyyy-MM-dd HH:mm");
-            var itemName = item.EventInventory.Inventory?.ItemName??"ItemName";
+            var inspectionTime = item.InspectionDetails.InspectionCompletedOn?.ToString("yyyy-MM-dd HH:mm");
+            var itemName = item.EventInventory.Inventory?.ItemName ?? "ItemName";
+
             <div class="card">
                 <div class="card-header">
                     <h4>@itemName</h4>
@@ -23,12 +24,24 @@
 
                     <h5>Inspection Details</h5>
                     <p><strong>Condition:</strong> @item.InspectionDetails.Condition</p>
-                    <p><strong>Repair Cost (Rands):</strong> R @item.InspectionDetails.RepairCost.ToString("N2")</p>
-                    <p><strong>Missing Item Cost (Rands):</strong> R @item.InspectionDetails.MissingItemCost.ToString("N2")</p>
+
+                    @* Uncomment if needed
+        <p><strong>Repair Cost (Rands):</strong> R @item.InspectionDetails.RepairCost.ToString("N2")</p>
+        <p><strong>Missing Item Cost (Rands):</strong> R @item.InspectionDetails.MissingItemCost.ToString("N2")</p>
+                    *@
+
                     <p><strong>Notes:</strong> @item.InspectionDetails.Notes</p>
                     <p><strong>Inspection Completed On:</strong> @inspectionTime</p>
-
                     <p><strong>Bill Status:</strong> @item.Status</p>
+
+                    <!-- Form for submitting feedback or updates -->
+                    <form method="post" action="@Url.Action("GenerateInvoice", "ReturnProcesses")">
+
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="returnProcessId" value="@item.ReturnProcessId" />
+                        
+                        <button type="submit" class="btn btn-primary">Process Bill</button>
+                    </form>
                 </div>
             </div>
         }

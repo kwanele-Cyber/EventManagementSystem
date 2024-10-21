@@ -1,66 +1,68 @@
 ﻿@model EventMangementSystem.Models.Inventory
 @{
-
+    ViewBag.Title = "Create";
 }
 
-<h2 class="page-title">New Inventory Item</h2>
-<div class="container form-container">
-    @using (Html.BeginForm("Create", "Inventory", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
+<h2>New Inventory Item</h2>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemName)
-            @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
-            @Html.ValidationMessageFor(model => model.ItemName)
+@using (Html.BeginForm("Create", "Inventory", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ItemName)
+        @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
+        @Html.ValidationMessageFor(model => model.ItemName)
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.QuantityAvailable)
+        @Html.EditorFor(model => model.QuantityAvailable, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
+        @Html.ValidationMessageFor(model => model.QuantityAvailable)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PriceToService)
+        @Html.EditorFor(model => model.PriceToService, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
+        @Html.ValidationMessageFor(model => model.PriceToService)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PriceToRelace)
+        @Html.EditorFor(model => model.PriceToRelace, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
+        @Html.ValidationMessageFor(model => model.PriceToRelace)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.picture, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10 col-md-offset-2">
+            <img id="user_img" height="200" width="350" style="border:solid" />
         </div>
 
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.QuantityAvailable)
-            @Html.EditorFor(model => model.QuantityAvailable, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
-            @Html.ValidationMessageFor(model => model.QuantityAvailable)
+        <div class="col-md-10 col-md-offset-2">
+            <input type="file" title="search image" id="pictureFile" name="pictureFile" onchange="show(this)" />
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description)
-            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.picture, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10 col-md-offset-2">
-                <img id="user_img" height="200" width="350" style="border:solid" />
-            </div>
+    </div>
 
-            <div class="col-md-10 col-md-offset-2">
-                <input type="file" title="search image" id="pictureFile" name="pictureFile" onchange="show(this)" />
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 
-    }
-    |
-    @Html.ActionLink("Back to List", "Index")
-    <script type="text/javascript">
+}
+ |
+@Html.ActionLink("Back to List", "Index")
+<script type="text/javascript">
 
-        function show(input) {
-            if (input.files && input.files[0]) {
-                var filerdr = new FileReader();
-                filerdr.onload = function (e) {
-                    $('#user_img').attr('src', e.target.result);
-                }
-                filerdr.readAsDataURL(input.files[0]);
+    function show(input) {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#user_img').attr('src', e.target.result);
             }
+            filerdr.readAsDataURL(input.files[0]);
         }
-    </script>
-</div>
-<style>
-    .page-title {
-        text-align: center;
-        margin-bottom: 2rem;
-        font-family: 'Georgia', serif;
-        font-size: 3rem;
-        color: #343a40;
     }
-</style>
+</script>
