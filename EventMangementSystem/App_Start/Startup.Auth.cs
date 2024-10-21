@@ -72,26 +72,141 @@ namespace EventMangementSystem
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-
-            //Admin
+        
+            // Admin role and user
             if (!roleManager.RoleExists("Admin"))
             {
                 roleManager.Create(new IdentityRole("Admin"));
-
+        
                 var user = new ApplicationUser();
                 user.Name = "Admin";
                 user.UserName = "Admin@event.com";
                 user.Email = "Admin@event.com";
                 user.EmailConfirmed = true;
                 string pwd = "Event@01";
-
+        
                 var newuser = userManager.Create(user, pwd);
                 if (newuser.Succeeded)
                 {
                     userManager.AddToRole(user.Id, "Admin");
                 }
             }
-
+        
+            // ServiceProvider role and user
+            if (!roleManager.RoleExists("ServiceProvider"))
+            {
+                roleManager.Create(new IdentityRole("ServiceProvider"));
+        
+                var serviceProviderUser = new ApplicationUser();
+                serviceProviderUser.Name = "Catering Co.";
+                serviceProviderUser.UserName = "serviceprovider@event.com";
+                serviceProviderUser.Email = "serviceprovider@event.com";
+                serviceProviderUser.EmailConfirmed = true;
+                string serviceProviderPwd = "Service@01";
+        
+                var newServiceProviderUser = userManager.Create(serviceProviderUser, serviceProviderPwd);
+                if (newServiceProviderUser.Succeeded)
+                {
+                    userManager.AddToRole(serviceProviderUser.Id, "ServiceProvider");
+        
+                    // Create corresponding ServiceProvider entity
+                    var serviceProvider = new ServiceProvider
+                    {
+                        Name = "Catering Co.",
+                        Specialization = "Catering",
+                        email = "serviceprovider@event.com",
+                        ContactInfo = "0857208560",
+                    };
+                    db.ServiceProviders.Add(serviceProvider);
+                }
+            }
+        
+            // Employee role and user
+            if (!roleManager.RoleExists("Employee"))
+            {
+                roleManager.Create(new IdentityRole("Employee"));
+        
+                var employeeUser = new ApplicationUser();
+                employeeUser.Name = "John Employee";
+                employeeUser.UserName = "employee@event.com";
+                employeeUser.Email = "employee@event.com";
+                employeeUser.EmailConfirmed = true;
+                string employeePwd = "Employee@01";
+        
+                var newEmployeeUser = userManager.Create(employeeUser, employeePwd);
+                if (newEmployeeUser.Succeeded)
+                {
+                    userManager.AddToRole(employeeUser.Id, "Employee");
+        
+                    // Create corresponding Employee entity
+                    var employee = new Employee
+                    {
+                        Name = "John Employee",
+                        Email = "employee@event.com",
+                        Position = "Technician",
+                        DateHired = DateTime.Now,
+                        ServiceProviderId = db.ServiceProviders.First().Id // assuming first ServiceProvider is assigned
+                    };
+                    db.Employees.Add(employee);
+                }
+            }
+        
+            // Driver role and user
+            if (!roleManager.RoleExists("Driver"))
+            {
+                roleManager.Create(new IdentityRole("Driver"));
+        
+                var driverUser = new ApplicationUser();
+                driverUser.Name = "Jane Driver";
+                driverUser.UserName = "driver@event.com";
+                driverUser.Email = "driver@event.com";
+                driverUser.EmailConfirmed = true;
+                string driverPwd = "Driver@01";
+        
+                var newDriverUser = userManager.Create(driverUser, driverPwd);
+                if (newDriverUser.Succeeded)
+                {
+                    userManager.AddToRole(driverUser.Id, "Driver");
+        
+                    // Create corresponding Driver entity
+                    var driver = new Driver
+                    {
+                        Name = "Jane",
+                        Surname = "Driver",
+                        Email = "driver@event.com",
+                        IsAvailable = true,
+                        CarName = "Toyota",
+                        CarModel = "Corolla",
+                        CarReg = "XYZ-123",
+                        CarType = "Truck",
+                        PhoneNumber = "0829781662",
+                        Address = "1940 Main Rd, Stanger, KwaZulu-Natal, 4450, South Africa",
+                    };
+                    db.Drivers.Add(driver);
+                }
+            }
+        
+            // EventManager role and user
+            if (!roleManager.RoleExists("EventManager"))
+            {
+                roleManager.Create(new IdentityRole("EventManager"));
+        
+                var eventManagerUser = new ApplicationUser();
+                eventManagerUser.Name = "Event Manager";
+                eventManagerUser.UserName = "eventmanager@event.com";
+                eventManagerUser.Email = "eventmanager@event.com";
+                eventManagerUser.EmailConfirmed = true;
+                string eventManagerPwd = "Manager@01";
+        
+                var newEventManagerUser = userManager.Create(eventManagerUser, eventManagerPwd);
+                if (newEventManagerUser.Succeeded)
+                {
+                    userManager.AddToRole(eventManagerUser.Id, "EventManager");
+        
+                    // Optional: create an EventManager entity if needed
+                }
+            }
+            db.SaveChanges();
         }
 
     }
