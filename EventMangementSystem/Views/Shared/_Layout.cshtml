@@ -200,6 +200,7 @@
                                                 <li><a href="@Url.Action("CreatePromotion", "Marketing")">Promotion</a></li>
                                                 <li><a href="@Url.Action("Index", "CheckIn")">Check-In</a></li>
                                                 <li><a href="@Url.Action("Index", "DriverAssignments")">Deliveries</a></li>
+                                                <a href="@Url.Action("ReturnedEquipment", "DriverAssignments")" class="btn btn-primary">Returned Equipment</a>
                                                 <li><a href="@Url.Action("Index", "Dashboard")">Dashboard</a></li>
                                             </ul>
                                         </li>
@@ -263,6 +264,8 @@
     {
         <div class="about_section">
             <div class="container">
+               
+
                 @{
                     var successMessage = TempData["SuccessMessage"] as string;
                     var errorMessage = TempData["ErrorMessage"] as string;

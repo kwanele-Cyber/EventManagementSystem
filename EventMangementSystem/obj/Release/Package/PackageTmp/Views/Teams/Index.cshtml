@@ -33,12 +33,18 @@
                             <span>@member.Employee.Name (@member.Employee.Email)</span><br />
                         </td>
                         <td>
-                            @if (myGroupRole == "Leader")
-                            {
-                                <span>@Html.ActionLink("Edit", "Edit", new { id = item.TeamId })</span>
-                            }|
-                            @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+                            @{
+                                if (member.HasAccepted == false)
+                                {
+                                    <span> @Html.ActionLink("Accept", "Accept", new { memberId = member.TeamMemberId ,id = item.TeamId }) </span>
+                                }
+                                else if (myGroupRole == "Leader")
+                                {
+                                    <span> @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) </span>
+                                }<span> |</span>
+                                @Html.ActionLink("Details", "Details", new { id = item.TeamId }) <span> |</span>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+                            }
                         </td>
                     </tr>
                 }

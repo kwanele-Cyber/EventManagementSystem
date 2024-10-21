@@ -1,8 +1,8 @@
 ﻿@model EventMangementSystem.Models.Venue
 @{
-    ViewBag.Title = "Create";
+
 }
-<h2> New Venue</h2>
+<h2 class="page-title">Register A New Venue</h2>
 
 @using (Html.BeginForm())
 {
@@ -10,7 +10,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Name)
-        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@style = "width:35%" } })
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
         @Html.ValidationMessageFor(model => model.Name)
     </div>
 
@@ -30,3 +30,16 @@
 
 }
 @Html.ActionLink("Back to List", "Index")
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+
+    .form-group {
+        align-items: center;
+    }
+</style>

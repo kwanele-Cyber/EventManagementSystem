@@ -304,15 +304,6 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\zh\Hangfire.Core.resources.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\zh-TW\Hangfire.Core.resources.dll
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.csproj.AssemblyReference.cache
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.init.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.fix_ServProviderFK_conflict.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.GroupsAndTasks.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.StartCodeIntoServiceRequest.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.RelationShip_ServiceRequestTeam.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.UpdateD.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.AddActualEndTimeinGroupTasks.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.NullableActualEndTimeinGroupTasks.resources
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.ReturnEquipment.resources
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.csproj.GenerateResource.cache
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.csproj.CoreCompileInputs.cache
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMan.95CC28AF.Up2Date
@@ -780,7 +771,6 @@ C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSys
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\System.Memory.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\System.Numerics.Vectors.xml
 C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\bin\System.Text.Encodings.Web.xml
-C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.inspection.resources
 C:\Users\manqo\Desktop\2024\EventManagementSystem\EventMangementSystem\bin\EventMangementSystem.dll.config
 C:\Users\manqo\Desktop\2024\EventManagementSystem\EventMangementSystem\bin\EventMangementSystem.dll
 C:\Users\manqo\Desktop\2024\EventManagementSystem\EventMangementSystem\bin\EventMangementSystem.pdb
@@ -1005,3 +995,8 @@ C:\Users\manqo\Desktop\2024\EventManagementSystem\EventMangementSystem\obj\Debug
 C:\Users\manqo\Desktop\2024\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.csproj.GenerateResource.cache
 C:\Users\manqo\Desktop\2024\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.ChangeInventorycreation.resources
 C:\Users\manqo\Desktop\2024\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.FindRecord.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.initial.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.ChangeInventorycreation.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.FindRecord.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.addispaidondamagereport.resources
+C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\obj\Debug\EventMangementSystem.Migrations.addhasAccepted.resources

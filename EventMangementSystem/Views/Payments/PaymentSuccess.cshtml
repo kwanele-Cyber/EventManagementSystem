@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Payment Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";  // Adjust based on your layout
+}
+
+< div class= "container" >
+    < div class= "jumbotron text-center" >
+        < h1 > Payment Successful! </ h1 >
+        < p > Thank you for your payment. The transaction has been processed successfully.</p>
+        <p>
+            <a href="@Url.Action("Index", "DamageReports")" class= "btn btn-primary" > Back to Reports</a>
+        </p>
+    </div>
+</div>

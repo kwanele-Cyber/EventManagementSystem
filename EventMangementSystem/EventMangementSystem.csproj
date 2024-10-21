@@ -343,6 +343,7 @@
     <Compile Include="Controllers\EventInventoriesController.cs" />
     <Compile Include="Controllers\EventOrganizerController.cs" />
     <Compile Include="Controllers\EventReminderController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\ReturnProcessesController.cs" />
     <Compile Include="Migrations\202410202041232_initial.cs" />
     <Compile Include="Migrations\202410202041232_initial.Designer.cs">
@@ -355,6 +356,14 @@
     <Compile Include="Migrations\202410202130267_FindRecord.cs" />
     <Compile Include="Migrations\202410202130267_FindRecord.Designer.cs">
       <DependentUpon>202410202130267_FindRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410210338241_add-ispaid-ondamage-report.cs" />
+    <Compile Include="Migrations\202410210338241_add-ispaid-ondamage-report.Designer.cs">
+      <DependentUpon>202410210338241_add-ispaid-ondamage-report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410210430353_add-hasAccepted.cs" />
+    <Compile Include="Migrations\202410210430353_add-hasAccepted.Designer.cs">
+      <DependentUpon>202410210430353_add-hasAccepted.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DamageReport.cs" />
@@ -425,6 +434,8 @@
     <Compile Include="ViewModels\SubmitReturnProcessViewModel.cs" />
     <Compile Include="ViewModels\TaskViewModel.cs" />
     <Compile Include="ViewModels\TeamEmployeeViewModel.cs" />
+    <Content Include="Views\Payments\CancelDamagePayment.cshtml" />
+    <None Include="Views\Payments\PaymentSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\bootstrap.css" />
@@ -760,6 +771,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202410202130267_FindRecord.resx">
       <DependentUpon>202410202130267_FindRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410210338241_add-ispaid-ondamage-report.resx">
+      <DependentUpon>202410210338241_add-ispaid-ondamage-report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410210430353_add-hasAccepted.resx">
+      <DependentUpon>202410210430353_add-hasAccepted.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

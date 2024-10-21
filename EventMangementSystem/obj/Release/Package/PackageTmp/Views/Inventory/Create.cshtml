@@ -22,6 +22,17 @@
         @Html.EditorFor(model => model.QuantityAvailable, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
         @Html.ValidationMessageFor(model => model.QuantityAvailable)
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PriceToService)
+        @Html.EditorFor(model => model.PriceToService, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
+        @Html.ValidationMessageFor(model => model.PriceToService)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PriceToRelace)
+        @Html.EditorFor(model => model.PriceToRelace, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
+        @Html.ValidationMessageFor(model => model.PriceToRelace)
+    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.Description)
         @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "width:35%" } })
@@ -37,6 +48,7 @@
             <input type="file" title="search image" id="pictureFile" name="pictureFile" onchange="show(this)" />
         </div>
     </div>
+
     <button type="submit" class="btn btn-primary">Create</button>
 
 }

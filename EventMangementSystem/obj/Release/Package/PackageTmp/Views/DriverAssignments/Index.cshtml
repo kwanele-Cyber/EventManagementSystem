@@ -89,9 +89,11 @@
         border-radius: 15px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
     .card-title {
         font-family: 'Georgia', serif;
     }
+
     .card-body {
         padding: 20px;
     }
@@ -120,7 +122,7 @@
 <h2 class="page-title">Deliveries</h2>
 <section class="w3l-index-about py-5" id="about2">
     <div class="container py-md-5 py-2">
-       
+
 
         @foreach (var item in Model)
         {
@@ -209,6 +211,9 @@
                                                         <label for="quantity" style="padding-left: 10%; margin-left: -8px; font-size: 15px">Quantity:</label>
                                                         <span style="padding-left: 1%; color: red; font-size: 15px">@item.QuantityRequired</span>
 
+                                                        <label for="quantity" style="padding-left: 10%; margin-left: -8px; font-size: 15px">Quantity Returned:</label>
+                                                        <span style="padding-left: 1%; color: red; font-size: 15px">@item.QuantityReturned</span>
+
                                                         <label for="quantity" style="padding-left: 10%; margin-left: -8px; font-size: 15px">Status:</label>
                                                         <span style="padding-left: 1%; color: red; font-size: 15px">@item.Status</span>
                                                     </p>
@@ -223,19 +228,23 @@
                     <div class="card-footer">
                         <div class="row">
                             <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                                @if (@item.Status == "Delivery Scheduled")
+                                @if (@item.Status == "Delivery Scheduled" && User.IsInRole("Admin"))
                                 {
                                     <button class="btn btn-outline-dark" style="margin-left: 20px;" onclick="openReadyModal(@assignment.FirstOrDefault().AssDrivId)">Inventory Ready</button>
                                 }
-                                else if (@item.Status == "Ready for pickup")
+                                else if (@item.Status == "Ready for pickup" && User.IsInRole("Admin"))
                                 {
                                     <button class="btn btn-outline-dark" style="margin-left: 20px;" onclick="openDispatchModal(@item.EventInventoryId)">Dispatch Inventory</button>
                                 }
                                 <button class="btn btn-outline-dark" style="margin-left: 5px;" onclick="openModal('@item.EventInventoryId')">Delivery Info</button>
-                                @if (item.AdminSignature != null)
+                                @if (@item.AdminSignature != null && User.IsInRole("Admin"))
                                 {
                                     <button class="btn btn-outline-dark" style="margin-left: 5px;" onclick="downloadPdf('@item.EventInventoryId')">Dispatch Info</button>
 
+                                }
+                                @if (@item.Status == "Delivered" && User.IsInRole("EventManager"))
+                                {
+                                    <button class="btn btn-outline-dark" style="margin-left: 20px;" onclick="openReturnModal(@item.EventInventoryId)">Return Equipment</button>
                                 }
                             </div>
                         </div>
@@ -288,6 +297,31 @@
     </div>
 </div>
 
+<!-- Modal for Return Equipment Confirmation -->
+<div id="returnModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Return Equipment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to mark this equipment as "Ready for Return"?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="returnForm" method="post" action="@Url.Action("MarkAsReadyForReturn", "DriverAssignments")">
+                    <input type="hidden" name="EventInventoryId" id="returnInventoryId" value="">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     let readyId;
     let dispatchId;
@@ -329,4 +363,12 @@
     function downloadPdf(eventInventoryId) {
         window.location.href = '@Url.Action("DispatchedInventoryDetails", "DriverAssignments")/' + eventInventoryId;
     }
+
+    let returnId;
+
+    function openReturnModal(id) {
+        document.getElementById('returnInventoryId').value = id;
+        $('#returnModal').modal('show');
+    }
+
 </script>

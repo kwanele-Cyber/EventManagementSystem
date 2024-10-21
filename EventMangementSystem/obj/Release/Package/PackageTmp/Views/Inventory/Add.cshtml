@@ -1,16 +1,15 @@
 ﻿@model EventMangementSystem.Models.EventInventory
 
 @{
-    ViewBag.Title = "Add Inventory";
+ 
 }
 
-<h2>Add Inventory</h2>
+<h2 class="page-title">Add Inventory</h2>
 
 @using (Html.BeginForm("Add", "Inventory", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <h4>Inventory Details</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -40,3 +39,12 @@
 <div>
     @Html.ActionLink("Back to Event List", "Index", "Event")
 </div>
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

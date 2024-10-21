@@ -17,6 +17,7 @@ namespace EventMangementSystem.Models
         public string Email { get; set; }
 
         public string Position { get; set; } // Role: e.g., Technician, Supervisor
+        
 
         [Required]
         public DateTime DateHired { get; set; } = DateTime.Today;

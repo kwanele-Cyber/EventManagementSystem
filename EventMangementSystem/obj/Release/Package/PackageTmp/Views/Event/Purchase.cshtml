@@ -32,6 +32,8 @@
     </div>
 </div>
 
+@if (!User.IsInRole("User"))
+{
 <div class="card mb-4" style="display:none">
     <div class="card-header bg-secondary text-white">
         <h4>Event Inventory</h4>
@@ -40,15 +42,16 @@
         <ul class="list-group">
             @foreach (var item in Model.Event.EventInventories)
             {
+                var name = item.Inventory?.ItemName ?? "ItemName";
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    @item.Inventory.ItemName
+                    @name
                     <span class="badge badge-primary badge-pill">@item.QuantityRequired</span>
                 </li>
             }
         </ul>
     </div>
 </div>
-
+}
 @using (Html.BeginForm("Purchase", "Event", FormMethod.Post, new { @class = "card" }))
 {
     @Html.AntiForgeryToken()
