@@ -50,6 +50,7 @@
                             @Html.ActionLink("Details", "Details", new { id = item.EventId }, new { @class = "btn btn-sm btn-outline-secondary" }) 
                            
                         </div>
+
                         @if (!User.IsInRole("Admin") && !User.IsInRole("EventManager"))
                         {
                             @Html.ActionLink("Purchase Tickets", "Purchase", new { id = item.EventId }, new { @class = "btn btn-sm btn-primary" })
