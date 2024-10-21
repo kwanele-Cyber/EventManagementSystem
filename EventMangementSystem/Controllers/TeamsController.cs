@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -90,10 +91,19 @@ namespace EventMangementSystem.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
+        public ActionResult Accept(int memberId, int id)
+        {
+            var teamMember = db.TeamMembers.Where(t => t.TeamMemberId == memberId).FirstOrDefault();
+            teamMember.HasAccepted = true;
 
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
 
 
         // GET: Team/Index
+        [Authorize]
         public ActionResult Index()
         {
             var email = User.Identity.GetUserName();
@@ -111,6 +121,8 @@ namespace EventMangementSystem.Controllers
         }
 
         // GET: Team/Edit/5
+
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -139,6 +151,7 @@ namespace EventMangementSystem.Controllers
         // POST: Team/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit(TeamEmployeeViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -176,6 +189,7 @@ namespace EventMangementSystem.Controllers
         }
 
         // GET: Team/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -206,6 +220,7 @@ namespace EventMangementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -275,6 +290,7 @@ namespace EventMangementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult AssignRoles(TeamEmployeeViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -342,6 +358,7 @@ namespace EventMangementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult AssignServiceRequest(int teamId, string returnUrl, int serviceRequestId)
         {
             var team = db.Teams.Include(t => t.ServiceRequests).FirstOrDefault(t => t.TeamId == teamId);

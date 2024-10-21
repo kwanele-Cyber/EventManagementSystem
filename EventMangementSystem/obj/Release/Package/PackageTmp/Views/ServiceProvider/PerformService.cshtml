@@ -84,11 +84,12 @@
         </table>
     </form>
 
-    if (Model.Tasks.All(t => t.Status == EventMangementSystem.Models.GroupTaskStatus.Completed))
-    {
+        if (Model.Tasks.All(t => t.Status == EventMangementSystem.Models.GroupTaskStatus.Completed))
+        {
         <form method="post" action="@Url.Action("InspectServiceDelivery", "ServiceProvider")">
             <input name="serviceRequestId" value="@Model.ServiceRequest.Id" type="hidden" />
             <input name="returnUrl" value="@Model.ReturnUrl" type="hidden" />
+            <input name="bidId" value="@Model.BidId" type="hidden" />
             <button type="submit" class="btn btn-success">Proceed To Service Delivery Inspection</button>
         </form>
     }

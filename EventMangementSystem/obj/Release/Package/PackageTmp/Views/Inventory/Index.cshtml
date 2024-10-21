@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<EventMangementSystem.Models.Inventory>
 
-<h2>Inventory List</h2>
+<h2 class="page-title">Inventory List</h2>
 
 <p>
     @Html.ActionLink("Create New Inventory Item", "Create", null, new { @class = "btn btn-primary" })
@@ -28,3 +28,12 @@
         </tr>
     }
 </table>
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

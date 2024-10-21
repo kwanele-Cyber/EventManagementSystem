@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<EventMangementSystem.Models.Driver>
 
 @{
-    ViewBag.Title = "Drivers";
+
 }
 
 <div class="container mt-5">
-    <h1 class="text-center mb-5">Meet Our Drivers</h1>
+    <h1 class="page-title">Assign A Driver</h1>
     <div class="row justify-content-center">
         @foreach (var item in Model)
         {
@@ -101,3 +101,12 @@
         });
     });
 </script>
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

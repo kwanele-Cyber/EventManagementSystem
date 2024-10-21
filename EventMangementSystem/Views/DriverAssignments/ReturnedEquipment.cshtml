@@ -39,8 +39,16 @@
 
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="returnProcessId" value="@item.ReturnProcessId" />
-                        
-                        <button type="submit" class="btn btn-primary">Process Bill</button>
+
+                        @if (User.IsInRole("EventManager"))
+                        {
+                            <button type="submit" class="btn btn-primary">Process BIll</button>
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <button type="submit" class="btn btn-primary">Send Bill</button>
+                        }
                     </form>
                 </div>
             </div>

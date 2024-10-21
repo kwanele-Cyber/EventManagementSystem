@@ -1,11 +1,11 @@
 ﻿@model EventMangementSystem.Models.Driver
 
 @{
-    ViewBag.Title = "Create";
+  
 }
 <section class="w3l-index-about py-5" id="about2">
     <div class="container py-md-5 py-2">
-        <h2>Create</h2>
+        <h2 class="page-title">Create My profile</h2>
 
         @using (Html.BeginForm("Create", "Drivers", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -117,3 +117,12 @@
                 }
             }
         </script>
+        <style>
+            .page-title {
+                text-align: center;
+                margin-bottom: 2rem;
+                font-family: 'Georgia', serif;
+                font-size: 3rem;
+                color: #343a40;
+            }
+        </style>

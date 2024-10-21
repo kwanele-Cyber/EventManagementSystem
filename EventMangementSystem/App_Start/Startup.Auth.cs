@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using EventMangementSystem.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Linq;
 
 namespace EventMangementSystem
 {
@@ -146,7 +147,7 @@ namespace EventMangementSystem
                             Email = "employee@event.com",
                             Position = "Technician",
                             DateHired = DateTime.Now,
-                            ServiceProviderId = db.ServiceProviders.First().Id // assuming first ServiceProvider is assigned
+                            ServiceProviderId = db.ServiceProviders.ToList().First().Id // assuming first ServiceProvider is assigned
                         };
                         db.Employees.Add(employee);
                     }

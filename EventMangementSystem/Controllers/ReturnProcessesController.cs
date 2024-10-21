@@ -54,7 +54,6 @@ namespace EventMangementSystem.Controllers
 
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GenerateInvoice(int returnProcessId)
@@ -65,7 +64,7 @@ namespace EventMangementSystem.Controllers
             }
 
             DamageReport damageReport = db.DamageReports
-    .FirstOrDefault(dr => dr.findRecord == returnProcessId);
+            .FirstOrDefault(dr => dr.findRecord == returnProcessId);
 
 
             if (damageReport == null)
