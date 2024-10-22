@@ -1,11 +1,18 @@
 ﻿@model EventMangementSystem.ViewModels.PerformServiceViewModel
 
 @{
-    ViewBag.Title = "Perform Service";
+  
 }
 
 
 <style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        color: #343a40;
+    }
     .table-striped {
         width: 100%;
         border-collapse: collapse;
@@ -44,7 +51,7 @@
 </style>
 
 
-<h2>Perform Service: @Model.ServiceRequest.ServiceName</h2>
+<h2 class="page-title">Perform Service: @Model.ServiceRequest.ServiceName</h2>
 
 <p>Status: @Model.ServiceRequest.Status</p>
 

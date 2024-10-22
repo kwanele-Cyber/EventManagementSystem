@@ -93,7 +93,7 @@
                         <input type="number" name="quantityReturned[@eventInventory.EventInventoryId]" id="quantity-returned-@eventInventory.EventInventoryId"
                                min="0" max="@eventInventory.QuantityRequired" required
                                value="0"
-                               onchange="calculateRepairCost('@eventInventory.EventInventoryId', '@item.ItemName')" />
+                               onchange="calculateRepairCost(@eventInventory.EventInventoryId, @item.ItemName)" />
                     </div>
 
                     <div class="form-group">
@@ -141,10 +141,10 @@
 <script>
     function calculateRepairCost(eventInventoryId, itemName) {
         var costPerItem = {
-            "chairs": 80,
+            "Chairs": 80,
             "Tables": 250,
-            "Speaker": 500,
-            "Microphone": 350
+            "Speakers": 500,
+            "Microphones": 350
         };
 
         // Get delivered and returned quantities

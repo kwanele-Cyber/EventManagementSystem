@@ -1,11 +1,18 @@
 ﻿@model EventMangementSystem.ViewModels.PerformServiceViewModel
 
 @{
-    ViewBag.Title = "Perform Service";
+  
 }
 
 
 <style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        color: #343a40;
+    }
     .table-striped {
         width: 100%;
         border-collapse: collapse;
@@ -44,7 +51,7 @@
 </style>
 
 
-<h2>Perform Service: @Model.ServiceRequest.ServiceName</h2>
+<h2 class="page-title">Perform Service: @Model.ServiceRequest.ServiceName</h2>
 
 <p>Status: @Model.ServiceRequest.Status</p>
 
@@ -84,11 +91,12 @@
         </table>
     </form>
 
-    if (Model.Tasks.All(t => t.Status == EventMangementSystem.Models.GroupTaskStatus.Completed))
-    {
+        if (Model.Tasks.All(t => t.Status == EventMangementSystem.Models.GroupTaskStatus.Completed))
+        {
         <form method="post" action="@Url.Action("InspectServiceDelivery", "ServiceProvider")">
             <input name="serviceRequestId" value="@Model.ServiceRequest.Id" type="hidden" />
             <input name="returnUrl" value="@Model.ReturnUrl" type="hidden" />
+            <input name="bidId" value="@Model.BidId" type="hidden" />
             <button type="submit" class="btn btn-success">Proceed To Service Delivery Inspection</button>
         </form>
     }

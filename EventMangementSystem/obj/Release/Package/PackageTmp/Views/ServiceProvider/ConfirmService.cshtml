@@ -1,10 +1,17 @@
 ﻿@model EventMangementSystem.Models.Quotation
 
 @{
-    ViewBag.Title = "Confirm Service";
+   
 }
 
 <style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        color: #343a40;
+    }
     /* Signature and form styling */
     .signature-pad {
         border: 1px solid #ddd;
@@ -30,7 +37,7 @@
 </style>
 
 <div class="container mt-5">
-    <h2 class="text-center">Confirm Service for @Model.ServiceRequest.Event.Name</h2>
+    <h2 class="page-title">Confirm Service for @Model.ServiceRequest.Event.Name</h2>
 
     <div class="card mt-4">
         <div class="card-header">
@@ -45,21 +52,42 @@
                 @Html.Hidden("bidId", Model.Id)
 
                 <!-- Checklist Section -->
-                <div class="checklist-section">
-                    <h5>Service Checklist</h5>
+            <div class="checklist-section">
+
+            @{
+                int index = 0;
+            }
+            @if (Model.ServiceRequest != null && Model.ServiceRequest.GroupTasks != null)
+            {
+                <h5>Tasks Performed</h5>
+                
+                foreach (var task in Model.ServiceRequest.GroupTasks)
+                {
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="task1" name="task1" required>
-                        <label class="form-check-label" for="task1">Task 1: Setup Complete</label>
+                        @*<input class="form-check-input" type="checkbox" id="@task.TaskId" name="GroupTasks[@index]" required> *@
+                        <label class="form-check-label" for="GroupTasks[@index]">Task @index: @task.TaskName Complete</label>
                     </div>
+
+                    @*Increment the index of GroupTask At the end*@
+                    index++;
+                }
+            }
+            else if (Model.ServiceRequest != null && Model.ServiceRequest.Team != null && Model.ServiceRequest.Team.GroupTasks != null)
+            {
+                <h5>Tasks Performed</h5>
+                
+                foreach (var task in Model.ServiceRequest.Team.GroupTasks)
+                {
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="task2" name="task2" required>
-                        <label class="form-check-label" for="task2">Task 2: Equipment Tested</label>
+                        @*<input class="form-check-input" type="checkbox" id="@task.TaskId" name="GroupTasks[@index]" required> *@
+                        <label class="form-check-label" for="GroupTasks[@index]">Task @index: @task.TaskName Complete</label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="task3" name="task3" required>
-                        <label class="form-check-label" for="task3">Task 3: Service Delivered</label>
-                    </div>
-                </div>
+
+                    @*Increment the index of GroupTask At the end*@
+                    index++;
+                }
+            }
+        </div>
 
                 <!-- Signature Section for Event Manager -->
                 <div class="signature-section">

@@ -22,7 +22,7 @@
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
     <WebStackScaffolding_DbContextTypeFullName>EventMangementSystem.Models.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
-    <NameOfLastUsedPublishProfile>C:\Users\cash1\OneDrive\Documents\GitHub\EventManagementSystem\EventMangementSystem\Properties\PublishProfiles\EventMangementSystem20241017090354 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\cash1\OneDrive\Documents\GitHub\sbo_tuesday_10_22_2024\EventManagementSystem\EventMangementSystem\Properties\PublishProfiles\eventmanagement-grp24 - Web Deploy1.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

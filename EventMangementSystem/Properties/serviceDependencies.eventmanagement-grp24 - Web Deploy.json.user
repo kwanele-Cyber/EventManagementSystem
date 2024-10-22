@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql4": {
+      "restored": true,
+      "restoreTime": "2024-10-21T07:47:04.6264009Z"
+    }
+  },
+  "parameters": {
+    "mssql4.resourceGroupName": {
+      "Name": "mssql4.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "EventMangementSystemvaulResourceGroup"
+    },
+    "mssql4.subscriptionId": {
+      "Name": "mssql4.subscriptionId",
+      "Type": "subscription",
+      "Value": "eb950b7b-2c1f-4f90-ad2d-09104013272f"
+    }
+  }
+}

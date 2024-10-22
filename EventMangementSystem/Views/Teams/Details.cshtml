@@ -189,7 +189,7 @@
                     item.TaskId = item.TaskId.Replace(" ", "");
                     @Html.Raw($"[\"{@item.TaskId}\", \"{ @item.TaskName}\",new Date({@item.StartDate.Year}, {(@item.StartDate.Month-1)}, {@item.StartDate.Day}, {@item.StartDate.Hour}, {@item.StartDate.Minute}, {@item.StartDate.Second}), new Date({@item.EndDate.Year}, {(@item.EndDate.Month-1)}, {@item.EndDate.Day}, {@item.EndDate.Hour}, {@item.EndDate.Minute}, {@item.EndDate.Second}), null, {@item.Progress}, \"{@item.Dependencies.Trim(' ')}\", \"{item.AssignedTo.Name}\"],")
                 }
-                
+
           ]);
 
           var options = {

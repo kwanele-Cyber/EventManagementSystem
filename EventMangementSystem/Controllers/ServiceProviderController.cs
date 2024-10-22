@@ -60,8 +60,8 @@ namespace EventMangementSystem.Controllers
             serviceRequest.StartCode = random.Next(1000, 9999).ToString();
 
             // Generate a QR code for completing the service
-            serviceRequest.FinishCode = GenerateQRCode(serviceRequest.Id);
-
+            serviceRequest.FinishCode = GenerateQRCode(int.Parse(serviceRequest.StartCode));
+            
             // Update the status of the service request
             serviceRequest.Status = ServiceRequestStatus.Assigned;
 
@@ -244,7 +244,20 @@ namespace EventMangementSystem.Controllers
         [Authorize(Roles = "ServiceProvider, EventManager")]
         public ActionResult ConfirmService(int bidId)
         {
-            var bid = db.Quotations.Include("ServiceRequest.Event").FirstOrDefault(b => b.Id == bidId);
+            var bid = db.Quotations
+                .Include(t => t.ServiceProvider)
+                .Include(t => t.ServiceRequest)
+
+                .Include(t => t.ServiceRequest.ServiceProvider)
+                .Include(t => t.ServiceRequest.ServiceProvider.Employees)
+
+                .Include(t => t.ServiceRequest.GroupTasks)
+                .Include(t => t.ServiceRequest.Event)
+
+                .Include(t => t.ServiceRequest.Team)
+                .Include(t => t.ServiceRequest.Team.TeamMembers)
+                .Include(t => t.ServiceRequest.Team.GroupTasks)
+                .FirstOrDefault(b => b.Id == bidId);
 
             if (bid == null)
             {
@@ -350,11 +363,19 @@ namespace EventMangementSystem.Controllers
         [HttpPost]
         public ActionResult InspectServiceDelivery(int bidId, int serviceRequestId, string returnUrl = null)
         {
-            var serviceRequest = db.ServiceRequests.Find(serviceRequestId);
+            var serviceRequest = db.ServiceRequests
+                .Include(t => t.ServiceProvider)
+                .Include(t => t.Team)
+                .Include(t => t.GroupTasks)
+                .Include(t => t.Team.GroupTasks)
+                .Include(t => t.Team.TeamMembers)
+                .Include(t => t.ServiceProvider.Employees)
+                .Include(t => t.Event)
+                .FirstOrDefault(t => t.Id == serviceRequestId);
 
             if (serviceRequest == null)
             {
-                return HttpNotFound();
+                return HttpNotFound("Could Not Find The ServiceRequested");
             }
 
             serviceRequest.Status = ServiceRequestStatus.UnderInspection;
@@ -428,10 +449,10 @@ namespace EventMangementSystem.Controllers
         //End of dashboad
 
         #region HelperMethods
-        private string GenerateQRCode(int requestId)
+        private string GenerateQRCode(int code)
         {
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(requestId.ToString(), QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(code.ToString(), QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
 
             using (MemoryStream ms = new MemoryStream())
@@ -493,7 +514,7 @@ namespace EventMangementSystem.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Failed to send email due to: " + ex.Message;
+                //TempData["ErrorMessage"] = "Failed to send email due to: " + ex.Message;
             }
         }
         #endregion

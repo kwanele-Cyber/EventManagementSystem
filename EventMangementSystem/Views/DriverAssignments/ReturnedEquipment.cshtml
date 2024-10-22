@@ -8,7 +8,7 @@
         @foreach (var item in Model)
         {
             var inspectionTime = item.InspectionDetails.InspectionCompletedOn?.ToString("yyyy-MM-dd HH:mm");
-            var itemName = item.EventInventory.Inventory?.ItemName ?? "ItemName";
+            var itemName = item.EventInventory.Inventory?.ItemName ?? $"InventoryId : {item.EventInventory.InventoryId}";
 
             <div class="card">
                 <div class="card-header">
@@ -26,8 +26,8 @@
                     <p><strong>Condition:</strong> @item.InspectionDetails.Condition</p>
 
                     @* Uncomment if needed
-        <p><strong>Repair Cost (Rands):</strong> R @item.InspectionDetails.RepairCost.ToString("N2")</p>
-        <p><strong>Missing Item Cost (Rands):</strong> R @item.InspectionDetails.MissingItemCost.ToString("N2")</p>
+                    <p><strong>Repair Cost (Rands):</strong> R @item.InspectionDetails.RepairCost.ToString("N2")</p>
+                    <p><strong>Missing Item Cost (Rands):</strong> R @item.InspectionDetails.MissingItemCost.ToString("N2")</p>
                     *@
 
                     <p><strong>Notes:</strong> @item.InspectionDetails.Notes</p>
@@ -39,8 +39,16 @@
 
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="returnProcessId" value="@item.ReturnProcessId" />
-                        
-                        <button type="submit" class="btn btn-primary">Process Bill</button>
+
+                        @if (User.IsInRole("EventManager") && (item.Status != "Settled"))
+                        {
+                            <button type="submit" class="btn btn-primary">Process BIll</button>
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <button type="submit" class="btn btn-primary">View Generated Bill</button>
+                        }
                     </form>
                 </div>
             </div>
@@ -62,6 +70,7 @@ else
     }
 
     .card-container {
+        font-family: 'Georgia', serif;
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
@@ -69,6 +78,7 @@ else
     }
 
     .card {
+        font-family: 'Georgia', serif;
         width: 300px;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -84,7 +94,7 @@ else
     }
 
     .card-body {
-        font-size: 0.9rem;
+        font-size: 1rem;
         line-height: 1.4;
     }
 

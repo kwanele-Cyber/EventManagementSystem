@@ -1,7 +1,7 @@
 ﻿@model List<EventMangementSystem.Models.ServiceRequest>
 
 @{
-    ViewBag.Title = "Request Multiple Services";
+
 
     // Serialize events and categories for use in JavaScript
     var eventsJson = Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Events);
@@ -9,7 +9,7 @@
 }
 
 <div class="container form-container">
-    <h2>Request Multiple Services</h2>
+    <h2 class="page-title">Request a service</h2>
 
     @using (Html.BeginForm("RequestService", "EventOrganizer", FormMethod.Post, new { @class = "form-horizontal" }))
     {
@@ -17,7 +17,7 @@
             @for (int i = 0; i < Model.Count; i++)
             {
                 <div class="service-request-item">
-                    <h4>Service Request @(i + 1)</h4>
+
 
                     <div class="form-group">
                         <label>Event</label>
@@ -98,3 +98,12 @@
         }
     </script>
 }
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

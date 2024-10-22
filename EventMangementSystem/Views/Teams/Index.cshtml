@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<EventMangementSystem.Models.Team>
 
 @{
-    ViewBag.Title = "Team List";
     var email = ViewBag.Email;
     var myGroupRole = "";
 }
 
-<h2>Team List</h2>
+<h2 class="page-title">Team List</h2>
+<div>
 
+</div>
 <p>@email</p>
 
 <table class="table">
@@ -33,12 +34,18 @@
                             <span>@member.Employee.Name (@member.Employee.Email)</span><br />
                         </td>
                         <td>
-                            @if (myGroupRole == "Leader")
-                            {
-                                <span>@Html.ActionLink("Edit", "Edit", new { id = item.TeamId })</span>
-                            }|
-                            @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+                            @{
+                                if (member.HasAccepted == false)
+                                {
+                                    <span> @Html.ActionLink("Accept", "Accept", new { memberId = member.TeamMemberId ,id = item.TeamId }) </span>
+                                }
+                                else if (myGroupRole == "Leader")
+                                {
+                                    <span> @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) </span>
+                                }<span> |</span>
+                                @Html.ActionLink("Details", "Details", new { id = item.TeamId }) <span> |</span>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+                            }
                         </td>
                     </tr>
                 }
@@ -101,7 +108,10 @@
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("Assign Service Request", "AssignServiceRequest", new { teamId = item.TeamId, returnUrl = Request.Url.AbsoluteUri }, new { @class = "btn btn-primary" })
+                        @if (item.ServiceProviderId == null)
+                        {
+                            @Html.ActionLink("Assign Service Request", "AssignServiceRequest", new { teamId = item.TeamId, returnUrl = Request.Url.AbsoluteUri }, new { @class = "btn btn-primary" })
+                        }
                         |
                         @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) |
                         @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
@@ -117,3 +127,12 @@
     @Html.ActionLink("Create New Team", "CreateTeam")
 </p>
 }
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

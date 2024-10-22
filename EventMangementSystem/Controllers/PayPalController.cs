@@ -45,18 +45,18 @@ namespace EventMangementSystem.Controllers
                 payer = new Payer { payment_method = "paypal" },
                 transactions = new List<Transaction>
                 {
-            new Transaction
-            {
-                amount = new Amount
-                {
+                    new Transaction
+                    {
+                        amount = new Amount
+                        {
 
-                    total = Cost,
-                    currency = "USD"
+                            total = Cost,
+                            currency = "USD"
+                        },
+
+                        description = "Shop Payment"
+                    }
                 },
-
-                description = "Shop Payment"
-            }
-        },
                 redirect_urls = new RedirectUrls
                 {
                     return_url = Url.Action("CompletePayment", "PayPal", null, Request.Url.Scheme),

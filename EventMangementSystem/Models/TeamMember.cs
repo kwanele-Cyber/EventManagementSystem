@@ -15,6 +15,8 @@ namespace EventMangementSystem.Models
         [ForeignKey(nameof(EmployeeId))]
         public virtual Employee Employee { get; set; }
 
+        public bool HasAccepted { get; set; }  = false;
+
         // Foreign key to Team entity
         [Required]
         

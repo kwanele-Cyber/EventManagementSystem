@@ -2,10 +2,10 @@
 @using EventMangementSystem.Models
 @{
     ApplicationDbContext db = new ApplicationDbContext();
-    ViewBag.Title = "Available Service Requests for Bidding";
+
 }
 
-<h2>Available Service Requests</h2>
+<h2 class="page-title">Available Service Requests</h2>
 
 <table class="table table-striped">
     <thead>
@@ -33,3 +33,12 @@
         }
     </tbody>
 </table>
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        color: #343a40;
+    }
+</style>

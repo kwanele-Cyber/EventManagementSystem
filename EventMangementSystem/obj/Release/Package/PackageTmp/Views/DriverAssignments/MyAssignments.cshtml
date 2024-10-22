@@ -44,7 +44,7 @@
                         <!-- Card -->
                         <div class="card mt-5">
                             <div class="card-header">
-                                <h4 class="card-title"><b>Delivery Number: @item.EventInventory.InventoryId</b></h4>
+                                <h4 class="card-title"><b>Delivery Number: @item.EventInventory.EventInventoryId</b></h4>
                                 <h5 class="card-title"><b>Delivery Date: @item.EventInventory.Event.Start.ToLongDateString()</b></h5>
                             </div>
                             @foreach (var inv in db.Inventories.Where(x => x.InventoryId == item.EventInventory.InventoryId).ToList())
@@ -56,6 +56,10 @@
                                         <strong>Quantity:</strong> @item.EventInventory.QuantityRequired
                                     </p>
                                     <p class="card-text">
+                                        <strong>Quantity returned:</strong> @item.EventInventory.QuantityReturned
+                                    </p>
+
+                                    <p class="card-text">
                                         <strong>Status:</strong> @item.EventInventory.Status
                                     </p>
                                 </div>
@@ -66,10 +70,10 @@
                                         {
                                             <button class="btn btn-success" onclick="openDeliveryModal(@item.AssDrivId)">Start Inventory Delivery</button>
                                         }
-                                        @if (item.EventInventory.Status == "Delivered")
+                                        @if (item.EventInventory.Status == "Ready for Return")
                                         {
                                             <!-- Button to trigger the return modal -->
-                                            <button class="btn btn-primary" onclick="openReturnModal(@item.EventInventory.InventoryId, '@inv.picture', '@inv.ItemName', @item.EventInventory.QuantityRequired)">Start Return</button>
+                                            <button class="btn btn-primary" onclick="openReturnModal(@item.EventInventory.EventInventoryId ,'@inv.picture', '@inv.ItemName', @item.EventInventory.QuantityRequired)">Start Inspection</button>
                                         }
                                         <button class="btn btn-info" data-toggle="modal" data-target="#@item.EventInventoryId">Delivery Info</button>
                                     </div>
@@ -98,7 +102,7 @@
                 <!-- Dynamically update the details in the modal -->
                 <p><strong>Item Name:</strong> <span id="modalItemName"></span></p>
                 <p><strong>Quantity:</strong> <span id="modalQuantity"></span></p>
-                <img id="modalImage" class="img-fluid" alt="Equipment Image" />
+              
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -161,7 +165,7 @@
         </div>
     </div>
 }
-</section>
+
 
 <!-- Modal for Start Inventory Delivery Confirmation -->
 <div id="deliveryModal" class="modal fade" tabindex="-1" role="dialog">
@@ -222,7 +226,7 @@
                 <!-- Dynamically update the details in the modal -->
                 <p><strong>Item Name:</strong> <span id="modalItemName"></span></p>
                 <p><strong>Quantity:</strong> <span id="modalQuantity"></span></p>
-               
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -263,7 +267,7 @@
         // Update modal content with the selected item's details
         document.getElementById('modalItemName').textContent = itemName;
         document.getElementById('modalQuantity').textContent = quantity;
-       
+
 
         // Show the modal
         $('#returnModal').modal('show');

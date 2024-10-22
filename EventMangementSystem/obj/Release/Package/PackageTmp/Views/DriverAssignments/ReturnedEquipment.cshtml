@@ -1,44 +1,104 @@
-﻿@model List<EventMangementSystem.Models.DriverAssignment>
-@using EventMangementSystem.Models
+﻿@model List<EventMangementSystem.Models.ReturnProcess>
 
-<h2 class="page-title">Returned Equipment List</h2>
+<h2 class="page-title">Inspected Equipment List</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Driver Name</th>
-            <th>Event ID</th>
-            <th>Item Name</th>
-            <th>Quantity Delivered</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var assignment in Model)
+@if (Model != null && Model.Any())
+{
+    <div class="card-container">
+        @foreach (var item in Model)
         {
-            var inventory = assignment.EventInventory; // Get the related EventInventory
+            var inspectionTime = item.InspectionDetails.InspectionCompletedOn?.ToString("yyyy-MM-dd HH:mm");
+            var itemName = item.EventInventory.Inventory?.ItemName ?? $"InventoryId : {item.EventInventory.InventoryId}";
 
-            if (inventory != null) // Check if inventory exists
-            {
-                <tr>
-                    <td>@assignment.Name</td> <!-- Adjust according to your model -->
-                    <td>@inventory.EventId</td>
-                    
-                    <td>@inventory.QuantityRequired</td>
-                    <
-                    <td>@inventory.Status</td>
-                </tr>
-            }
+            <div class="card">
+                <div class="card-header">
+                    <h4>@itemName</h4>
+                </div>
+
+                <div class="card-body">
+                    <p><strong>Driver Assignment:</strong> @item.DriverAssignment.Name</p>
+                    <p><strong>Quantity Delivered:</strong> @item.EventInventory.QuantityRequired</p>
+                    <p><strong>Quantity Returned:</strong> @item.QuantityReturned</p>
+                    <p><strong>Return Submitted On:</strong> @item.ReturnSubmittedOn.ToString("yyyy-MM-dd HH:mm")</p>
+                    <p><strong>Return Status:</strong> @item.EventInventory.Status</p>
+
+                    <h5>Inspection Details</h5>
+                    <p><strong>Condition:</strong> @item.InspectionDetails.Condition</p>
+
+                    @* Uncomment if needed
+                    <p><strong>Repair Cost (Rands):</strong> R @item.InspectionDetails.RepairCost.ToString("N2")</p>
+                    <p><strong>Missing Item Cost (Rands):</strong> R @item.InspectionDetails.MissingItemCost.ToString("N2")</p>
+                    *@
+
+                    <p><strong>Notes:</strong> @item.InspectionDetails.Notes</p>
+                    <p><strong>Inspection Completed On:</strong> @inspectionTime</p>
+                    <p><strong>Bill Status:</strong> @item.Status</p>
+
+                    <!-- Form for submitting feedback or updates -->
+                    <form method="post" action="@Url.Action("GenerateInvoice", "ReturnProcesses")">
+
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="returnProcessId" value="@item.ReturnProcessId" />
+
+                        @if (User.IsInRole("EventManager") && (item.Status != "Settled"))
+                        {
+                            <button type="submit" class="btn btn-primary">Process BIll</button>
+                        }
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <button type="submit" class="btn btn-primary">View Generated Bill</button>
+                        }
+                    </form>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+}
+else
+{
+    <p>No inspected items to display.</p>
+}
 
 <style>
     .page-title {
         text-align: center;
         margin-bottom: 2rem;
         font-family: 'Georgia', serif;
-        font-size: 3rem;
+        font-size: 2.5rem;
         color: #343a40;
+    }
+
+    .card-container {
+        font-family: 'Georgia', serif;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .card {
+        font-family: 'Georgia', serif;
+        width: 300px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-body {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    h5 {
+        margin-top: 1rem;
     }
 </style>

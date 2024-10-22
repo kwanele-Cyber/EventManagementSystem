@@ -1,10 +1,9 @@
 ﻿@model EventMangementSystem.Models.ServiceRequest
 
-@{
-    ViewBag.Title = "Verify QR Code or Start Code";
-}
+<script src="~/Scripts/html5-qrcode.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
-<h2>Start the Service by Verifying the QR Code or Start Code</h2>
+<h2 class="page-title">Start the Service by Verifying the QR Code or Start Code</h2>
 
 <div class="container">
     <div class="alert alert-info" role="alert">
@@ -32,14 +31,12 @@
             }
         </div>
 
-        <!-- QR Code Scanner (Placeholder for actual scanner integration) -->
+        <!-- QR Code Scanner Integration -->
         <div class="col-md-6">
             <h4>Scan the QR Code:</h4>
 
-            <!-- Placeholder for QR code scanner -->
-            <p>Use a QR code scanner to scan the QR code for service verification.</p>
-
-            <!-- If you want to integrate a real-time scanner, you can use JavaScript QR scanning libraries -->
+            <!-- QR code scanner container -->
+            <div id="qr-code-scanner" style="width:100%;"></div>
         </div>
     </div>
 
@@ -50,3 +47,60 @@
         </div>
     </div>
 </div>
+
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+
+    #qr-code-scanner {
+        width: 100%;
+        height: 250px;
+        border: 1px solid #ddd;
+        margin-top: 15px;
+    }
+</style>
+
+<script>
+    // QR Code Scanner configuration
+    const html5QrCodeScanner = new Html5QrcodeScanner("qr-code-scanner", {
+        formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+        fps: 10,
+        qrbox: 250
+    });
+
+    html5QrCodeScanner.render(onScanSuccess, onScanFailure);
+
+    function onScanSuccess(qrCodeMessage) {
+        // Automatically submit the scanned QR code for verification
+        sendCodeToServer(qrCodeMessage);
+        html5QrCodeScanner.clear();
+    }
+
+    function onScanFailure(error) {
+        console.error("QR code scanning failed:", error);
+    }
+
+    // Sends the scanned or manually entered code to the server
+    function sendCodeToServer(code) {
+        var form = document.createElement('form');
+        form.method = 'post';
+        form.action = '@Url.Action("VerifyQRCode", "ServiceProvider")';
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'enteredCode';
+        input.value = code;
+        form.appendChild(input);
+        var bidIdInput = document.createElement('input');
+        bidIdInput.type = 'hidden';
+        bidIdInput.name = 'bidId';
+        bidIdInput.value = '@Model.Id';
+        form.appendChild(bidIdInput);
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>

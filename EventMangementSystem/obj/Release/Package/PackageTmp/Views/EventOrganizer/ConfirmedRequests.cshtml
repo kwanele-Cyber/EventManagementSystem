@@ -2,7 +2,7 @@
 @using EventMangementSystem.Models
 @{
     ApplicationDbContext db = new ApplicationDbContext();
-    ViewBag.Title = "Confirmed Service Requests";
+    
 }
 
 <style>
@@ -78,7 +78,7 @@
 </style>
 
 <div class="container2 mt-5">
-    <h2 class="text-center custom-heading">Confirmed Service Requests</h2>
+    <h2 class="page-title">Confirmed Service Requests</h2>
 
     @if (!Model.Any())
     {
@@ -101,7 +101,7 @@
                 @foreach (var request in Model)
                 {
                     var svCat = db.ServiceCategories.Find(int.Parse(request.ServiceCategory));
-                    var verifyQrCodeUrl = Url.Action("VerifyQRCode", "ServiceProvider", new { bidId = request.Id });
+                    var verifyQrCodeUrl = Url.Action("ViewQRCode", "EventOrganizer", new { bidId = request.Id });
                    
                     <tr class="custom-table-row" style="font-size:16px">
                         <td style="color:black">@request.Event.Name</td>
@@ -111,14 +111,9 @@
                         <td style="color:black">@request.Status.ToString()</td>
                         <td>
                             <!-- Only show the "Access QR Code" button if VerifyCode is not null or empty -->
-                            @if (!string.IsNullOrEmpty(request.StartCode) && request.Status == ServiceRequestStatus.Assigned || request.Status == ServiceRequestStatus.Open)
-                            {
+                           
                                 <a href="@verifyQrCodeUrl" class="btn-access-qr">Access QR Code</a>
-                            }
-                            else
-                            {
-                                <p style="background:gray; color:red;" href="#" class="btn-access-qr">Access QR Code</p>
-                            }
+                            
                         </td>
                     </tr>
                 }
@@ -126,3 +121,12 @@
         </table>
     }
 </div>
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

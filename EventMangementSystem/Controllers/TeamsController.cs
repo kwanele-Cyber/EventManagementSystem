@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -58,7 +59,7 @@ namespace EventMangementSystem.Controllers
 
             if (ModelState.IsValid)
             {
-                
+
                 db.Teams.Add(viewModel.Team);
                 db.SaveChanges();
 
@@ -90,27 +91,38 @@ namespace EventMangementSystem.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
+        public ActionResult Accept(int memberId, int id)
+        {
+            var teamMember = db.TeamMembers.Where(t => t.TeamMemberId == memberId).FirstOrDefault();
+            teamMember.HasAccepted = true;
 
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
 
 
         // GET: Team/Index
+        [Authorize]
         public ActionResult Index()
         {
             var email = User.Identity.GetUserName();
             ViewBag.Email = email;
             List<Team> teams = new List<Team>();
 
-           
+
             teams = db.Teams
                 .Include(t => t.GroupTasks)
                 .Include(t => t.TeamMembers.Select(tm => tm.Employee))
                 .Include(t => t.ServiceProvider)
                 .ToList();
-            
+
             return View(teams);
         }
 
         // GET: Team/Edit/5
+
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -139,6 +151,7 @@ namespace EventMangementSystem.Controllers
         // POST: Team/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit(TeamEmployeeViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -176,6 +189,7 @@ namespace EventMangementSystem.Controllers
         }
 
         // GET: Team/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -206,6 +220,7 @@ namespace EventMangementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -227,7 +242,7 @@ namespace EventMangementSystem.Controllers
 
             ViewData["GanttData"] = new List<EventMangementSystem.Models.GroupTaskViewModel>();
             // Assuming `GroupTasks` is properly populated
-            ViewData["GanttData"] = db.Tasks.Include(t=>t.Employee).Where(t => t.TeamId == id).Select(t => new GroupTaskViewModel
+            ViewData["GanttData"] = db.Tasks.Include(t => t.Employee).Where(t => t.TeamId == id).Select(t => new GroupTaskViewModel
             {
                 TaskId = t.TaskId.ToString(),
                 TaskName = t.TaskName,
@@ -251,22 +266,22 @@ namespace EventMangementSystem.Controllers
                 },
                 Dependencies = t.Dependencies, // Assuming Dependencies is a string that indicates task dependencies
                 Progress = t.Progress,
-                AssignedTo  = t.Employee
+                AssignedTo = t.Employee
             }).ToList();
             //Dec 6, 2014 10:30:00 -0800
-            
+
 
             // Check user roles for service provider, team coordinator, or leader
-            var role = User.IsInRole("ServiceProvider")? "ServiceProvider" :
+            var role = User.IsInRole("ServiceProvider") ? "ServiceProvider" :
                        User.IsInRole("Driver") ? "Driver" :
                        User.IsInRole("User") ? "User" :
-                       User.IsInRole("Employee")? "Employee" : 
+                       User.IsInRole("Employee") ? "Employee" :
                        User.IsInRole("EventOrganiser") ? "EventOrganiser" :
                        User.IsInRole("Admin") ? "Admin" : null;
 
             ViewBag.Role = role;
 
-            ViewBag.IsLeader = (role == "TeamLeader")?true:false;
+            ViewBag.IsLeader = (role == "TeamLeader") ? true : false;
 
             return View(team);
         }
@@ -275,6 +290,7 @@ namespace EventMangementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult AssignRoles(TeamEmployeeViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -322,9 +338,9 @@ namespace EventMangementSystem.Controllers
 
             // Fetch available service requests that are not assigned to any team
             var availableServiceRequests = db.ServiceRequests
-                .Include(t=> t.Event)
-                .Include(t=> t.ServiceProvider)
-                .Where(t=> (t.TeamId != teamId || t.Status == ServiceRequestStatus.Assigned) && t.ServiceProviderId == serviceProvider.Id)
+                .Include(t => t.Event)
+                .Include(t => t.ServiceProvider)
+                .Where(t => (t.TeamId != teamId || t.Status == ServiceRequestStatus.Assigned) && t.ServiceProviderId == serviceProvider.Id)
                 .ToList();
 
             // Create a ViewModel to pass to the view
@@ -342,6 +358,7 @@ namespace EventMangementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult AssignServiceRequest(int teamId, string returnUrl, int serviceRequestId)
         {
             var team = db.Teams.Include(t => t.ServiceRequests).FirstOrDefault(t => t.TeamId == teamId);

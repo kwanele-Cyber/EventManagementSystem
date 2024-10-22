@@ -10,6 +10,7 @@ namespace EventMangementSystem.ViewModels
 
         // Property to hold selected employee IDs when the form is submitted
         public List<int> SelectedEmployeeIds { get; set; }
+        public string ReturnUrl { get; set; } = null;
 
         public TeamEmployeeViewModel()
         {

@@ -1,24 +1,29 @@
 {
   "dependencies": {
-    "mssql3": {
-      "type": "mssql",
-      "connectionId": "ConnectionString"
-    },
     "mssql2": {
+      "ignored": "true",
       "type": "mssql",
       "connectionId": "ConnectionStrings"
     },
     "mssql1": {
+      "ignored": "true",
       "type": "mssql",
       "connectionId": "ConnectionStrings:DefaultConnection"
     },
-    "secrets1": {
-      "type": "secrets"
+    "mssql3": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionString"
     },
     "signalr1": {
+      "ignored": "true",
       "type": "signalr",
       "connectionId": "Azure:SignalR:ConnectionString",
       "dynamicId": null
+    },
+    "mssql4": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnection"
     }
   }
 }

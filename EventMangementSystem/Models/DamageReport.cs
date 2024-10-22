@@ -33,6 +33,7 @@ namespace EventMangementSystem.Models
         public double TotalCost { get; set; }
 
         public int findRecord { get; set; }
+        public bool IsPaid { get; set; } = false;
 
         //NEWLY
         [Required]

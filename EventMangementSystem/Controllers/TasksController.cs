@@ -13,13 +13,12 @@ using System.Threading.Tasks;
 
 namespace EventMangementSystem.Controllers
 {
-
     public class TasksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tasks/Create
-        public ActionResult Create(int teamId)
+        public ActionResult Create(int teamId, string returnUrl = null)
         {
             var team = db.Teams.Include(t => t.TeamMembers.Select(tm => tm.Employee)).FirstOrDefault(t => t.TeamId == teamId);
             if (team == null)
@@ -33,43 +32,50 @@ namespace EventMangementSystem.Controllers
                 TeamMembers = team.TeamMembers.Select(tm => tm.Employee).ToList()
             };
 
+            // Save the returnUrl in ViewBag so the view can use it
+            ViewBag.ReturnUrl = returnUrl;
+
             return View(model);
         }
 
         // POST: Tasks/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TaskViewModel model)
+        public ActionResult Create(TaskViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
                 var dep = "";
-                if(model.Dependencies != null)
+                if (model.Dependencies != null)
                 {
                     foreach (var item in model.Dependencies)
                     {
                         dep = item + ", ";
                     }
                 }
-                
 
                 var task = new GroupTask
                 {
                     TaskName = model.TaskName,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-
                     EmployeeId = model.EmployeeId,
                     TeamId = model.TeamId,
                     Status = GroupTaskStatus.NotStarted,
                     Dependencies = dep,
-
                 };
 
                 db.Tasks.Add(task);
                 db.SaveChanges();
 
                 TempData["SuccessMessage"] = "Task created successfully!";
+
+                // Redirect to returnUrl if it is provided, else to Team details
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+
                 return RedirectToAction("Details", "Teams", new { id = model.TeamId });
             }
 
@@ -83,6 +89,7 @@ namespace EventMangementSystem.Controllers
             return View(model);
         }
 
+        // GET: Tasks/Index
         public ActionResult Index(int teamId, int? memberId, string returnUrl = null)
         {
             var tasks = db.Tasks.Where(t => t.TeamId == teamId).Include(t => t.Employee).ToList();
@@ -98,7 +105,6 @@ namespace EventMangementSystem.Controllers
 
             return View(tasks);
         }
-
 
         // GET: Tasks/AssignRoles
         public ActionResult AssignRoles(int teamId)
@@ -160,8 +166,7 @@ namespace EventMangementSystem.Controllers
             return Json(ganttData, JsonRequestBehavior.AllowGet);
         }
 
-
-
+        // GET: Tasks/AssignServiceRequest
         [HttpGet]
         public ActionResult AssignServiceRequest(int teamId, string returnUrl)
         {
@@ -184,7 +189,7 @@ namespace EventMangementSystem.Controllers
             return View(model);
         }
 
-
+        // POST: Tasks/AssignServiceRequest
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AssignServiceRequest(int teamId, string returnUrl, int serviceRequestId)
@@ -225,11 +230,5 @@ namespace EventMangementSystem.Controllers
 
             return RedirectToAction("Index", "Teams");
         }
-
     }
-
-
-
 }
-
-

@@ -1,13 +1,12 @@
 ﻿@model EventMangementSystem.ViewModels.TeamEmployeeViewModel
 
 @{
-    ViewBag.Title = "Create Team";
 }
 <hr/>
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item active">
-        <a class="nav-link active" href="#createTeam" role="tab" data-toggle="tab">Create Team</a>
+        <a class="nav-link active" href="#createTeam" role="tab" data-toggle="tab">Coordinate Team</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#addEmployee" role="tab" data-toggle="tab">Add Employee</a>
@@ -22,8 +21,18 @@
             @using (Html.BeginForm("CreateTeam", "Teams", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
+                if (Model.ReturnUrl != null)
+                {
+                    @Html.Hidden("returnUrl", Model.ReturnUrl)
+                }
+                else if(ViewBag.ReturnUr != null)
+                {
+                    string url = ViewBag.ReturnUr;
+                    @Html.Hidden("returnUrl", url)
+                }
 
-                <h4>Create Team</h4>
+
+                <h4 class="page-title">Cordinate Team</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -94,7 +103,7 @@
                 <div class="form-group">
                     @Html.Label("GroupRole", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <input type="text" name="Position" class="form-control" placeholder="e.g., Technician, Supervisor"/>
+                        <input type="text" name="Position" class="form-control" placeholder="e.g., Technician, Supervisor" />
                     </div>
                 </div>
 
@@ -107,15 +116,24 @@
         </div>
     </div>
 
-<!-- Scripts for enabling tab navigation -->
-@section Scripts {
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Activate the first tab by default
-            $('.nav-tabs a[href="#createTeam"]').tab('show');
-        });
-    </script>
-}
+    <!-- Scripts for enabling tab navigation -->
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Activate the first tab by default
+                $('.nav-tabs a[href="#createTeam"]').tab('show');
+            });
+        </script>
+    }
+    <style>
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Georgia', serif;
+            font-size: 3rem;
+            color: #343a40;
+        }
+    </style>

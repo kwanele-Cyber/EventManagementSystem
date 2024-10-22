@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Rotativa;
 
 namespace EventMangementSystem
 {
@@ -21,6 +22,8 @@ namespace EventMangementSystem
             GlobalConfiguration.Configuration.UseSqlServerStorage("DefaultConnection");
             var reminderService = new ReminderService();
             reminderService.ScheduleReminders();
+
+            
         }
     }
 }

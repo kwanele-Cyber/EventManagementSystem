@@ -7,7 +7,7 @@
 
 <section class="w3l-index-about py-5" id="about2">
     <div class="container py-md-5 py-2">
-        <h2>Finish Inventory Delivery</h2>
+        <h2 class="page-title">Finish Inventory Delivery</h2>
         <div id="countdown"></div>
         <form id="noResponseForm" action="@Url.Action("NoResponseAction", "DriverAssignments")" method="post">
             <button type="submit" id="submitButton" style="display: none;">Submit No Response</button>
@@ -77,3 +77,12 @@
         console.error("QR code scanning failed:", error);
     }
 </script>
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        color: #343a40;
+    }
+</style>

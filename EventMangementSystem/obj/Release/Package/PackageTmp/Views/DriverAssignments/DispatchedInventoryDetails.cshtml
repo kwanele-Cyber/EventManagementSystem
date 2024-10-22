@@ -2,11 +2,10 @@
 @using EventMangementSystem.Models
 @{
     ApplicationDbContext db = new ApplicationDbContext();
-    ViewBag.Title = "Dispatched Inventory Details";
-}
 
+}
 <style>
-   
+
 
     /* Card Styles */
     .card {
@@ -117,11 +116,19 @@
             background-color: #343a40;
             color: #fff;
         }
+
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
 </style>
 
 <section class="w3l-index-about py-5" id="about2">
     <div class="container py-md-5 py-2">
-        <h2>Dispatched Inventory Details</h2>
+        <h2 class="page-title">Dispatched Inventory Details</h2>
 
         <div class="card mb-4">
             <div class="row">
@@ -136,7 +143,7 @@
                     </div>
 
                     <div>
-                        <p><b>Delivery Date:</b> @Model.DeliveryDate.ToString("MM/dd/yyyy")</p>
+                        <p><b>Delivery Date:</b> @DateTime.Now.Date.ToString("MM/dd/yyyy")</p>
                         <div class="signature-container">
                             <div>
                                 <p><b>Driver's Signature:</b></p>
@@ -183,7 +190,7 @@
                         <h5>Inventory QR Code</h5>
                         <p>@Model.UniqueCode</p>
                         <div class="text-center mb-3">
-                            <a href="#" >
+                            <a href="#">
                                 <img src="~/images/@Model.QrCodePicture" alt="Order QR Code" class="img-fluid barcode-img" style="width:200px;height:200px" />
                             </a>
                         </div>

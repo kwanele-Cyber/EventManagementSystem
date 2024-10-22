@@ -450,28 +450,28 @@ namespace EventMangementSystem.Controllers
                 inventory.DeliveredBy = assign.DrivId;
                 assign.Status = "Completed";
                 assign.IsActive = false;
-                try
-                {
-                    var email2 = new MailMessage
-                    {
-                        From = new MailAddress("eventproplanners@gmail.com"),
-                        Subject = "Inventory Delivered",
-                        Body = $"Inventory Number: " + inventory.EventInventoryId + " \n\n" +
-                               $"Hi {inventory.FirstName}, \n\n" +
-                               $"Your inventory {inventory.EventInventoryId} has been delivered to {inventory.Address} on {DateTime.Now.Date.ToLongDateString()} at {DateTime.Now.ToShortTimeString()}.\n\n" +
-                               "Regards,\r\nEventManagement Team"
-                    };
-                    var _event = db.Events.Find(inventory.EventId);
-                    email2.To.Add(_event.EventMangerEmail);
+                //try
+                //{
+                //    var email2 = new MailMessage
+                //    {
+                //        From = new MailAddress("eventproplanners@gmail.com"),
+                //        Subject = "Inventory Delivered",
+                //        Body = $"Inventory Number: " + inventory.EventInventoryId + " \n\n" +
+                //               $"Hi {inventory.FirstName}, \n\n" +
+                //               $"Your inventory {inventory.EventInventoryId} has been delivered to {inventory.Address} on {DateTime.Now.Date.ToLongDateString()} at {DateTime.Now.ToShortTimeString()}.\n\n" +
+                //               "Regards,\r\nEventManagement Team"
+                //    };
+                //    var _event = db.Events.Find(inventory.EventId);
+                //    email2.To.Add(_event.EventMangerEmail);
 
-                    var smtpClient = new SmtpClient();
-                    smtpClient.Send(email2);
-                }
-                catch (Exception ex)
-                {
-                    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                    return RedirectToAction("FinishInventoryDelivery");
-                }
+                //    var smtpClient = new SmtpClient();
+                //    smtpClient.Send(email2);
+                //}
+                //catch (Exception ex)
+                //{
+                //    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
+                //    return RedirectToAction("FinishInventoryDelivery");
+                //}
 
                 db.SaveChanges();
                 inventory.Status = "Delivered";
@@ -552,7 +552,7 @@ namespace EventMangementSystem.Controllers
                 eventInventory.Status = "Ready for Return";
                 db.SaveChanges();
             }
-            TempData["ErrorMessage"] = "Equipment marked as ready for return.";
+            TempData["SuccessMessage"] = "Equipment marked as ready for return.";
             return RedirectToAction("Index"); // Redirect to the relevant page
         }
 
@@ -765,7 +765,11 @@ namespace EventMangementSystem.Controllers
                 foreach (var eventInventoryId in quantityReturned.Keys)
                 {
                     // Find the EventInventory
-                    var eventInventory = db.EventInventories.Find(eventInventoryId);
+                    var eventInventory = db.EventInventories
+                        .Include(d => d.Inventories) /*Added Object References when fetching EventInventory*/
+                        .Include(d => d.Inventory) /*Added Object References when fetching EventInventory*/
+                        .FirstOrDefault(d => d.EventInventoryId == eventInventoryId);
+
                     if (eventInventory == null)
                     {
                         errorMessages.Add($"Event Inventory with ID {eventInventoryId} not found.");
@@ -779,6 +783,7 @@ namespace EventMangementSystem.Controllers
                         {
                             DriverAssignmentId = driverAssignment.AssDrivId,
                             EventInventoryId = eventInventoryId,
+                            EventInventory = eventInventory, /*Added Object Reference to the EventInventory*/
                             QuantityReturned = quantityReturned[eventInventoryId],
                             ReturnSubmittedOn = DateTime.Now,
                             InspectionDetails = new InspectionDetails
@@ -789,13 +794,12 @@ namespace EventMangementSystem.Controllers
                                 MissingItemCost = missingItemCost.ContainsKey(eventInventoryId) ? missingItemCost[eventInventoryId] : 0,
                                 InspectionCompletedOn = DateTime.Now
                             },
-                            Status = repairCost[eventInventoryId] > 0 ? "Not Paid" : "Settled" // Determine the status based on repair cost
+                            Status = quantityReturned[eventInventoryId] < eventInventory.QuantityRequired? "Not Paid" : "Settled" // Determine the status based on repair cost
                         };
 
                         // Update the EventInventory status based on repair cost
                         eventInventory.Status = returnProcess.Status == "Not Paid" ? "Returned with bill" : "Returned";
-
-
+                        eventInventory.QuantityReturned = quantityReturned[eventInventoryId];
 
                         // Add the ReturnProcess entry to the context
                         db.ReturnProcesses.Add(returnProcess);
@@ -818,19 +822,6 @@ namespace EventMangementSystem.Controllers
                             findRecord = returnProcess.ReturnProcessId,
                             EquipmentId = returnProcess.EventInventory.InventoryId
                         };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                         db.DamageReports.Add(damageReport);
@@ -898,6 +889,28 @@ namespace EventMangementSystem.Controllers
                 .Include(rp => rp.EventInventory.Inventory)
                 .Include(rp => rp.InspectionDetails) // Include Inspection Details
                 .ToList();
+
+
+            /* New Code to manually include Inventory into ReturnProcess since inventory is null while inventoryId is set */
+            var fixedInspectedItems = new List<ReturnProcess>();
+            foreach(var item in inspectedItems)
+            {
+                var inventory = db.Inventories.FirstOrDefault(d => d.InventoryId == item.EventInventory.InventoryId);
+                if(inventory != null)
+                {
+                    item.EventInventory.Inventory = inventory;
+                }
+
+                fixedInspectedItems.Add(item);
+            }
+
+
+            /* Finally Set the newly fixedObject to the original object if the fixed object contains items after enumeration. */
+            if(fixedInspectedItems != null || fixedInspectedItems.Any())
+            {
+                inspectedItems = fixedInspectedItems;
+            }
+
 
             if (!inspectedItems.Any())
             {
@@ -1166,7 +1179,6 @@ namespace EventMangementSystem.Controllers
                     //catch (Exception ex)
                     //{
                     //    TempData["ErrorMessage"] = "Failed to send email due to, " + ex.Message;
-                    //    //return RedirectToAction("Index", "EventInventories");
                     //}
                     db.SaveChanges();
                     Session["InvId"] = null;

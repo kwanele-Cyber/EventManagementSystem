@@ -1,10 +1,10 @@
 ﻿@model EventMangementSystem.ViewModels.AssignServiceRequestViewModel
 
 @{
-    ViewBag.Title = "Assign Service Request";
+
 }
 
-<h2>Assign Service Request to Team: @Model.TeamName</h2>
+<h2 class="page-title">Assign Service Request to Team: @Model.TeamName</h2>
 
 <!-- Display form to assign a service request to the team -->
 @using (Html.BeginForm("AssignServiceRequest", "Teams", FormMethod.Post))
@@ -13,7 +13,15 @@
 
     <!-- Hidden fields to pass teamId and returnUrl -->
     @Html.HiddenFor(model => model.TeamId)
-    @Html.Hidden("returnUrl", Model.ReturnUrl)
+    if (Model.ReturnUrl != null)
+    {
+        @Html.Hidden("returnUrl", Model.ReturnUrl)
+    }
+    else if (ViewBag.ReturnUr != null)
+    {
+        string url = ViewBag.ReturnUr;
+        @Html.Hidden("returnUrl", url)
+    }
 
     if (!Model.AvailableServiceRequests.Any())
     {
@@ -21,13 +29,22 @@
     }
     else
     {
-    <div class="form-group">
-        @Html.Label("Service Request", "Select Service Request", htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownList("serviceRequestId", new SelectList(Model.AvailableServiceRequests, "Id", "Event.Name"), "Select a service request", new { @class = "form-control" })
-    </div>
+        <div class="form-group">
+            @Html.Label("Service Request", "Select Service Request", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownList("serviceRequestId", new SelectList(Model.AvailableServiceRequests, "Id", "Event.Name"), "Select a service request", new { @class = "form-control" })
+        </div>
     }
     <button type="submit" class="btn btn-primary">Assign Service Request</button>
 
     <!-- Optionally, provide a cancel button to return to the previous page -->
     <a href="@Model.ReturnUrl" class="btn btn-secondary">Cancel</a>
 }
+<style>
+    .page-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        color: #343a40;
+    }
+</style>

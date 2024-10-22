@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using EventMangementSystem.Models;
 using Org.BouncyCastle.Operators.Utilities;
+using Rotativa;
 
 namespace EventMangementSystem.Controllers
 {
@@ -54,7 +55,6 @@ namespace EventMangementSystem.Controllers
 
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GenerateInvoice(int returnProcessId)
@@ -65,8 +65,8 @@ namespace EventMangementSystem.Controllers
             }
 
             DamageReport damageReport = db.DamageReports
-    .FirstOrDefault(dr => dr.findRecord == returnProcessId);
-
+            .FirstOrDefault(dr => dr.findRecord == returnProcessId);
+            ViewBag.ReturnProcessId = returnProcessId;
 
             if (damageReport == null)
             {
@@ -106,6 +106,67 @@ namespace EventMangementSystem.Controllers
 
             return View(damageReportViewModel);
         }
+
+        [HttpPost]
+        public ActionResult DownloadPDF(int returnProcessId)
+        {
+            ViewBag.ReturnProcessId = returnProcessId;
+            if (returnProcessId == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Retrieve the damage report from the database using returnProcessId
+            DamageReport damageReportEntity = db.DamageReports
+                .FirstOrDefault(dr => dr.findRecord == returnProcessId);
+
+            if (damageReportEntity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Calculate the total cost
+            double total = 0;
+            var missingQuantity = damageReportEntity.ReturnProcess.EventInventory.QuantityRequired - damageReportEntity.ReturnProcess.QuantityReturned;
+
+            if (damageReportEntity.DamageDescription == "Bad")
+            {
+                total = missingQuantity * damageReportEntity.Inventory.PriceToRelace;
+            }
+            else
+            {
+                total = missingQuantity * damageReportEntity.Inventory.PriceToService;
+            }
+
+            // Prepare the view model
+            DamageReportViewModel damageReportViewModel = new DamageReportViewModel
+            {
+                ReportId = damageReportEntity.ReportId,
+                EquipmentId = damageReportEntity.EquipmentId,
+                DamageDescription = damageReportEntity.DamageDescription,
+                ReportDate = damageReportEntity.ReportDate,
+                EventId = damageReportEntity.EventId,
+                TotalCost = total,
+                bareCost = total * 0.85,
+                vat = total * 0.15,
+                Inventory = damageReportEntity.Inventory,
+                Event = damageReportEntity.Event
+            };
+
+            // Set the PDF flag to skip the layout
+            ViewBag.IsPdf = true;
+
+            // Use the "GenerateInvoice" view to generate the PDF
+            return new ViewAsPdf("GenerateInvoice", damageReportViewModel)
+            {
+                FileName = "DamageReportInvoice.pdf",
+
+                // Optionally, specify custom options like margins, page size, etc.
+                PageSize = Rotativa.Options.Size.A4,
+                CustomSwitches = "--disable-smart-shrinking --no-stop-slow-scripts"
+            };
+        }
+
 
 
 
