@@ -20,6 +20,7 @@ using Image = iTextSharp.text.Image;
 
 namespace EventMangementSystem.Controllers
 {
+    [Authorize]
     public class DriverAssignmentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

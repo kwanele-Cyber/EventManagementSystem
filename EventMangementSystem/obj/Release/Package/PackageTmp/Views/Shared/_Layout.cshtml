@@ -8,10 +8,15 @@
     <!-- CSS Files -->
     <link href="~/assets/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <link href="~/assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/assets/css/snow.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link   href="~/assets/css/snow.css" rel="stylesheet" type="text/css" media="all" />
+    <link   href="~/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Fonts -->
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700" rel="stylesheet">
+
+    @RenderSection("head", required: false)
+
+    @RenderSection("styles", required: false)
+
     <style>
         #chat-toggle {
             position: fixed;
