@@ -51,7 +51,7 @@ namespace EventMangementSystem.Controllers
             var serviceProvider = db.ServiceProviders.FirstOrDefault(sp => sp.email == currentUserEmail);
 
             //set service provider for service provider if not set.
-            if (viewModel.Team.ServiceProviderId == null)
+            if (viewModel.Team.ServiceProvider == null|| viewModel.Team.ServiceProviderId == null)
             {
                 viewModel.Team.ServiceProviderId = serviceProvider.Id;
                 viewModel.Team.ServiceProvider = serviceProvider;
@@ -108,6 +108,15 @@ namespace EventMangementSystem.Controllers
         {
             var email = User.Identity.GetUserName();
             ViewBag.Email = email;
+
+            if(User.IsInRole("ServiceProvider"))
+            {
+                var serviceProvider = db.ServiceProviders.FirstOrDefault(sp => sp.email == email);
+                if (serviceProvider != null)
+                    ViewBag.ServiceProviderId = serviceProvider.Id;
+            }
+
+
             List<Team> teams = new List<Team>();
 
 
@@ -115,6 +124,7 @@ namespace EventMangementSystem.Controllers
                 .Include(t => t.GroupTasks)
                 .Include(t => t.TeamMembers.Select(tm => tm.Employee))
                 .Include(t => t.ServiceProvider)
+                .Include(t => t.ServiceRequests)
                 .ToList();
 
             return View(teams);
@@ -382,9 +392,14 @@ namespace EventMangementSystem.Controllers
                 return RedirectToAction("AssignServiceRequest", new { teamId = teamId, returnUrl = returnUrl });
             }
 
-            // Assign the service request to the team
+
             serviceRequest.TeamId = teamId;
             db.Entry(serviceRequest).State = EntityState.Modified;
+
+            // Assign the service request to the team
+            team.ServiceRequests.Add(serviceRequest);
+            db.Entry(team).State = EntityState.Modified;
+
             db.SaveChanges();
 
             TempData["SuccessMessage"] = $"Service request has been successfully assigned to team: {team.TeamName}.";

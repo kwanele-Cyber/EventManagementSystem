@@ -37,15 +37,15 @@
                             @{
                                 if (member.HasAccepted == false)
                                 {
-                                    <span> @Html.ActionLink("Accept", "Accept", new { memberId = member.TeamMemberId ,id = item.TeamId }) </span>
+                                    <span> @Html.ActionLink("Accept TeamAssigment", "Accept", new { memberId = member.TeamMemberId ,id = item.TeamId }) </span>
                                 }
                                 else if (myGroupRole == "Leader")
                                 {
                                     <span> @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) </span>
                                 }<span> |</span>
                                 @Html.ActionLink("Details", "Details", new { id = item.TeamId }) <span> |</span>
-                                @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
-                            }
+                              
+                             }
                         </td>
                     </tr>
                 }
@@ -97,7 +97,10 @@
                 </tr>
             }
            *@
-
+            if ((item.ServiceProvider != null && item.ServiceProvider.email == email) ||
+                (item.TeamMembers.First().Employee.ServiceProvider != null && item.TeamMembers.First().Employee.ServiceProvider.email == email) || 
+                (item.TeamMembers.First().Employee.ServiceProviderId == (ViewBag.ServiceProviderId??-1)))
+            {
                 <tr>
                     <td>@item.TeamName</td>
                     <td>@item.Description</td>
@@ -108,7 +111,7 @@
                         }
                     </td>
                     <td>
-                        @if (item.ServiceProviderId == null)
+                        @if (item.ServiceRequests == null || !item.ServiceRequests.Any())
                         {
                             @Html.ActionLink("Assign Service Request", "AssignServiceRequest", new { teamId = item.TeamId, returnUrl = Request.Url.AbsoluteUri }, new { @class = "btn btn-primary" })
                         }
@@ -118,6 +121,11 @@
                         @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
                     </td>
                 </tr>
+            }
+            else
+            {
+                <tr>No Data Found :(</tr>
+            }
         }
     }
 </table>

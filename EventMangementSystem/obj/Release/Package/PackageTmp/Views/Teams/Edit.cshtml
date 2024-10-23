@@ -14,6 +14,7 @@
     <li class="nav-item">
         <a class="nav-link" href="#addEmployee" role="tab" data-toggle="tab">Add Employee</a>
     </li>
+
     <li class="nav-item">
         <a class="nav-link" href="#assignRoles" role="tab" data-toggle="tab">Coordinate Roles</a>
     </li>
@@ -83,6 +84,15 @@
             @using (Html.BeginForm("Create", "Employees", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
+                if (Model.ReturnUrl != null)
+                {
+                    @Html.Hidden("returnUrl", Model.ReturnUrl)
+                }
+                else if (ViewBag.ReturnUr != null)
+                {
+                    string url = ViewBag.ReturnUr;
+                    @Html.Hidden("returnUrl", url)
+                }
 
                 <h4 class="page-title">Add Employee</h4>
                 <hr />
@@ -124,6 +134,15 @@
             @using (Html.BeginForm("AssignRoles", "Teams", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
+                if (Model.ReturnUrl != null)
+                {
+                    @Html.Hidden("returnUrl", Model.ReturnUrl)
+                }
+                else if (ViewBag.ReturnUr != null)
+                {
+                    string url = ViewBag.ReturnUr;
+                    @Html.Hidden("returnUrl", url)
+                }
 
                 <h4 class="page-title">Coordinate Roles to Team Members</h4>
                 <hr />
@@ -141,7 +160,7 @@
                             @Html.Label(teamMembers[i].Employee.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.HiddenFor(m => teamMembers[i].TeamMemberId) <!-- Hidden field for TeamMemberId -->
-                                <select asp-for="@teamMembers[i].Role" class = "form-control" placeholder ="Select Role for @teamMembers[i].Employee.Name">
+                                <select asp-for="@teamMembers[i].Role" class="form-control" placeholder="Select Role for @teamMembers[i].Employee.Name">
                                     <option value="Member">Team Member</option>
                                     <option value="Leader">Team Leader</option>
                                 </select>
