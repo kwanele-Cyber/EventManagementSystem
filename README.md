@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the Event Management System project built with .NET Framework. The project uses various NuGet packages listed in the `packages.config` file to function properly.
+This is an Event Management System project built with .NET Framework. 
 
 ## Getting Started
 
