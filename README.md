@@ -11,7 +11,7 @@ This repository contains the source code for the Event Management System, a web-
 
 ### Cloning the Repository
 ```sh
-git clone https://[kwanele-Cyber/EventManagementSystem](https://github.com/kwanele-Cyber/EventManagementSystem).git
+git clone https://github.com/kwanele-Cyber/EventManagementSystem.git
 cd EventManagementSystem/EventMangementSystem
 ```
 
