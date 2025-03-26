@@ -17,6 +17,7 @@ obj/
 *.vcxproj.user
 *.psess
 *.tss
+*.csproj.user
 
 # Distribution folders
 publish/
