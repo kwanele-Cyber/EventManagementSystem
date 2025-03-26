@@ -1,5 +1,119 @@
-Prototypes/
-.fake
+# Build folders (build output)
+bin/
+obj/
 
-.vs/
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.swp
+*.sln.docstates
+
+# VS Code files
 .vscode/
+
+# VS-specific folders and files
+.vs/
+*.vcxproj.user
+*.psess
+*.tss
+
+# Distribution folders
+publish/
+out/
+
+# Backup & Report files
+*.bak
+*.dmp
+*.mdf
+*.ldf
+*.log
+
+# Package directories
+packages/
+node_modules/
+
+# Dependency caches
+*.pdb
+*.cache
+*.pyo
+*.pyc
+*.py.class
+
+# Resharper files
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Tooling
+*.dotCover
+*.ncrunch*
+*.coverage
+*.coveragexml
+*.testsettings
+*.runsettings
+TestResults/
+*.nunit.xml
+*.testresults.xml
+
+# Azure and Web config
+appsettings.*.json
+app.config
+web.config
+secrets.json
+
+# JetBrains Rider
+.idea/
+.idea/*
+
+# Log, lock, and temporary files
+*.log
+*.lock
+*.tmp
+*.temp
+*.DS_Store
+Thumbs.db
+~$*
+
+# IDE and editor configuration files
+*.vsconfig
+*.editorconfig
+.vscode/
+.vs/
+
+# Assembly and database files
+*.mdb
+*.sql
+*.sqlite
+*.sqlite3
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Docker files
+docker-compose.override.yml
+
+# Visual Studio Code workspace settings
+.vscode/settings.json
+
+# LibMan library cache
+libman.json
+
+# Exclude files from NuGet
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+
+# Rider-specific directories
+.idea/
+.idea/*
+
+# Windows image file caches
+[Dd]ebug/
+[Rr]elease/
